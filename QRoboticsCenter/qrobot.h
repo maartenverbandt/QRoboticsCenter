@@ -75,7 +75,6 @@ private:
 
     QPrintStitcher* _stitcher;
 
-
 signals:
     void gpioReceived(QVector<float> doubles, QVector<int> ints, double time);
     //void threadReceived()

@@ -106,6 +106,20 @@ void QRobot::receiveMessage(mavlink_message_t msg)
             }
         break; }
 
+        case MAVLINK_MSG_ID_THREAD_INFO:{
+            mavlink_thread_info_t thread_info;
+            mavlink_msg_thread_info_decode(&msg,&thread_info);
+
+            thread_t thread;
+            thread.id = thread_info.ID;
+            thread.time = thread_info.time;
+            thread.priority = thread_info.priority;
+            thread.latency = thread_info.latency;
+            thread.executions = thread_info.number_of_executions;
+
+            _threading->updateThreadInfo(thread);
+        break; }
+
         case MAVLINK_MSG_ID_PARTITION:{
             mavlink_partition_t partition;
             mavlink_msg_partition_decode(&msg,&partition);
