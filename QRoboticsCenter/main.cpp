@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     QConnectionCoordinator c;
     QRobotCoordinator w;
     QObject::connect(&c, SIGNAL(mavlinkConnectionFound(QMavlinkConnection*)), &w, SLOT(mavlinkConnectionFound(QMavlinkConnection*)));
+    QObject::connect(w.getRescanAction(),SIGNAL(triggered()),&c,SLOT(query()));
 
     w.show();
     w.addRobot(100,10);

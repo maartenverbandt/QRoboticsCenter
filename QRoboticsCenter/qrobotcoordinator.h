@@ -16,6 +16,7 @@ public:
     QRobot* addRobot(unsigned int id, unsigned int type);
     QRobot* addRobot(QMavlinkConnection* connection);
 
+    QAction* getRescanAction();
 protected:
     virtual void closeEvent(QCloseEvent *e);
 private:
@@ -24,6 +25,7 @@ private:
     QList<QPushButton*> _buttons;
     QSignalMapper* _robot_mapper;
 
+    QAction* _rescan;
 signals:
 
 public slots:

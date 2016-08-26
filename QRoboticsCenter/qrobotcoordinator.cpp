@@ -1,10 +1,13 @@
 #include "qrobotcoordinator.h"
 
 QRobotCoordinator::QRobotCoordinator(QWidget *parent) :
-    QWidget(parent), _layout(new QVBoxLayout()), _robot_mapper(new QSignalMapper(this))
+    QWidget(parent), _layout(new QVBoxLayout()), _robot_mapper(new QSignalMapper(this)), _rescan(new QAction(this))
 {
     this->setLayout(_layout);
     QObject::connect(_robot_mapper,SIGNAL(mapped(int)),this,SLOT(showRobotWidget(int)));
+
+    _rescan->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
+    addAction(_rescan);
 }
 
 QRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
@@ -62,7 +65,7 @@ void QRobotCoordinator::showRobotWidget(int index)
     _robots[index]->show();
 }
 
-/*void QRobotCoordinator::paintEvent(QPaintEvent *)
+QAction* QRobotCoordinator::getRescanAction()
 {
-
-}*/
+    return _rescan;
+}
