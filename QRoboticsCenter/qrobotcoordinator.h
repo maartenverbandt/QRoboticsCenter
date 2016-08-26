@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QLayout>
 #include <qrobot.h>
+#include <qrobotbutton.h>
 #include <qballbot.h>
 #include <qsegbot.h>
 #include <qmavlinkconnection.h>

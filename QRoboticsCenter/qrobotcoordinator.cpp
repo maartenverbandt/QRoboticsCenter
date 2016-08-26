@@ -31,8 +31,7 @@ QRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
     _robots.append(robot);
 
     //Add button to the mainwindow
-    QPushButton* button = new QPushButton(this);
-    button->setText(robot->getType() + " " + QString::number(id));
+    QPushButton* button = new QRobotButton(robot, this);
     _layout->addWidget(button);
 
     QObject::connect(button,SIGNAL(clicked()),_robot_mapper,SLOT(map()));
