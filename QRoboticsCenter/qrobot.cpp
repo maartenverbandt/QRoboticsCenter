@@ -203,6 +203,7 @@ void QRobot::setupGPIOWidget()
     QObject::connect(gpiorec,SIGNAL(started()),_recorder,SLOT(start()));
     QObject::connect(gpiorec,SIGNAL(stopped()),_recorder,SLOT(stop()));
     addRecorder(gpiorec);
+    widget->inputLabelsSend();
 
     //add view
     addView(widget);
