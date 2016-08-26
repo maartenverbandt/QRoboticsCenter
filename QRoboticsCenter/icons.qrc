@@ -1,1 +1,5 @@
-<RCC/>
+<!DOCTYPE RCC><RCC version="1.0">
+ <qresource>
+     <file>../icons/car.png</file>
+ </qresource>
+ </RCC>
