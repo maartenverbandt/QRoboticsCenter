@@ -14,12 +14,15 @@ class QRobotCoordinator : public QWidget
     Q_OBJECT
 public:
     explicit QRobotCoordinator(QWidget *parent = 0);
+
     QRobot* addRobot(unsigned int id, unsigned int type);
     QRobot* addRobot(QMavlinkConnection* connection);
 
     QAction* getRescanAction();
+
 protected:
     virtual void closeEvent(QCloseEvent *e);
+
 private:
     QLayout* _layout;
     QList<QRobot*> _robots;
@@ -27,6 +30,7 @@ private:
     QSignalMapper* _robot_mapper;
 
     QAction* _rescan;
+
 signals:
 
 public slots:

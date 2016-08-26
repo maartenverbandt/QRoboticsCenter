@@ -8,6 +8,8 @@ QRobotCoordinator::QRobotCoordinator(QWidget *parent) :
 
     _rescan->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
     addAction(_rescan);
+
+    setMinimumWidth(250);
 }
 
 QRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
