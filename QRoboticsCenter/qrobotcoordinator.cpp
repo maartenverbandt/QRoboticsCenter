@@ -44,6 +44,13 @@ QRobot *QRobotCoordinator::addRobot(QMavlinkConnection *connection)
     return robot;
 }
 
+void QRobotCoordinator::closeEvent(QCloseEvent *e)
+{
+    QListIterator<QRobot*> robot(_robots);
+    while (robot.hasNext())
+        robot.next()->close();
+}
+
 void QRobotCoordinator::mavlinkConnectionFound(QMavlinkConnection *connection)
 {
     QRobot* robot = addRobot(connection->getRobotID(),connection->getRobotType());

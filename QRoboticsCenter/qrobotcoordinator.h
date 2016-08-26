@@ -16,6 +16,8 @@ public:
     QRobot* addRobot(unsigned int id, unsigned int type);
     QRobot* addRobot(QMavlinkConnection* connection);
 
+protected:
+    virtual void closeEvent(QCloseEvent *e);
 private:
     QLayout* _layout;
     QList<QRobot*> _robots;
