@@ -14,7 +14,7 @@ QString QGPIORecorder::createHeader()
     header += QDateTime::currentDateTime().toString("dd/MM/yy, HH'h'mm") + "\n";
     header += "1.0\n";
     header += "\n";
-    header += _labels.join('\t') + "\n";
+    header += "time\t" + _labels.join('\t') + "\n";
 
     return header;
 }
