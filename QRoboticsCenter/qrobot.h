@@ -21,7 +21,8 @@ public:
 
     typedef enum type_t{
         BALLBOT = 10,
-        SEGBOT = 11
+        SEGBOT = 11,
+        CAR = 20
     } type_t;
 
     typedef enum event_t{

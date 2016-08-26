@@ -21,6 +21,9 @@ QRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
     case(QRobot::SEGBOT):
         robot = new QSegbot(id,0);
         break;
+    case(QRobot::CAR):
+        robot = new QRobot(id,"car",QIcon(":/icons/car.png"),0);
+        break;
     default:
         robot = new QRobot(id,0);
         break;
