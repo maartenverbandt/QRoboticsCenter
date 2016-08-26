@@ -12,13 +12,13 @@ int main(int argc, char *argv[])
     QObject::connect(w.getRescanAction(),SIGNAL(triggered()),&c,SLOT(query()));
 
     w.show();
-    w.addRobot(100,10);
-    w.addRobot(101,11);
+    //w.addRobot(100,10);
+    //w.addRobot(101,11);
 
     c.query();
 
-    QRobot *r = new QBallbot(102,0);
-    r->show();
+    //QRobot *r = new QBallbot(102,0);
+    //r->show();
 
     return a.exec();
 }

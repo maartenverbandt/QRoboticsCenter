@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = QRoboticsCenter
 TEMPLATE = app
 
+INCLUDEPATH += $$PWD \
+               mavlink/ballbot_messagesavr/mavlink.h
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -25,7 +27,8 @@ SOURCES += main.cpp\
     qgpiorecorder.cpp \
     qbalancingwidget.cpp \
     ballbotconfigdialog.cpp \
-    qrecorderwidget.cpp
+    qrecorderwidget.cpp \
+    qrobotbutton.cpp
 
 HEADERS  += mainwindow.h \
     qrobotcoordinator.h \
@@ -39,11 +42,16 @@ HEADERS  += mainwindow.h \
     qgpiorecorder.h \
     qbalancingwidget.h \
     ballbotconfigdialog.h \
-    qrecorderwidget.h
+    qrecorderwidget.h \
+    qrobotbutton.h
 
 FORMS    += mainwindow.ui \
     qbalancingwidget.ui
 
+RESOURCES += \
+    icons.qrc
+
 include(../../QtModules/QMavlinkConnection/src/qmavlinkconnection.pri)
 include(../../QtModules/QGPIOWidget/src/qgpiowidget.pri)
 include(../../QtModules/QRobotConfigDialog/src/qrobotconfigdialog.pri)
+
