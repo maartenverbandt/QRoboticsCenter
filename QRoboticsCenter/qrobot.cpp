@@ -121,7 +121,7 @@ void QRobot::receiveMessage(mavlink_message_t msg)
             for(unsigned int k=0;k<8;k++){ doubles[k] = gpio.gpio_float[k]; }
             for(unsigned int k=0;k<4;k++){ ints[k] = gpio.gpio_int[k]; }
 
-            emit gpioReceived(doubles,ints,gpio.time);
+            emit gpioReceived(doubles,ints,gpio.time*0.001);
         break; }
 
         case MAVLINK_MSG_ID_PRINT:{
@@ -155,6 +155,11 @@ void QRobot::receiveMessage(mavlink_message_t msg)
             handlePartition(partition.ID, QByteArray((char*)partition.value,partition.size), partition.index);
         break; }
     }
+}
+
+void QRobot::saveSettings()
+{
+    _gpiowidget->saveSettings();
 }
 
 int QRobot::addView(QWidget* w)
@@ -194,6 +199,14 @@ void QRobot::setupMainWindow()
     _recorder_menu = new QMenu("Record",this);
     _stack = new QStackedWidget(this);
     _recorder = new QRecorderWidget(this);
+
+    _quickrecord_action = new QAction("Quick record",this);
+    _quickrecord_action->setCheckable(true);
+    _quickrecord_action->setChecked(false);
+    _quickrecord_action->setShortcut(Qt::CTRL + Qt::Key_R);
+    QObject::connect(_quickrecord_action,SIGNAL(toggled(bool)),this,SLOT(quickRecordToggled(bool)));
+    addAction(_quickrecord_action);
+
     _stitcher = new QPrintStitcher(this);
     _threading = new QThreadingWidget(0);
 
@@ -229,26 +242,31 @@ void QRobot::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void QRobot::quickRecordToggled(bool b)
+{
+    _recorders[0]->recorder()->setChecked(b);
+}
+
 void QRobot::setupGPIOWidget()
 {
-    QGPIOWidget* widget = new QGPIOWidget(this);
+    _gpiowidget = new QGPIOWidget(this);
 
-    QObject::connect(this,SIGNAL(gpioReceived(QVector<float>,QVector<int>,double)),widget,SLOT(setGPIO(QVector<float>,QVector<int>)));
-    QObject::connect(this,SIGNAL(printReceived(QString)),widget,SLOT(setPrint(QString)));
-    QObject::connect(widget,SIGNAL(eventButtonPressed(int)),this,SLOT(eventButtonPressed(int)));
-    QObject::connect(widget,SIGNAL(gpioSet(QVector<float>,QVector<int>)),this,SLOT(gpioSet(QVector<float>,QVector<int>)));
+    QObject::connect(this,SIGNAL(gpioReceived(QVector<float>,QVector<int>,double)),_gpiowidget,SLOT(setGPIO(QVector<float>,QVector<int>)));
+    QObject::connect(this,SIGNAL(printReceived(QString)),_gpiowidget,SLOT(setPrint(QString)));
+    QObject::connect(_gpiowidget,SIGNAL(eventButtonPressed(int)),this,SLOT(eventButtonPressed(int)));
+    QObject::connect(_gpiowidget,SIGNAL(gpioSet(QVector<float>,QVector<int>)),this,SLOT(gpioSet(QVector<float>,QVector<int>)));
 
     //add recorder
     QGPIORecorder* gpiorec = new QGPIORecorder(this);
     QObject::connect(this,SIGNAL(gpioReceived(QVector<float>,QVector<int>,double)),gpiorec,SLOT(gpioReceived(QVector<float>,QVector<int>,double)));
-    QObject::connect(widget,SIGNAL(inputLabelsSet(QStringList)),gpiorec,SLOT(setLabels(QStringList)));
+    QObject::connect(_gpiowidget,SIGNAL(inputLabelsSet(QStringList)),gpiorec,SLOT(setLabels(QStringList)));
     QObject::connect(gpiorec,SIGNAL(started()),_recorder,SLOT(start()));
     QObject::connect(gpiorec,SIGNAL(stopped()),_recorder,SLOT(stop()));
     addRecorder(gpiorec);
-    widget->inputLabelsSend();
+    _gpiowidget->inputLabelsSend();
 
     //add view
-    addView(widget);
+    addView(_gpiowidget);
 }
 
 void QRobot::addRecorder(QAbstractRecorder *recorder)
@@ -265,4 +283,6 @@ void QRobot::addRobotMenuAction(QAction *open)
 void QRobot::closeEvent(QCloseEvent *event)
 {
     _threading->close();
+    saveSettings();
+    event->accept();
 }
