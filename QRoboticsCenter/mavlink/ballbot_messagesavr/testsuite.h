@@ -765,6 +765,106 @@ static void mavlink_test_ballbot_log(uint8_t system_id, uint8_t component_id, ma
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
+static void mavlink_test_channel_io(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+	mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+	mavlink_channel_io_t packet_in = {
+		963497464,
+	}{ 45.0, 46.0, 47.0, 48.0, 49.0, 50.0 },
+	}{ 213.0, 214.0, 215.0, 216.0, 217.0, 218.0 },
+	}161,
+	};
+	mavlink_channel_io_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        	packet1.time = packet_in.time;
+        	packet1.sync = packet_in.sync;
+        
+        	mav_array_memcpy(packet1.input, packet_in.input, sizeof(float)*6);
+        	mav_array_memcpy(packet1.output, packet_in.output, sizeof(float)*6);
+        
+
+        memset(&packet2, 0, sizeof(packet2));
+	mavlink_msg_channel_io_encode(system_id, component_id, &msg, &packet1);
+	mavlink_msg_channel_io_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+	mavlink_msg_channel_io_pack(system_id, component_id, &msg , packet1.time , packet1.sync , packet1.input , packet1.output );
+	mavlink_msg_channel_io_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+	mavlink_msg_channel_io_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.time , packet1.sync , packet1.input , packet1.output );
+	mavlink_msg_channel_io_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+        	comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+	mavlink_msg_channel_io_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+	mavlink_msg_channel_io_send(MAVLINK_COMM_1 , packet1.time , packet1.sync , packet1.input , packet1.output );
+	mavlink_msg_channel_io_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+}
+
+static void mavlink_test_channel_io_info(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+	mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+	mavlink_channel_io_info_t packet_in = {
+		5,
+	}72,
+	}139,
+	}206,
+	}17,
+	};
+	mavlink_channel_io_info_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        	packet1.type = packet_in.type;
+        	packet1.configuration = packet_in.configuration;
+        	packet1.excitation = packet_in.excitation;
+        	packet1.version = packet_in.version;
+        	packet1.subversion = packet_in.subversion;
+        
+        
+
+        memset(&packet2, 0, sizeof(packet2));
+	mavlink_msg_channel_io_info_encode(system_id, component_id, &msg, &packet1);
+	mavlink_msg_channel_io_info_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+	mavlink_msg_channel_io_info_pack(system_id, component_id, &msg , packet1.type , packet1.configuration , packet1.excitation , packet1.version , packet1.subversion );
+	mavlink_msg_channel_io_info_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+	mavlink_msg_channel_io_info_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.type , packet1.configuration , packet1.excitation , packet1.version , packet1.subversion );
+	mavlink_msg_channel_io_info_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+        	comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+	mavlink_msg_channel_io_info_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+	mavlink_msg_channel_io_info_send(MAVLINK_COMM_1 , packet1.type , packet1.configuration , packet1.excitation , packet1.version , packet1.subversion );
+	mavlink_msg_channel_io_info_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+}
+
 static void mavlink_test_ballbot_messagesavr(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
 	mavlink_test_motor_state(system_id, component_id, last_msg);
@@ -780,6 +880,8 @@ static void mavlink_test_ballbot_messagesavr(uint8_t system_id, uint8_t componen
 	mavlink_test_ballbot_excitation(system_id, component_id, last_msg);
 	mavlink_test_motor_log(system_id, component_id, last_msg);
 	mavlink_test_ballbot_log(system_id, component_id, last_msg);
+	mavlink_test_channel_io(system_id, component_id, last_msg);
+	mavlink_test_channel_io_info(system_id, component_id, last_msg);
 }
 
 #ifdef __cplusplus
