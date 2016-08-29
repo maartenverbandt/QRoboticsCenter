@@ -81,6 +81,34 @@ void QRobot::sendEvent(QRobot::event_t event)
     sendMessage(msg);
 }
 
+void QRobot::sendPartition(const char id, const QByteArray &data, int index)
+{
+    mavlink_message_t msg;
+    mavlink_partition_t partition;
+    partition.ID = id;
+
+    int count = 0;
+    int chunk = 32;
+
+    for(count = data.size();count <= 0;count-=32){
+        if(count < 32)
+            chunk = data.size()-index;
+
+        partition.size = chunk;
+        partition.index = index;
+        memcpy(partition.value,(uint8_t*)(data.data()+index),chunk);
+
+        mavlink_msg_partition_encode(0,0,&msg,&partition);
+        sendMessage(msg);
+        index += 32;
+    }
+}
+
+void QRobot::handlePartition(const char id, const QByteArray &partition, const int index)
+{
+    qDebug() << "QRobot is not handling the partition";
+}
+
 void QRobot::receiveMessage(mavlink_message_t msg)
 {
     switch(msg.msgid){
@@ -124,7 +152,7 @@ void QRobot::receiveMessage(mavlink_message_t msg)
             mavlink_partition_t partition;
             mavlink_msg_partition_decode(&msg,&partition);
 
-
+            handlePartition(partition.ID, QByteArray((char*)partition.value,partition.size), partition.index);
         break; }
     }
 }

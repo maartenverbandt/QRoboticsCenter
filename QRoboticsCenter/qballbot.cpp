@@ -7,6 +7,19 @@ QBallbot::QBallbot(unsigned int id, QWidget *parent):
     setupBallbotWidget();
 }
 
+void QBallbot::handlePartition(const char id, const QByteArray &partition, const int index)
+{
+    switch(id){
+    case 'C':{
+        _config->fromByteArray(partition,index);
+        qDebug() << "Config partition handled!";
+        break;}
+    case 'D':{
+        qDebug() << "Data partition not handled";
+        break;}
+    }
+}
+
 void QBallbot::setupBallbotWidget()
 {
     addRobotMenuAction(_config->getPopupAction());

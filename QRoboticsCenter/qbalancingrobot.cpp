@@ -22,6 +22,11 @@ void QBalancingRobot::setupBalancingWidget()
     addView(widget);
 }
 
+void QBalancingRobot::handlePartition(const char id, const QByteArray &partition, const int index)
+{
+    QRobot::handlePartition(id, partition, index);
+}
+
 void QBalancingRobot::setPosition(QVector3D position)
 {
     _position = position;

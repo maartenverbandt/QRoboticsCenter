@@ -48,6 +48,9 @@ protected:
 
     void sendMessage(const mavlink_message_t &msg);
     void sendEvent(QRobot::event_t event);
+    void sendPartition(const char id, const QByteArray &data, int index);
+
+    virtual void handlePartition(const char id, const QByteArray &partition, const int index);
 
     int addView(QWidget* w);
     void setView(int index);

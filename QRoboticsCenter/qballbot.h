@@ -11,6 +11,9 @@ class QBallbot : public QBalancingRobot
 public:
     QBallbot(unsigned int id, QWidget *parent = 0);
 
+protected:
+    virtual void handlePartition(const char id, const QByteArray &partition, const int index);
+
 private:
     BallbotConfigDialog *_config;
 

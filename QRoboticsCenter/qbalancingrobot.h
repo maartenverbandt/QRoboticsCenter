@@ -15,6 +15,9 @@ public:
 
     void setupBalancingWidget();
 
+protected:
+    virtual void handlePartition(const char id, const QByteArray &partition, const int index);
+
 private:
     QVector3D _position;
     QVector3D _attitude;
