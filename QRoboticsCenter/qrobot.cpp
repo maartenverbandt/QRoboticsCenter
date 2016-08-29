@@ -129,6 +129,11 @@ void QRobot::receiveMessage(mavlink_message_t msg)
     }
 }
 
+void QRobot::saveSettings()
+{
+    _gpiowidget->saveSettings();
+}
+
 int QRobot::addView(QWidget* w)
 {
     //make action and menu
@@ -216,24 +221,24 @@ void QRobot::quickRecordToggled(bool b)
 
 void QRobot::setupGPIOWidget()
 {
-    QGPIOWidget* widget = new QGPIOWidget(this);
+    _gpiowidget = new QGPIOWidget(this);
 
-    QObject::connect(this,SIGNAL(gpioReceived(QVector<float>,QVector<int>,double)),widget,SLOT(setGPIO(QVector<float>,QVector<int>)));
-    QObject::connect(this,SIGNAL(printReceived(QString)),widget,SLOT(setPrint(QString)));
-    QObject::connect(widget,SIGNAL(eventButtonPressed(int)),this,SLOT(eventButtonPressed(int)));
-    QObject::connect(widget,SIGNAL(gpioSet(QVector<float>,QVector<int>)),this,SLOT(gpioSet(QVector<float>,QVector<int>)));
+    QObject::connect(this,SIGNAL(gpioReceived(QVector<float>,QVector<int>,double)),_gpiowidget,SLOT(setGPIO(QVector<float>,QVector<int>)));
+    QObject::connect(this,SIGNAL(printReceived(QString)),_gpiowidget,SLOT(setPrint(QString)));
+    QObject::connect(_gpiowidget,SIGNAL(eventButtonPressed(int)),this,SLOT(eventButtonPressed(int)));
+    QObject::connect(_gpiowidget,SIGNAL(gpioSet(QVector<float>,QVector<int>)),this,SLOT(gpioSet(QVector<float>,QVector<int>)));
 
     //add recorder
     QGPIORecorder* gpiorec = new QGPIORecorder(this);
     QObject::connect(this,SIGNAL(gpioReceived(QVector<float>,QVector<int>,double)),gpiorec,SLOT(gpioReceived(QVector<float>,QVector<int>,double)));
-    QObject::connect(widget,SIGNAL(inputLabelsSet(QStringList)),gpiorec,SLOT(setLabels(QStringList)));
+    QObject::connect(_gpiowidget,SIGNAL(inputLabelsSet(QStringList)),gpiorec,SLOT(setLabels(QStringList)));
     QObject::connect(gpiorec,SIGNAL(started()),_recorder,SLOT(start()));
     QObject::connect(gpiorec,SIGNAL(stopped()),_recorder,SLOT(stop()));
     addRecorder(gpiorec);
-    widget->inputLabelsSend();
+    _gpiowidget->inputLabelsSend();
 
     //add view
-    addView(widget);
+    addView(_gpiowidget);
 }
 
 void QRobot::addRecorder(QAbstractRecorder *recorder)
@@ -250,4 +255,6 @@ void QRobot::addRobotMenuAction(QAction *open)
 void QRobot::closeEvent(QCloseEvent *event)
 {
     _threading->close();
+    saveSettings();
+    event->accept();
 }

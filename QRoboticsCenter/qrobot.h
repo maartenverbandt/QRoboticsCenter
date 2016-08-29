@@ -71,6 +71,8 @@ private:
     QAction* _quickrecord_action;
 
     QStackedWidget* _stack;
+    QGPIOWidget* _gpiowidget;
+
     QRecorderWidget* _recorder;
     QThreadingWidget* _threading;
 
@@ -92,6 +94,7 @@ protected slots:
 
 public slots:
     virtual void receiveMessage(mavlink_message_t msg);
+    virtual void saveSettings();
 
 };
 
