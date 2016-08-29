@@ -26,7 +26,7 @@ public:
     ~BallbotConfigDialog();
 
     QByteArray getByteArray();
-    void fromByteArray(const QByteArray &data);
+    void fromByteArray(const QByteArray &data, const int index = 0);
 
 private:
     void load(ballbot_config_t config);

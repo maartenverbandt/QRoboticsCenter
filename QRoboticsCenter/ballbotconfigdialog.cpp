@@ -29,7 +29,8 @@ QByteArray BallbotConfigDialog::getByteArray()
     return data;
 }
 
-void BallbotConfigDialog::fromByteArray(const QByteArray &data)
+void BallbotConfigDialog::fromByteArray(const QByteArray &data, const int index)
 {
-    _config = *reinterpret_cast<const ballbot_config_t*>(data.data());
+    //_config = *reinterpret_cast<const ballbot_config_t*>(data.data());
+    memcpy((char*)(&_config)+index,data.data(),data.size());
 }
