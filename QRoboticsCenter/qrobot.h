@@ -68,6 +68,7 @@ private:
     QMenu* _robot_menu;
     QMenu* _connections_menu;
     QMenu* _recorder_menu;
+    QAction* _quickrecord_action;
 
     QStackedWidget* _stack;
     QRecorderWidget* _recorder;
@@ -87,6 +88,7 @@ private slots:
 
 protected slots:
     virtual void keyPressEvent(QKeyEvent *event);
+    virtual void quickRecordToggled(bool b);
 
 public slots:
     virtual void receiveMessage(mavlink_message_t msg);

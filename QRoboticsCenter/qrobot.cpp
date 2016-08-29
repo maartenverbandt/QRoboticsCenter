@@ -166,6 +166,14 @@ void QRobot::setupMainWindow()
     _recorder_menu = new QMenu("Record",this);
     _stack = new QStackedWidget(this);
     _recorder = new QRecorderWidget(this);
+
+    _quickrecord_action = new QAction("Quick record",this);
+    _quickrecord_action->setCheckable(true);
+    _quickrecord_action->setChecked(false);
+    _quickrecord_action->setShortcut(Qt::CTRL + Qt::Key_R);
+    QObject::connect(_quickrecord_action,SIGNAL(toggled(bool)),this,SLOT(quickRecordToggled(bool)));
+    addAction(_quickrecord_action);
+
     _stitcher = new QPrintStitcher(this);
     _threading = new QThreadingWidget(0);
 
@@ -199,6 +207,11 @@ void QRobot::keyPressEvent(QKeyEvent *event)
         stackDown();
         break; }
     }
+}
+
+void QRobot::quickRecordToggled(bool b)
+{
+    _recorders[0]->recorder()->setChecked(b);
 }
 
 void QRobot::setupGPIOWidget()
