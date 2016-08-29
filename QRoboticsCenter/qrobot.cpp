@@ -93,7 +93,7 @@ void QRobot::receiveMessage(mavlink_message_t msg)
             for(unsigned int k=0;k<8;k++){ doubles[k] = gpio.gpio_float[k]; }
             for(unsigned int k=0;k<4;k++){ ints[k] = gpio.gpio_int[k]; }
 
-            emit gpioReceived(doubles,ints,gpio.time);
+            emit gpioReceived(doubles,ints,gpio.time*0.001);
         break; }
 
         case MAVLINK_MSG_ID_PRINT:{
