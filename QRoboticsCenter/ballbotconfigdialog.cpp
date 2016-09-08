@@ -23,14 +23,14 @@ BallbotConfigDialog::~BallbotConfigDialog()
 
 QByteArray BallbotConfigDialog::getByteArray()
 {
+    updateParameters(); //update the parameters from the widget first!
     QByteArray data((char*)(&_config), sizeof(_config));
-    qDebug() << *((int*)data.data());
 
     return data;
 }
 
 void BallbotConfigDialog::fromByteArray(const QByteArray &data, const int index)
 {
-    //_config = *reinterpret_cast<const ballbot_config_t*>(data.data());
     memcpy((char*)(&_config)+index,data.data(),data.size());
+    updateWidgets(); //update the widgets after new parameters have been read
 }
