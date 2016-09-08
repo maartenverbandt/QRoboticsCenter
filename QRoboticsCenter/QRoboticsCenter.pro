@@ -11,8 +11,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = QRoboticsCenter
 TEMPLATE = app
 
-INCLUDEPATH += $$PWD \
-               mavlink/ballbot_messagesavr/mavlink.h
+INCLUDEPATH += $$PWD #\
+               #mavlink
+#/ballbot_messagesavr/mavlink.h
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -54,4 +55,6 @@ RESOURCES += \
 include(../../QtModules/QMavlinkConnection/src/qmavlinkconnection.pri)
 include(../../QtModules/QGPIOWidget/src/qgpiowidget.pri)
 include(../../QtModules/QRobotConfigDialog/src/qrobotconfigdialog.pri)
+include(../../QtModules/QIMUWidget/src/qimuwidget.pri)
+
 
