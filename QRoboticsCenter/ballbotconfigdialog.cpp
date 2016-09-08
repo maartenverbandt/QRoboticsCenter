@@ -2,18 +2,18 @@
 
 BallbotConfigDialog::BallbotConfigDialog(QWidget *parent) : QRobotConfigDialog("ballbot",parent)
 {
-    addGroup("Stats");
+    addGroup("Info")->setExpanded(true);
+    addParameter("ID",&_config.robot_id,"Info");
+    addGroup("Stats")->setExpanded(true);
     addParameter("ballbot runtime",&_config.ballbot_runtime,"Stats");
     addParameter("ballbot dropcount",&_config.ballbot_dropcount,"Stats");
-    addGroup("IMU");
+    addGroup("IMU")->setExpanded(true);
     addParameter("roll offset",&_config.roll_offset,"IMU");
     addParameter("pitch offset",&_config.pitch_offset,"IMU");
-    addGroup("Controllers");
+    addGroup("Controllers")->setExpanded(true);
     addParameter("attitude controller",&_config.default_attitude_controller,"Controllers");
     addParameter("yaw controller",&_config.default_yaw_controller,"Controllers");
     addParameter("position controller",&_config.default_position_controller,"Controllers");
-
-    setExpanded(true);
 }
 
 BallbotConfigDialog::~BallbotConfigDialog()
