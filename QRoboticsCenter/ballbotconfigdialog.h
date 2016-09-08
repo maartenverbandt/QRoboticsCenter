@@ -21,6 +21,8 @@ typedef struct __attribute__((__packed__)) ballbot_config_t{
 
 class BallbotConfigDialog : public QRobotConfigDialog
 {
+    Q_OBJECT
+
 public:
     BallbotConfigDialog(QWidget *parent = 0);
     ~BallbotConfigDialog();
