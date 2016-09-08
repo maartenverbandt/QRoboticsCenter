@@ -46,24 +46,20 @@ void QRobot::addConnection(QMavlinkConnection *connection)
     _connections_menu->addMenu(menu);
 }
 
-int QRobot::stackUp()
+void QRobot::stackUp()
 {
     int new_index = _stack->currentIndex()+1;
     if(new_index>_stack->count())
         new_index = 0;
     _stack->setCurrentIndex(new_index);
-
-    return new_index;
 }
 
-int QRobot::stackDown()
+void QRobot::stackDown()
 {
     int new_index = _stack->currentIndex()-1;
     if(new_index < 0)
         new_index = _stack->count();
     _stack->setCurrentIndex(new_index);
-
-    return new_index;
 }
 
 void QRobot::sendMessage(const mavlink_message_t &msg)
@@ -227,6 +223,16 @@ void QRobot::setupMainWindow()
     QObject::connect(_quickrecord_action,SIGNAL(toggled(bool)),this,SLOT(quickRecordToggled(bool)));
     addAction(_quickrecord_action);
 
+    _stackup_action = new QAction("next",this);
+    _stackup_action->setShortcut(Qt::CTRL + Qt::Key_Right);
+    QObject::connect(_stackup_action,SIGNAL(triggered(bool)),this,SLOT(stackUp()));
+    addAction(_stackup_action);
+
+    _stackdown_action = new QAction("next",this);
+    _stackdown_action->setShortcut(Qt::CTRL + Qt::Key_Left);
+    QObject::connect(_stackdown_action,SIGNAL(triggered(bool)),this,SLOT(stackDown()));
+    addAction(_stackdown_action);
+
     _stitcher = new QPrintStitcher(this);
     _threading = new QThreadingWidget(0);
 
@@ -248,18 +254,6 @@ void QRobot::setupMainWindow()
 void QRobot::setStatusBarMessage(QString text)
 {
     statusBar()->showMessage(text,2000);
-}
-
-void QRobot::keyPressEvent(QKeyEvent *event)
-{
-    switch(event->key()){
-    case Qt::Key_Left:{
-        stackUp();
-        break; }
-    case Qt::Key_Right:{
-        stackDown();
-        break; }
-    }
 }
 
 void QRobot::quickRecordToggled(bool b)

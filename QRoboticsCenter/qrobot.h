@@ -36,8 +36,6 @@ public:
 
     void addConnection(QMavlinkConnection* connection);
     QStackedWidget* getStack();
-    int stackUp();
-    int stackDown();
 
     QList<QAbstractRecorder*> recorders;
 
@@ -74,6 +72,9 @@ private:
     QAction* _quickrecord_action;
 
     QStackedWidget* _stack;
+    QAction* _stackup_action;
+    QAction* _stackdown_action;
+
     QGPIOWidget* _gpiowidget;
 
     QRecorderWidget* _recorder;
@@ -91,8 +92,10 @@ private slots:
     void gpioSet(QVector<float> doubles, QVector<int> ints);
     void setStatusBarMessage(QString text);
 
+    void stackUp();
+    void stackDown();
+
 protected slots:
-    virtual void keyPressEvent(QKeyEvent *event);
     virtual void quickRecordToggled(bool b);
 
 public slots:
@@ -101,6 +104,7 @@ public slots:
     void sendRobotSettings(); //request config from robot
     void writeRobotSettings(QByteArray data); //write new config file
     void saveRobotSettings(); //save config file to eeprom
+
     virtual void saveSettings();
 
 };
