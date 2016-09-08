@@ -12,7 +12,6 @@ void QBallbot::handlePartition(const char id, const QByteArray &partition, const
     switch(id){
     case 'C':{
         _config->fromByteArray(partition,index);
-        qDebug() << "Config partition handled!";
         break;}
     case 'D':{
         qDebug() << "Data partition not handled";
@@ -23,4 +22,8 @@ void QBallbot::handlePartition(const char id, const QByteArray &partition, const
 void QBallbot::setupBallbotWidget()
 {
     addRobotMenuAction(_config->getPopupAction());
+    QObject::connect(_config,SIGNAL(readRobotSettings()),this,SLOT(sendRobotSettings()));
+    QObject::connect(_config,SIGNAL(writeRobotSettings(QByteArray)),this,SLOT(writeRobotSettings(QByteArray)));
+    QObject::connect(_config,SIGNAL(storeRobotSettings()),this,SLOT(saveRobotSettings()));
+    sendRobotSettings(); //request current info
 }
