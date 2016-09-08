@@ -48,7 +48,7 @@ protected:
 
     void sendMessage(const mavlink_message_t &msg);
     void sendEvent(QRobot::event_t event);
-    void sendPartition(const char id, const QByteArray &data, int index);
+    void sendPartition(const char id, QByteArray data, int index = 0);
 
     virtual void handlePartition(const char id, const QByteArray &partition, const int index);
 
@@ -97,6 +97,10 @@ protected slots:
 
 public slots:
     virtual void receiveMessage(mavlink_message_t msg);
+
+    void sendRobotSettings(); //request config from robot
+    void writeRobotSettings(QByteArray data); //write new config file
+    void saveRobotSettings(); //save config file to eeprom
     virtual void saveSettings();
 
 };
