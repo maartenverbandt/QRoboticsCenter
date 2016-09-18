@@ -34,10 +34,10 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QRunningPlot" name="attitude_widget" native="true"/>
+       <widget class="QPolarPlot" name="balance_widget" native="true"/>
       </item>
       <item>
-       <widget class="QWidget" name="position_widget" native="true"/>
+       <widget class="QMapWidget" name="map_widget" native="true"/>
       </item>
      </layout>
     </widget>
@@ -46,9 +46,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QRunningPlot</class>
+   <class>QPolarPlot</class>
    <extends>QWidget</extends>
-   <header>qrunningplot.h</header>
+   <header>qpolarplot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QMapWidget</class>
+   <extends>QWidget</extends>
+   <header>qmapwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

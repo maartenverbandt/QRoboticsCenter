@@ -56,5 +56,6 @@ include(../../QtModules/QMavlinkConnection/src/qmavlinkconnection.pri)
 include(../../QtModules/QGPIOWidget/src/qgpiowidget.pri)
 include(../../QtModules/QRobotConfigDialog/src/qrobotconfigdialog.pri)
 include(../../QtModules/QPolarPlot/src/qpolarplot.pri)
+include(../../QtModules/QMapWidget/src/qmapwidget.pri)
 
 
