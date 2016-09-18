@@ -7,6 +7,8 @@
 
 class QBalancingRobot : public QRobot
 {
+    Q_OBJECT
+
 public:
     QBalancingRobot(unsigned int id, QString type, QIcon icon, QWidget *parent = 0);
 
@@ -21,6 +23,10 @@ protected:
 private:
     QVector3D _position;
     QVector3D _attitude;
+
+signals:
+    void positionChanged(QVector3D position);
+    void attitudeChanged(QVector3D attitude);
 
 public slots:
     void setPosition(QVector3D position);

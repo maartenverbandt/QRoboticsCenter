@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include <QFrame>
+#include <QVector2D>
+#include <QVector3D>
+#include <QtMath>
 
 namespace Ui {
 class QBalancingWidget;
@@ -21,6 +24,11 @@ public:
 
 private:
     Ui::QBalancingWidget *ui;
+
+public slots:
+    virtual void updatePosition(QVector3D position);
+    virtual void updateAttitude(QVector3D attitude);
+
 };
 
 #endif // QBALANCINGWIDGET_H
