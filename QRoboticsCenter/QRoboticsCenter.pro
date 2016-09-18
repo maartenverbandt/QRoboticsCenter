@@ -55,6 +55,6 @@ RESOURCES += \
 include(../../QtModules/QMavlinkConnection/src/qmavlinkconnection.pri)
 include(../../QtModules/QGPIOWidget/src/qgpiowidget.pri)
 include(../../QtModules/QRobotConfigDialog/src/qrobotconfigdialog.pri)
-include(../../QtModules/QIMUWidget/src/qimuwidget.pri)
+include(../../QtModules/QPolarPlot/src/qpolarplot.pri)
 
 
