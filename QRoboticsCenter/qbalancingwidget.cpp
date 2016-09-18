@@ -10,7 +10,10 @@ QBalancingWidget::QBalancingWidget(QWidget *parent) :
     ui->attitude_widget->xAxis->setVisible(false);
     ui->attitude_widget->yAxis->setVisible(false);
     ui->attitude_widget->xAxis->setRange(-10,10);
-    ui->attitude_widget->yAxis->setRange(-10,10);
+    ui->balance_widget->setRange(10);
+    ui->balance_widget->addCircle(5);
+    ui->balance_widget->addCircle(10);
+    ui->balance_widget->setSize(20);
 }
 
 QBalancingWidget::~QBalancingWidget()
