@@ -142,6 +142,9 @@ void QRobot::receiveMessage(mavlink_message_t msg)
             thread.id = thread_info.ID;
             thread.time = thread_info.time;
             thread.priority = thread_info.priority;
+            thread.average_duration = thread_info.total_duration/thread_info.number_of_executions;
+            thread.average_latency = thread_info.total_latency/thread_info.number_of_executions;
+            thread.duration = thread_info.duration;
             thread.latency = thread_info.latency;
             thread.executions = thread_info.number_of_executions;
 
