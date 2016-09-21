@@ -129,9 +129,6 @@ void QRobot::receiveMessage(mavlink_message_t msg)
             mavlink_gpio_t gpio;
             mavlink_msg_gpio_decode(&msg, &gpio);
 
-            QVector<float> doubles; doubles.fill(0,8);
-            QVector<int> ints; ints.fill(0,4);
-            for(unsigned int k=0;k<8;k++){ doubles[k] = gpio.gpio_float[k]; }
             // put info on the socket
             QGPIOWidget::gpio_t gpio_;
             memcpy(gpio_.floats,gpio.gpio_float,32); //copy 8*4=32 bytes
@@ -234,7 +231,8 @@ void QRobot::setupMainWindow()
     //initialization of the members
     _robot_menu = new QMenu("Settings",this);
     _connections_menu = new QMenu("Connections",this);
-    _recorder_menu = new QMenu("Record",this);
+    _tools_menu = new QMenu("Tools",this);
+    _recorder_menu = new QMenu("Recorders",this);
     _stack = new QStackedWidget(this);
     _recorder = new QRecorderWidget(this);
 
@@ -266,14 +264,15 @@ void QRobot::setupMainWindow()
 
     //setup the settings
     menuBar()->addMenu(_robot_menu);
-    _robot_menu->addAction(_threading->getPopupAction());
 
     //setup the connections
     menuBar()->addMenu(_connections_menu);
 
-    //setup the recorder
-    menuBar()->addMenu(_recorder_menu);
-    //Add thread analyzer
+    //setup the tools
+    menuBar()->addMenu(_tools_menu);
+    _tools_menu->addAction(_threading->getPopupAction());
+    _tools_menu->addAction(_gpioinput->getPopupAction());
+    _tools_menu->addMenu(_recorder_menu);
 }
 
 void QRobot::setStatusBarMessage(QString text)

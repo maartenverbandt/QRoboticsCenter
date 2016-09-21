@@ -18,6 +18,7 @@
 class QRobot : public QMainWindow
 {
     Q_OBJECT
+
 public:
     explicit QRobot(unsigned int id, QWidget *parent = 0);
     explicit QRobot(unsigned int id, QString type, QIcon icon, QWidget *parent = 0);
@@ -73,6 +74,7 @@ private:
 
     QMenu* _robot_menu;
     QMenu* _connections_menu;
+    QMenu* _tools_menu;
     QMenu* _recorder_menu;
     QAction* _quickrecord_action;
 
