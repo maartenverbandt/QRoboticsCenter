@@ -90,13 +90,13 @@ private:
     QLocalSocket* _socket;
 
 signals:
-    void gpioReceived(QVector<float> doubles, QVector<int> ints, double time);
+    void gpioReceived(QGPIOWidget::gpio_t gpio);
     //void threadReceived()
     void printReceived(QString text);
 
 private slots:
     void eventButtonPressed(int b);
-    void gpioSet(QVector<float> doubles, QVector<int> ints);
+    void setGpioOutput(QGPIOWidget::gpio_t gpio);
     void setStatusBarMessage(QString text);
 
     void stackUp();

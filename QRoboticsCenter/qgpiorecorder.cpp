@@ -19,18 +19,18 @@ QString QGPIORecorder::createHeader()
     return header;
 }
 
-void QGPIORecorder::gpioReceived(QVector<float> doubles, QVector<int> ints, double time)
+void QGPIORecorder::gpioReceived(QGPIOWidget::gpio_t gpio)
 {
     if(isRecording()){
         int k;
-        QString line = QString::number(time);
+        QString line = QString::number(gpio.time);
 
         for(k=0;k<8;k++){
-           line +=  "\t" + QString::number(doubles[k]);
+           line +=  "\t" + QString::number(gpio.floats[k]);
         }
 
         for(k=0;k<4;k++){
-           line +=  "\t" + QString::number(ints[k]);
+           line +=  "\t" + QString::number(gpio.ints[k]);
         }
 
         line += QString("\n");

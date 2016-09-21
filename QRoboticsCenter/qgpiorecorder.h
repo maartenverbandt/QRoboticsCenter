@@ -2,6 +2,7 @@
 #define QGPIORECORDER_H
 
 #include <qabstractrecorder.h>
+#include <qgpiowidget.h>
 
 class QGPIORecorder : public QAbstractRecorder
 {
@@ -16,7 +17,7 @@ private:
     QString createHeader();
 
 public slots:
-    void gpioReceived(QVector<float>, QVector<int>, double);
+    void gpioReceived(QGPIOWidget::gpio_t gpio);
     void setLabels(QStringList);
     void startRecording();
     void stopRecording();
