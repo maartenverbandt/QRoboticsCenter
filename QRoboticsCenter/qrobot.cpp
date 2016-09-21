@@ -4,22 +4,30 @@ QRobot::QRobot(unsigned int id, QWidget *parent) :
     QMainWindow(parent),
     _id(id),
     _type("Unknown"),
-    _icon(QIcon())
+    _icon(QIcon()),
+    _server(new QLocalServer(this)),
+    _socket(NULL)
 {
     setupMainWindow();
     setCentralWidget(_stack);
     setupGPIOWidget();
+
+    restartServer();
 }
 
 QRobot::QRobot(unsigned int id, QString type, QIcon icon, QWidget *parent) :
     QMainWindow(parent),
     _id(id),
     _type(type),
-    _icon(icon)
+    _icon(icon),
+    _server(new QLocalServer(this)),
+    _socket(NULL)
 {
     setupMainWindow();
     setCentralWidget(_stack);
     setupGPIOWidget();
+
+    restartServer();
 }
 
 unsigned int QRobot::id()
@@ -44,6 +52,11 @@ void QRobot::addConnection(QMavlinkConnection *connection)
 
     QMenu* menu = connection->constructMenu();
     _connections_menu->addMenu(menu);
+}
+
+bool QRobot::serverConnected()
+{
+    return (_socket != NULL);
 }
 
 void QRobot::stackUp()
@@ -302,4 +315,46 @@ void QRobot::closeEvent(QCloseEvent *event)
     _threading->close();
     saveSettings();
     event->accept();
+}
+
+void QRobot::restartServer()
+{
+    if(_server->isListening())
+        _server->close();
+
+    _server->listen(_type + QString::number(_id));
+}
+
+void QRobot::handleNewConnection()
+{
+    if(_socket == NULL){
+        _socket = _server->nextPendingConnection();
+        _socket->open(QIODevice::ReadWrite);
+        QObject::connect(_socket,SIGNAL(readyRead()),this,SLOT(readFromSocket()));
+    } else {
+        qDebug() << "Server is already connected.";
+    }
+}
+
+void QRobot::readFromSocket()
+{
+    if(serverConnected()){
+        while(_socket->bytesAvailable() >= sizeof(QGPIOWidget::gpio_t)){
+            QByteArray data = _socket->read(sizeof(QGPIOWidget::gpio_t));
+            QGPIOWidget::gpio_t packet = *(QGPIOWidget::gpio_t*)data.data();
+
+            setGpioOutput(packet);
+            qDebug() << "New socket data: gpio data written to robot.";
+        }
+    }
+}
+
+void QRobot::writeToSocket(QGPIOWidget::gpio_t gpio)
+{
+    if(serverConnected()){
+        QByteArray data((char*)(&gpio),sizeof(QGPIOWidget::gpio_t));
+        _socket->write(data);
+
+        qDebug() << "New incoming gpio data: gpio data written to socket";
+    }
 }

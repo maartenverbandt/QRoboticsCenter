@@ -5,6 +5,8 @@
 
 #include <QWidget>
 #include <QMainWindow>
+#include <QLocalServer>
+#include <QLocalSocket>
 #include <qmavlinkconnection.h>
 #include <qgpiowidget.h>
 #include <qprintstitcher.h>
@@ -38,6 +40,8 @@ public:
     QStackedWidget* getStack();
 
     QList<QAbstractRecorder*> recorders;
+
+    bool serverConnected();
 
 protected:
     const unsigned int  _id;
@@ -82,6 +86,9 @@ private:
 
     QPrintStitcher* _stitcher;
 
+    QLocalServer* _server;
+    QLocalSocket* _socket;
+
 signals:
     void gpioReceived(QVector<float> doubles, QVector<int> ints, double time);
     //void threadReceived()
@@ -106,6 +113,11 @@ public slots:
     void saveRobotSettings(); //save config file to eeprom
 
     virtual void saveSettings();
+
+    void restartServer();
+    void handleNewConnection();
+    void readFromSocket();
+    void writeToSocket(QGPIOWidget::gpio_t gpio);
 
 };
 
