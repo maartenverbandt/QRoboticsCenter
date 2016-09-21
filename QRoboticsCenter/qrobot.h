@@ -13,6 +13,7 @@
 #include <qabstractrecorder.h>
 #include <qgpiorecorder.h>
 #include <qthreadingwidget.h>
+#include <qgpioinputdialog.h>
 
 class QRobot : public QMainWindow
 {
@@ -83,6 +84,7 @@ private:
 
     QRecorderWidget* _recorder;
     QThreadingWidget* _threading;
+    QGPIOInputDialog* _gpioinput;
 
     QPrintStitcher* _stitcher;
 
