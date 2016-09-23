@@ -36,6 +36,7 @@ public:
 
     unsigned int id();
     QString getType();
+    QString getName();
     QIcon getIcon();
 
     void addConnection(QMavlinkConnection* connection);

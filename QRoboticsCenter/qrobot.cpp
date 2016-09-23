@@ -42,6 +42,11 @@ QString QRobot::getType()
     return _type;
 }
 
+QString QRobot::getName()
+{
+    return _type + QString::number(_id);
+}
+
 QIcon QRobot::getIcon()
 {
     return _icon;
