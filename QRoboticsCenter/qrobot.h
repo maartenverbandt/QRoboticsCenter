@@ -5,8 +5,8 @@
 
 #include <QWidget>
 #include <QMainWindow>
-#include <QLocalServer>
-#include <QLocalSocket>
+#include <QTcpServer>
+#include <QTcpSocket>
 #include <qmavlinkconnection.h>
 #include <qgpiowidget.h>
 #include <qprintstitcher.h>
@@ -90,8 +90,8 @@ private:
 
     QPrintStitcher* _stitcher;
 
-    QLocalServer* _server;
-    QLocalSocket* _socket;
+    QTcpServer* _server;
+    QTcpSocket* _socket;
 
 signals:
     void gpioReceived(QGPIOWidget::gpio_t gpio);

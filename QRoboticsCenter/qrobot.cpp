@@ -5,13 +5,14 @@ QRobot::QRobot(unsigned int id, QWidget *parent) :
     _id(id),
     _type("Unknown"),
     _icon(QIcon()),
-    _server(new QLocalServer(this)),
+    _server(new QTcpServer(this)),
     _socket(NULL)
 {
     setupMainWindow();
     setCentralWidget(_stack);
     setupGPIOWidget();
 
+    QObject::connect(_server,SIGNAL(newConnection()),this,SLOT(handleNewConnection()));
     restartServer();
 }
 
@@ -20,13 +21,14 @@ QRobot::QRobot(unsigned int id, QString type, QIcon icon, QWidget *parent) :
     _id(id),
     _type(type),
     _icon(icon),
-    _server(new QLocalServer(this)),
+    _server(new QTcpServer(this)),
     _socket(NULL)
 {
     setupMainWindow();
     setCentralWidget(_stack);
     setupGPIOWidget();
 
+    QObject::connect(_server,SIGNAL(newConnection()),this,SLOT(handleNewConnection()));
     restartServer();
 }
 
@@ -329,7 +331,9 @@ void QRobot::restartServer()
     if(_server->isListening())
         _server->close();
 
-    _server->listen(_type + QString::number(_id));
+    _server->listen(QHostAddress::LocalHost);
+    qDebug() << "Started tcp server for" << getName() << ".";
+    qDebug() << "The magic number is" << _server->serverPort();
 }
 
 void QRobot::handleNewConnection()
