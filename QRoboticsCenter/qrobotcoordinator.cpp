@@ -18,16 +18,16 @@ QRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
     QRobot* robot;
     switch(type){
     case(QRobot::BALLBOT):
-        robot = new QBallbot(id,0);
+        robot = new QBallbot(id,this);
         break;
     case(QRobot::SEGBOT):
-        robot = new QSegbot(id,0);
+        robot = new QSegbot(id,this);
         break;
     case(QRobot::CAR):
-        robot = new QRobot(id,"car",QIcon(":/icons/car.png"),0);
+        robot = new QRobot(id,"car",QIcon(":/icons/car.png"),this);
         break;
     default:
-        robot = new QRobot(id,0);
+        robot = new QRobot(id,this);
         break;
     }
     _robots.append(robot);
