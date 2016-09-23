@@ -153,6 +153,8 @@ void QRobot::receiveMessage(mavlink_message_t msg)
 
             if(_stitcher->stitch(QString(print.text),32)){
                 setStatusBarMessage(_stitcher->getLine());
+                _robot_log->write(_stitcher->getLine().toLatin1());
+                _robot_log->flush(); //force a quick update
                 printReceived(_stitcher->getLine());
             }
         break; }
@@ -311,6 +313,13 @@ void QRobot::setupGPIOWidget()
 
     //add view
     addView(_gpiowidget);
+}
+
+void QRobot::setupRobotLog()
+{
+    _robot_log = new QFile(QDir::tempPath() + QDir::separator() + getName() + ".txt",this);
+    if(!_robot_log->open(QIODevice::WriteOnly | QIODevice::Text))
+        qDebug() << "Error opening robot log file";
 }
 
 void QRobot::addRecorder(QAbstractRecorder *recorder)

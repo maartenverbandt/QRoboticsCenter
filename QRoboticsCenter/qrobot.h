@@ -62,6 +62,7 @@ protected:
 
     void setupMainWindow();
     void setupGPIOWidget();
+    void setupRobotLog();
 
     void addRecorder(QAbstractRecorder* recorder);
     void addRobotMenuAction(QAction* open);
@@ -90,6 +91,7 @@ private:
     QGPIOInputDialog* _gpioinput;
 
     QPrintStitcher* _stitcher;
+    QFile* _robot_log;
 
     QTcpServer* _server;
     QTcpSocket* _socket;
