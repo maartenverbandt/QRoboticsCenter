@@ -11,6 +11,7 @@ QRobot::QRobot(unsigned int id, QWidget *parent) :
     setupMainWindow();
     setCentralWidget(_stack);
     setupGPIOWidget();
+    setupRobotLog();
 
     QObject::connect(_server,SIGNAL(newConnection()),this,SLOT(handleNewConnection()));
     restartServer();
@@ -27,6 +28,7 @@ QRobot::QRobot(unsigned int id, QString type, QIcon icon, QWidget *parent) :
     setupMainWindow();
     setCentralWidget(_stack);
     setupGPIOWidget();
+    setupRobotLog();
 
     QObject::connect(_server,SIGNAL(newConnection()),this,SLOT(handleNewConnection()));
     restartServer();
