@@ -17,6 +17,7 @@ public:
 
     QRobot* addRobot(unsigned int id, unsigned int type);
     QRobot* addRobot(QMavlinkConnection* connection);
+    QRobot* findRobot(unsigned int id, unsigned int type);
 
     QAction* getRescanAction();
 

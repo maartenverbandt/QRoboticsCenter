@@ -45,10 +45,26 @@ QRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
 
 QRobot *QRobotCoordinator::addRobot(QMavlinkConnection *connection)
 {
-    QRobot* robot = this->addRobot(connection->getRobotID(), connection->getRobotType());
+    QRobot* robot = findRobot(connection->getRobotID(), connection->getRobotType());
+    if(robot == NULL){
+        robot = this->addRobot(connection->getRobotID(), connection->getRobotType());
+    }
     robot->addConnection(connection);
 
     return robot;
+}
+
+QRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int type)
+{
+    QListIterator<QRobot*> i(_robots);
+    while(i.hasNext()){
+        qDebug() << i.peekNext()->id() << id;
+        if(i.next()->id() == id){
+            return i.peekPrevious();
+        }
+    }
+
+    return NULL;
 }
 
 void QRobotCoordinator::closeEvent(QCloseEvent *e)
@@ -60,8 +76,7 @@ void QRobotCoordinator::closeEvent(QCloseEvent *e)
 
 void QRobotCoordinator::mavlinkConnectionFound(QMavlinkConnection *connection)
 {
-    QRobot* robot = addRobot(connection->getRobotID(),connection->getRobotType());
-    robot->addConnection(connection);
+    addRobot(connection);
 }
 
 void QRobotCoordinator::showRobotWidget(int index)
