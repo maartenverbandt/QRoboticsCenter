@@ -31,7 +31,8 @@ public:
 
     typedef enum event_t{
         SEND_CONFIG = 100,
-        SAVE_CONFIG = 101
+        SAVE_CONFIG = 101,
+        MODE_INDEX = 200
     } event_t;
 
     unsigned int id();

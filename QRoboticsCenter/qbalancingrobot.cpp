@@ -21,6 +21,7 @@ void QBalancingRobot::setupBalancingWidget()
     QBalancingWidget* widget = new QBalancingWidget(this);
     QObject::connect(this,SIGNAL(attitudeChanged(QVector3D)),widget,SLOT(updateAttitude(QVector3D)));
     QObject::connect(this,SIGNAL(positionChanged(QVector3D)),widget,SLOT(updatePosition(QVector3D)));
+    QObject::connect(widget,SIGNAL(controlModeChanged(int)),this,SLOT(setControlMode(int)));
 
     addView(widget);
 }
@@ -40,6 +41,11 @@ void QBalancingRobot::setAttitude(QVector3D attitude)
 {
     _attitude = attitude;
     emit attitudeChanged(_attitude);
+}
+
+void QBalancingRobot::setControlMode(int mode)
+{
+    sendEvent(QRobot::MODE_INDEX + mode);
 }
 
 void QBalancingRobot::receiveMessage(mavlink_message_t msg)

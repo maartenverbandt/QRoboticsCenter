@@ -31,6 +31,7 @@ signals:
 public slots:
     void setPosition(QVector3D position);
     void setAttitude(QVector3D attitude);
+    void setControlMode(int mode);
 
     virtual void receiveMessage(mavlink_message_t msg);
 
