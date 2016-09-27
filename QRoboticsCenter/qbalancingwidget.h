@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QFrame>
+#include <QButtonGroup>
 #include <QVector2D>
 #include <QVector3D>
 #include <QtMath>
@@ -24,6 +25,8 @@ public:
 
 private:
     Ui::QBalancingWidget *ui;
+    QButtonGroup *_controls;
+    int _control_mode;
 
 public slots:
     virtual void updatePosition(QVector3D position);
