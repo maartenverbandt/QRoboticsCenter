@@ -1,5 +1,10 @@
 <!DOCTYPE RCC><RCC version="1.0">
  <qresource>
      <file>../icons/car.png</file>
+     <file>../icons/balancing_control_idle.png</file>
+     <file>../icons/balancing_control_attitude.png</file>
+     <file>../icons/balancing_control_velocity.png</file>
+     <file>../icons/balancing_control_position.png</file>
+     <file>../icons/balancing_control_console.png</file>
  </qresource>
  </RCC>
