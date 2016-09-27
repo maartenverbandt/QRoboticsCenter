@@ -6,6 +6,7 @@ QBalancingWidget::QBalancingWidget(QWidget *parent) :
     ui(new Ui::QBalancingWidget),
     _controls(new QButtonGroup(this)),
     _control_mode(0),
+    _jumping(false)
 {
     ui->setupUi(this);
 
@@ -51,4 +52,15 @@ void QBalancingWidget::updateAttitude(QVector3D attitude)
 {
     ui->balance_widget->addPoint(QPointF(qRadiansToDegrees(attitude.x()),qRadiansToDegrees(attitude.y())));
     ui->map_widget->setOrientation(attitude.z());
+}
+
+void QBalancingWidget::handleControlsClicked(int id)
+{
+    if((abs(id-_control_mode)==1) || (_jumping)){
+        _control_mode = id;
+        emit controlModeChanged(_control_mode);
+    } else if(abs(id-_control_mode)!=0){
+        _controls->button(_control_mode)->setChecked(true);
+        qDebug() << "Cannot set the requested mode: jumping is not allowed.";
+    }
 }

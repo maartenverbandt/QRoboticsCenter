@@ -27,10 +27,15 @@ private:
     Ui::QBalancingWidget *ui;
     QButtonGroup *_controls;
     int _control_mode;
+    bool _jumping;
+
+signals:
+    void controlModeChanged(int mode);
 
 public slots:
     virtual void updatePosition(QVector3D position);
     virtual void updateAttitude(QVector3D attitude);
+    virtual void handleControlsClicked(int id);
 
 };
 
