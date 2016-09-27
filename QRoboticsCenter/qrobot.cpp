@@ -92,7 +92,7 @@ void QRobot::sendMessage(const mavlink_message_t &msg)
         qDebug() << "Error when sending message: no connections in the list.";
 }
 
-void QRobot::sendEvent(QRobot::event_t event)
+void QRobot::sendEvent(int event)
 {
     mavlink_message_t msg;
     mavlink_msg_event_pack(0,0,&msg,event);

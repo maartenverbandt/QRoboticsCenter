@@ -52,7 +52,7 @@ protected:
     const QIcon         _icon;
 
     void sendMessage(const mavlink_message_t &msg);
-    void sendEvent(QRobot::event_t event);
+    void sendEvent(int event);
     void sendPartition(const char id, QByteArray data, int index = 0);
 
     virtual void handlePartition(const char id, const QByteArray &partition, const int index);
