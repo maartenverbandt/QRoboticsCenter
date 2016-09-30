@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     w.show();
     //w.addRobot(100,10);
     //w.addRobot(101,11);
+    //w.addRobot(102,20);
 
     c.query();
 
