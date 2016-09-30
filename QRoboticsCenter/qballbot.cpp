@@ -1,7 +1,7 @@
 #include "qballbot.h"
 
 QBallbot::QBallbot(unsigned int id, QWidget *parent):
-    QBalancingRobot(id, "Ballbot", QIcon(), parent),
+    QBalancingRobot(id, "Ballbot", QIcon(":/icons/ballbot.png"), parent),
     _config(new BallbotConfigDialog(0))
 {
     setupBallbotWidget();

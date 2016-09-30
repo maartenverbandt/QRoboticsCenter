@@ -1,6 +1,7 @@
 <!DOCTYPE RCC><RCC version="1.0">
  <qresource>
      <file>../icons/car.png</file>
+     <file>../icons/ballbot.png</file>
      <file>../icons/balancing_control_idle.png</file>
      <file>../icons/balancing_control_attitude.png</file>
      <file>../icons/balancing_control_velocity.png</file>
