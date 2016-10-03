@@ -1,6 +1,6 @@
 // MESSAGE EVENT PACKING
 
-#define MAVLINK_MSG_ID_EVENT 5
+#define MAVLINK_MSG_ID_EVENT 4
 
 typedef struct __mavlink_event_t
 {
@@ -8,10 +8,10 @@ typedef struct __mavlink_event_t
 } mavlink_event_t;
 
 #define MAVLINK_MSG_ID_EVENT_LEN 2
-#define MAVLINK_MSG_ID_5_LEN 2
+#define MAVLINK_MSG_ID_4_LEN 2
 
 #define MAVLINK_MSG_ID_EVENT_CRC 133
-#define MAVLINK_MSG_ID_5_CRC 133
+#define MAVLINK_MSG_ID_4_CRC 133
 
 
 

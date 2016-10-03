@@ -1,5 +1,5 @@
 /** @file
- *	@brief MAVLink comm protocol built from ballbot_messagesavr.xml
+ *	@brief MAVLink comm protocol built from robot_messages.xml
  *	@see http://pixhawk.ethz.ch/software/mavlink
  */
 #ifndef MAVLINK_H
@@ -22,6 +22,6 @@
 #endif
 
 #include "version.h"
-#include "ballbot_messagesavr.h"
+#include "robot_messages.h"
 
 #endif // MAVLINK_H
