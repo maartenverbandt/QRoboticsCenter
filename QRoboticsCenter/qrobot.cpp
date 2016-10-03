@@ -232,7 +232,7 @@ void QRobot::eventButtonPressed(int b)
 void QRobot::setGpioOutput(QGPIOWidget::gpio_t gpio)
 {
     mavlink_message_t msg;
-    mavlink_msg_gpio_pack(0,0,&msg,gpio.time,0,gpio.floats,gpio.ints);
+    mavlink_msg_gpio_pack(0,0,&msg,gpio.time,gpio.floats,gpio.ints);
 
     emit sendMessage(msg);
 }

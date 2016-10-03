@@ -51,10 +51,10 @@ void QBalancingRobot::setControlMode(int mode)
 void QBalancingRobot::receiveMessage(mavlink_message_t msg)
 {
     switch(msg.msgid){
-    case MAVLINK_MSG_ID_AHRS_ANGLE:{
-        mavlink_ahrs_angle_t ahrs_angle;
-        mavlink_msg_ahrs_angle_decode(&msg,&ahrs_angle);
-        setAttitude(QVector3D(ahrs_angle.roll,ahrs_angle.pitch,ahrs_angle.yaw));
+    case MAVLINK_MSG_ID_POSE:{
+        mavlink_pose_t pose;
+        mavlink_msg_pose_decode(&msg,&pose);
+        setAttitude(QVector3D(pose.roll,pose.pitch,pose.yaw));
         break;}
 
     default:
