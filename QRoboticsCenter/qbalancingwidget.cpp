@@ -50,7 +50,7 @@ void QBalancingWidget::updatePosition(QVector3D position)
 
 void QBalancingWidget::updateAttitude(QVector3D attitude)
 {
-    ui->balance_widget->addPoint(QPointF(qRadiansToDegrees(attitude.x()),qRadiansToDegrees(attitude.y())));
+    ui->balance_widget->addPoint(QPointF(qRadiansToDegrees(attitude.x()),-qRadiansToDegrees(attitude.y())));
     ui->map_widget->setOrientation(attitude.z());
 }
 
