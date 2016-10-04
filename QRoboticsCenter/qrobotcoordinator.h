@@ -15,7 +15,8 @@ class QRobotCoordinator : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit QRobotCoordinator(QWidget *parent = 0);
+    explicit QRobotCoordinator();
+    ~QRobotCoordinator();
 
     QRobot* addRobot(unsigned int id, unsigned int type);
     QRobot* addRobot(QMavlinkConnection* connection);
@@ -38,6 +39,9 @@ private:
     QAction* _about;
 
     QConnectionCoordinator* _connection_coordinator;
+
+    void saveSettings();
+    void loadSettings();
 
 signals:
 

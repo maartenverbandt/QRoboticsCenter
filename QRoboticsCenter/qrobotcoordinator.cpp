@@ -35,7 +35,14 @@ QRobotCoordinator::QRobotCoordinator() :
     QMenu *help = menuBar()->addMenu("Help");
     help->addAction(_about);
 
+    loadSettings();
+
     setMinimumWidth(250);
+}
+
+QRobotCoordinator::~QRobotCoordinator()
+{
+    saveSettings();
 }
 
 QRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
@@ -100,6 +107,39 @@ void QRobotCoordinator::closeEvent(QCloseEvent *e)
         robot.next()->close();
 }
 
+void QRobotCoordinator::saveSettings()
+{
+    QSettings settings("RobSoft", "QRoboticsCenter");
+
+    // set window group
+    settings.beginGroup("QRobotCoordinator");
+
+    // save window settings
+    settings.setValue("pos", pos());
+
+    //save scan settings
+    settings.setValue("scan_usb", _scan_usb->isChecked());
+    settings.setValue("scan_bluetooth", _scan_bluetooth->isChecked());
+
+    settings.endGroup();
+}
+
+void QRobotCoordinator::loadSettings()
+{
+    QSettings settings("RobSoft", "QRoboticsCenter");
+
+    // set window group
+    settings.beginGroup("QRobotCoordinator");
+
+    // restore window settings
+    move(settings.value("pos", QPoint(200, 200)).toPoint());
+
+    //save scan settings
+    _scan_usb->setChecked(settings.value("scan_usb",true).toBool());
+    _scan_bluetooth->setChecked(settings.value("scan_bluetooth",false).toBool());
+
+    settings.endGroup();
+}
 
 void QRobotCoordinator::showAboutDialog()
 {
