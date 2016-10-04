@@ -33,7 +33,11 @@ private:
     QSignalMapper* _robot_mapper;
 
     QAction* _rescan;
+    QAction* _scan_usb;
+    QAction* _scan_bluetooth;
     QAction* _about;
+
+    QConnectionCoordinator* _connection_coordinator;
 
 signals:
 
@@ -43,6 +47,7 @@ private slots:
 public slots:
     void mavlinkConnectionFound(QMavlinkConnection *connection);
     void showRobotWidget(int index);
+    void scan();
 
 };
 

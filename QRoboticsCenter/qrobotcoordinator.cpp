@@ -5,16 +5,29 @@ QRobotCoordinator::QRobotCoordinator() :
     _layout(new QVBoxLayout()),
     _robot_mapper(new QSignalMapper(this)),
     _rescan(new QAction("Scan",this)),
+    _scan_usb(new QAction("usb",this)),
+    _scan_bluetooth(new QAction("bluetooth",this)),
     _about(new QAction("About",this)),
+    _connection_coordinator(new QConnectionCoordinator(this))
 {
     // setup central widget
     QWidget* central_widget = new QWidget(this);
     central_widget->setLayout(_layout);
     this->setCentralWidget(central_widget);
+
+    QObject::connect(_connection_coordinator, SIGNAL(mavlinkConnectionFound(QMavlinkConnection*)), this, SLOT(mavlinkConnectionFound(QMavlinkConnection*)));
+    QObject::connect(_rescan,SIGNAL(triggered()),this,SLOT(scan()));
+
     QObject::connect(_robot_mapper,SIGNAL(mapped(int)),this,SLOT(showRobotWidget(int)));
 
+    QMenu *scan = menuBar()->addMenu("Scan");
     _rescan->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
-    addAction(_rescan);
+    scan->addAction(_rescan);
+    scan->addSeparator();
+    _scan_usb->setCheckable(true);
+    _scan_bluetooth->setCheckable(true);
+    scan->addAction(_scan_usb);
+    scan->addAction(_scan_bluetooth);
 
     QObject::connect(_about,SIGNAL(triggered(bool)),this,SLOT(showAboutDialog()));
     addAction(_about);
@@ -104,6 +117,14 @@ void QRobotCoordinator::mavlinkConnectionFound(QMavlinkConnection *connection)
 void QRobotCoordinator::showRobotWidget(int index)
 {
     _robots[index]->show();
+}
+
+void QRobotCoordinator::scan()
+{
+    if(_scan_usb->isChecked())
+        _connection_coordinator->scanUSB();
+    if(_scan_bluetooth->isChecked())
+        _connection_coordinator->scanBT();
 }
 
 QAction* QRobotCoordinator::getRescanAction()
