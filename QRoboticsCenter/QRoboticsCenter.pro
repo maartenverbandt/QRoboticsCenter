@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     qbalancingwidget.cpp \
     ballbotconfigdialog.cpp \
     qrecorderwidget.cpp \
-    qrobotbutton.cpp
+    qrobotbutton.cpp \
+    qaboutdialog.cpp
 
 HEADERS  += mainwindow.h \
     qrobotcoordinator.h \
@@ -44,10 +45,12 @@ HEADERS  += mainwindow.h \
     qbalancingwidget.h \
     ballbotconfigdialog.h \
     qrecorderwidget.h \
-    qrobotbutton.h
+    qrobotbutton.h \
+    qaboutdialog.h
 
 FORMS    += mainwindow.ui \
-    qbalancingwidget.ui
+    qbalancingwidget.ui \
+    qaboutdialog.ui
 
 RESOURCES += \
     icons.qrc
