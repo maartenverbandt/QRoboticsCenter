@@ -1,9 +1,15 @@
 #include "qrobotcoordinator.h"
 
-QRobotCoordinator::QRobotCoordinator(QWidget *parent) :
-    QWidget(parent), _layout(new QVBoxLayout()), _robot_mapper(new QSignalMapper(this)), _rescan(new QAction(this))
+QRobotCoordinator::QRobotCoordinator() :
+    QMainWindow(),
+    _layout(new QVBoxLayout()),
+    _robot_mapper(new QSignalMapper(this)),
+    _rescan(new QAction("Scan",this)),
 {
-    this->setLayout(_layout);
+    // setup central widget
+    QWidget* central_widget = new QWidget(this);
+    central_widget->setLayout(_layout);
+    this->setCentralWidget(central_widget);
     QObject::connect(_robot_mapper,SIGNAL(mapped(int)),this,SLOT(showRobotWidget(int)));
 
     _rescan->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));

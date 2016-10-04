@@ -2,6 +2,7 @@
 #define QROBOTCOORDINATOR_H
 
 #include <QObject>
+#include <QMainWindow>
 #include <QLayout>
 #include <qrobot.h>
 #include <qrobotbutton.h>
@@ -9,7 +10,7 @@
 #include <qsegbot.h>
 #include <qmavlinkconnection.h>
 
-class QRobotCoordinator : public QWidget
+class QRobotCoordinator : public QMainWindow
 {
     Q_OBJECT
 public:
