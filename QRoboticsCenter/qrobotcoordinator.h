@@ -9,6 +9,7 @@
 #include <qballbot.h>
 #include <qsegbot.h>
 #include <qmavlinkconnection.h>
+#include <qaboutdialog.h>
 
 class QRobotCoordinator : public QMainWindow
 {
@@ -32,8 +33,12 @@ private:
     QSignalMapper* _robot_mapper;
 
     QAction* _rescan;
+    QAction* _about;
 
 signals:
+
+private slots:
+    void showAboutDialog();
 
 public slots:
     void mavlinkConnectionFound(QMavlinkConnection *connection);

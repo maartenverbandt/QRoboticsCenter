@@ -5,6 +5,7 @@ QRobotCoordinator::QRobotCoordinator() :
     _layout(new QVBoxLayout()),
     _robot_mapper(new QSignalMapper(this)),
     _rescan(new QAction("Scan",this)),
+    _about(new QAction("About",this)),
 {
     // setup central widget
     QWidget* central_widget = new QWidget(this);
@@ -14,6 +15,12 @@ QRobotCoordinator::QRobotCoordinator() :
 
     _rescan->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
     addAction(_rescan);
+
+    QObject::connect(_about,SIGNAL(triggered(bool)),this,SLOT(showAboutDialog()));
+    addAction(_about);
+
+    QMenu *help = menuBar()->addMenu("Help");
+    help->addAction(_about);
 
     setMinimumWidth(250);
 }
@@ -78,6 +85,15 @@ void QRobotCoordinator::closeEvent(QCloseEvent *e)
     QListIterator<QRobot*> robot(_robots);
     while (robot.hasNext())
         robot.next()->close();
+}
+
+
+void QRobotCoordinator::showAboutDialog()
+{
+    QAboutDialog *d = new QAboutDialog(this);
+    d->setApplicationTitle("QRoboticsCenter");
+    d->setVersion("0.1.0");
+    d->setIcon(":/icons/car.png");
 }
 
 void QRobotCoordinator::mavlinkConnectionFound(QMavlinkConnection *connection)
