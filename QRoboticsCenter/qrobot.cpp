@@ -187,11 +187,15 @@ void QRobot::receiveMessage(mavlink_message_t msg)
     }
 }
 
-void QRobot::sendRobotSettings()
+void QRobot::requestSendConfig()
 {
     sendEvent(QRobot::SEND_CONFIG);
 }
 
+void QRobot::requestSaveConfig()
+{
+    sendEvent(QRobot::SAVE_CONFIG);
+}
 
 void QRobot::requestStartLogging()
 {
@@ -207,11 +211,6 @@ void QRobot::writeRobotSettings(QByteArray data)
 {
     sendPartition('C',data);
     qDebug() << "sending partition data.";
-}
-
-void QRobot::saveRobotSettings()
-{
-    sendEvent(QRobot::SAVE_CONFIG);
 }
 
 void QRobot::saveSettings()

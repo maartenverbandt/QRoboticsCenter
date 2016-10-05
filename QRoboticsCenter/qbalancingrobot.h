@@ -12,6 +12,17 @@ class QBalancingRobot : public QRobot
     Q_OBJECT
 
 public:
+    typedef enum event_t{
+        MODE_IDLE = 200,
+        MODE_ATTITUDE = 201,
+        MODE_VELOCITY = 202,
+        MODE_POSITION = 203,
+        LOG_GPIO = 302,
+        LOG_ATTITUDE = 303,
+        LOG_VELOCITY = 304,
+        LOG_POSITION = 305
+    } event_t;
+
     QBalancingRobot(unsigned int id, QString type, QIcon icon, QWidget *parent = 0);
 
     QVector3D position();
@@ -36,6 +47,13 @@ public slots:
     void setPosition(QVector3D position);
     void setAttitude(QVector3D attitude);
     void setControlMode(int mode);
+
+    void requestIdleMode();
+    void requestAttitudeMode();
+    void requestVelocityMode();
+    void requestPositionMode();
+    void requestAttitudeLogging();
+    void requestPositionLogging();
 
     virtual void receiveMessage(mavlink_message_t msg);
 

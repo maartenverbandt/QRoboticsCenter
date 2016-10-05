@@ -118,11 +118,11 @@ protected slots:
 public slots:
     virtual void receiveMessage(mavlink_message_t msg);
 
-    void sendRobotSettings(); //request config from robot
+    void requestSendConfig(); //request config from robot
+    void requestSaveConfig(); //save config file to eeprom
     void requestStartLogging();
     void requestStopLogging();
     void writeRobotSettings(QByteArray data); //write new config file
-    void saveRobotSettings(); //save config file to eeprom
 
     virtual void saveSettings();
 

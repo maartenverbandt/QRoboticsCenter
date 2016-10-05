@@ -22,8 +22,8 @@ void QBallbot::handlePartition(const char id, const QByteArray &partition, const
 void QBallbot::setupBallbotWidget()
 {
     addRobotMenuAction(_config->getPopupAction());
-    QObject::connect(_config,SIGNAL(readRobotSettings()),this,SLOT(sendRobotSettings()));
+    QObject::connect(_config,SIGNAL(readRobotSettings()),this,SLOT(requestSendConfig()));
     QObject::connect(_config,SIGNAL(writeRobotSettings(QByteArray)),this,SLOT(writeRobotSettings(QByteArray)));
-    QObject::connect(_config,SIGNAL(storeRobotSettings()),this,SLOT(saveRobotSettings()));
-    sendRobotSettings(); //request current info
+    QObject::connect(_config,SIGNAL(storeRobotSettings()),this,SLOT(requestSaveConfig()));
+    requestSendConfig(); //request current info
 }

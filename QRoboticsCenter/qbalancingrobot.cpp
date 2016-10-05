@@ -55,7 +55,33 @@ void QBalancingRobot::setAttitude(QVector3D attitude)
 
 void QBalancingRobot::setControlMode(int mode)
 {
-    sendEvent(QRobot::MODE_INDEX + mode);
+    switch(mode){
+    case 0: requestIdleMode(); break;
+    case 1: requestAttitudeMode(); break;
+    case 2: requestVelocityMode(); break;
+    case 3: requestPositionMode(); break;
+    }
+}
+
+void QBalancingRobot::requestIdleMode()
+{
+    sendEvent(QBalancingRobot::MODE_IDLE);
+}
+
+void QBalancingRobot::requestAttitudeMode()
+{
+    sendEvent(QBalancingRobot::MODE_ATTITUDE);
+}
+
+void QBalancingRobot::requestVelocityMode()
+{
+    sendEvent(QBalancingRobot::MODE_VELOCITY);
+}
+
+void QBalancingRobot::requestPositionMode()
+{
+    sendEvent(QBalancingRobot::MODE_POSITION);
+}
 
 void QBalancingRobot::requestAttitudeLogging()
 {
