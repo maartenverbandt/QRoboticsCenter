@@ -4,6 +4,8 @@
 #include <QVector3D>
 #include <qrobot.h>
 #include <qbalancingwidget.h>
+#include <qattituderecorder.h>
+#include <qpositionrecorder.h>
 
 class QBalancingRobot : public QRobot
 {
@@ -27,6 +29,8 @@ private:
 signals:
     void positionChanged(QVector3D position);
     void attitudeChanged(QVector3D attitude);
+    void positionMessageReceived(mavlink_position_t position);
+    void attitudeMessageReceived(mavlink_attitude_t attitude);
 
 public slots:
     void setPosition(QVector3D position);
@@ -36,5 +40,8 @@ public slots:
     virtual void receiveMessage(mavlink_message_t msg);
 
 };
+
+Q_DECLARE_METATYPE(mavlink_position_t)
+Q_DECLARE_METATYPE(mavlink_attitude_t)
 
 #endif // QBALANCINGROBOT_H

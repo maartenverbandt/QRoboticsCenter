@@ -192,6 +192,17 @@ void QRobot::sendRobotSettings()
     sendEvent(QRobot::SEND_CONFIG);
 }
 
+
+void QRobot::requestStartLogging()
+{
+    sendEvent(QRobot::LOG_START);
+}
+
+void QRobot::requestStopLogging()
+{
+    sendEvent(QRobot::LOG_STOP);
+}
+
 void QRobot::writeRobotSettings(QByteArray data)
 {
     sendPartition('C',data);
@@ -308,8 +319,6 @@ void QRobot::setupGPIOWidget()
     QGPIORecorder* gpiorec = new QGPIORecorder(this);
     QObject::connect(this,SIGNAL(gpioReceived(QGPIOWidget::gpio_t)),gpiorec,SLOT(gpioReceived(QGPIOWidget::gpio_t)));
     QObject::connect(_gpiowidget,SIGNAL(inputLabelsSet(QStringList)),gpiorec,SLOT(setLabels(QStringList)));
-    QObject::connect(gpiorec,SIGNAL(started()),_recorder,SLOT(start()));
-    QObject::connect(gpiorec,SIGNAL(stopped()),_recorder,SLOT(stop()));
     addRecorder(gpiorec);
     _gpiowidget->inputLabelsSend();
 
@@ -328,6 +337,10 @@ void QRobot::addRecorder(QAbstractRecorder *recorder)
 {
     _recorders.append(recorder);
     _recorder_menu->addAction(recorder->recorder());
+    QObject::connect(recorder,SIGNAL(started()),_recorder,SLOT(start()));
+    QObject::connect(recorder,SIGNAL(started()),this,SLOT(requestStartLogging()));
+    QObject::connect(recorder,SIGNAL(stopped()),_recorder,SLOT(stop()));
+    QObject::connect(recorder,SIGNAL(stopped()),this,SLOT(requestStopLogging()));
 }
 
 void QRobot::addRobotMenuAction(QAction *open)

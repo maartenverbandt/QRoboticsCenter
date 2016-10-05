@@ -32,7 +32,9 @@ public:
     typedef enum event_t{
         SEND_CONFIG = 100,
         SAVE_CONFIG = 101,
-        MODE_INDEX = 200
+        MODE_INDEX = 200,
+        LOG_START = 300,
+        LOG_STOP = 301
     } event_t;
 
     unsigned int id();
@@ -117,6 +119,8 @@ public slots:
     virtual void receiveMessage(mavlink_message_t msg);
 
     void sendRobotSettings(); //request config from robot
+    void requestStartLogging();
+    void requestStopLogging();
     void writeRobotSettings(QByteArray data); //write new config file
     void saveRobotSettings(); //save config file to eeprom
 

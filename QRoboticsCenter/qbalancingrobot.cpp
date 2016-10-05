@@ -24,6 +24,16 @@ void QBalancingRobot::setupBalancingWidget()
     QObject::connect(widget,SIGNAL(controlModeChanged(int)),this,SLOT(setControlMode(int)));
 
     addView(widget);
+
+    // setup recorders
+    QAttitudeRecorder* attrec = new QAttitudeRecorder(this);
+    QObject::connect(this,SIGNAL(attitudeMessageReceived(mavlink_attitude_t)),attrec,SLOT(attitudeReceived(mavlink_attitude_t)));
+    QObject::connect(attrec,SIGNAL(started()),this,SLOT(requestAttitudeLogging()));
+    addRecorder(attrec);
+    QPositionRecorder* posrec = new QPositionRecorder(this);
+    QObject::connect(this,SIGNAL(positionMessageReceived(mavlink_position_t)),posrec,SLOT(positionReceived(mavlink_position_t)));
+    QObject::connect(posrec,SIGNAL(started()),this,SLOT(requestPositionLogging()));
+    addRecorder(posrec);
 }
 
 void QBalancingRobot::handlePartition(const char id, const QByteArray &partition, const int index)
@@ -46,6 +56,15 @@ void QBalancingRobot::setAttitude(QVector3D attitude)
 void QBalancingRobot::setControlMode(int mode)
 {
     sendEvent(QRobot::MODE_INDEX + mode);
+
+void QBalancingRobot::requestAttitudeLogging()
+{
+    sendEvent(QBalancingRobot::LOG_ATTITUDE);
+}
+
+void QBalancingRobot::requestPositionLogging()
+{
+    sendEvent(QBalancingRobot::LOG_POSITION);
 }
 
 void QBalancingRobot::receiveMessage(mavlink_message_t msg)
@@ -62,12 +81,14 @@ void QBalancingRobot::receiveMessage(mavlink_message_t msg)
         mavlink_attitude_t attitude;
         mavlink_msg_attitude_decode(&msg,&attitude);
         setAttitude(QVector3D(attitude.roll,attitude.pitch,attitude.roll));
+        emit attitudeMessageReceived(attitude);
         break;}
 
     case MAVLINK_MSG_ID_POSITION:{
         mavlink_position_t position;
         mavlink_msg_position_decode(&msg,&position);
         setPosition(QVector3D(position.x,position.y,position.z));
+        emit positionMessageReceived(position);
         break;}
 
     default:
