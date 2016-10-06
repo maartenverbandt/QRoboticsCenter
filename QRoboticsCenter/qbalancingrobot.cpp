@@ -104,21 +104,21 @@ void QBalancingRobot::receiveMessage(mavlink_message_t msg)
     case MAVLINK_MSG_ID_POSE:{
         mavlink_pose_t pose;
         mavlink_msg_pose_decode(&msg,&pose);
-        setAttitude(QVector3D(pose.roll,pose.pitch,pose.yaw));
+        setAttitude(QVector3D(pose.roll,pose.pitch,pose.yaw)*0.0001);
         setPosition(QVector3D(pose.x,pose.y,pose.z));
         break;}
 
     case MAVLINK_MSG_ID_ATTITUDE:{
         mavlink_attitude_t attitude;
         mavlink_msg_attitude_decode(&msg,&attitude);
-        setAttitude(QVector3D(attitude.roll,attitude.pitch,attitude.roll));
+        setAttitude(QVector3D(attitude.roll,attitude.pitch,attitude.yaw)*0.0001);
         emit attitudeMessageReceived(attitude);
         break;}
 
     case MAVLINK_MSG_ID_POSITION:{
         mavlink_position_t position;
         mavlink_msg_position_decode(&msg,&position);
-        setPosition(QVector3D(position.x,position.y,position.z));
+        setPosition(QVector3D(position.x,position.y,position.z)*0.001);
         emit positionMessageReceived(position);
         break;}
 
