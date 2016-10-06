@@ -117,6 +117,7 @@ void QRobot::sendPartition(const char id, QByteArray data, int index)
 
         partition.size = chunk;
         partition.index = index;
+        partition.togo = count/32;
         memcpy(partition.value,(uint8_t*)(data.data()+index),chunk);
 
         mavlink_msg_partition_encode(0,0,&msg,&partition);
