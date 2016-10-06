@@ -41,6 +41,11 @@ void QBalancingRobot::handlePartition(const char id, const QByteArray &partition
     QRobot::handlePartition(id, partition, index);
 }
 
+void QBalancingRobot::quickRecordToggled(bool b)
+{
+    _position_recorder->recorder()->setChecked(b);
+}
+
 void QBalancingRobot::setPosition(QVector3D position)
 {
     _position = position;

@@ -43,6 +43,9 @@ signals:
     void positionMessageReceived(mavlink_position_t position);
     void attitudeMessageReceived(mavlink_attitude_t attitude);
 
+protected slots:
+    void quickRecordToggled(bool b);
+
 public slots:
     void setPosition(QVector3D position);
     void setAttitude(QVector3D attitude);
