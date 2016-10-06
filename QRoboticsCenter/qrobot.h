@@ -68,7 +68,7 @@ protected:
     void setupRobotLog();
 
     void addRecorder(QAbstractRecorder* recorder);
-    void addRobotMenuAction(QAction* open);
+    void addRobotMenuAction(QAction* action);
 
     void closeEvent(QCloseEvent *event);
 
@@ -101,7 +101,6 @@ private:
 
 signals:
     void gpioReceived(QGPIOWidget::gpio_t gpio);
-    //void threadReceived()
     void printReceived(QString text);
 
 private slots:
@@ -130,7 +129,6 @@ public slots:
     void handleNewConnection();
     void readFromSocket();
     void writeToSocket(QGPIOWidget::gpio_t gpio);
-
 };
 
 #endif // QROBOT_H
