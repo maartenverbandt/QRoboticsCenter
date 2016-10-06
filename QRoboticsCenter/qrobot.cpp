@@ -342,9 +342,9 @@ void QRobot::addRecorder(QAbstractRecorder *recorder)
     QObject::connect(recorder,SIGNAL(stopped()),this,SLOT(requestStopLogging()));
 }
 
-void QRobot::addRobotMenuAction(QAction *open)
+void QRobot::addRobotMenuAction(QAction *action)
 {
-    _robot_menu->addAction(open);
+    _robot_menu->addAction(action);
 }
 
 void QRobot::closeEvent(QCloseEvent *event)
