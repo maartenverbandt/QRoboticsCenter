@@ -26,14 +26,14 @@ void QBalancingRobot::setupBalancingWidget()
     addView(widget);
 
     // setup recorders
-    QAttitudeRecorder* attrec = new QAttitudeRecorder(this);
-    QObject::connect(this,SIGNAL(attitudeMessageReceived(mavlink_attitude_t)),attrec,SLOT(attitudeReceived(mavlink_attitude_t)));
-    QObject::connect(attrec,SIGNAL(started()),this,SLOT(requestAttitudeLogging()));
-    addRecorder(attrec);
-    QPositionRecorder* posrec = new QPositionRecorder(this);
-    QObject::connect(this,SIGNAL(positionMessageReceived(mavlink_position_t)),posrec,SLOT(positionReceived(mavlink_position_t)));
-    QObject::connect(posrec,SIGNAL(started()),this,SLOT(requestPositionLogging()));
-    addRecorder(posrec);
+    _attitude_recorder = new QAttitudeRecorder(this);
+    QObject::connect(this,SIGNAL(attitudeMessageReceived(mavlink_attitude_t)),_attitude_recorder,SLOT(attitudeReceived(mavlink_attitude_t)));
+    QObject::connect(_attitude_recorder,SIGNAL(started()),this,SLOT(requestAttitudeLogging()));
+    addRecorder(_attitude_recorder);
+    _position_recorder = new QPositionRecorder(this);
+    QObject::connect(this,SIGNAL(positionMessageReceived(mavlink_position_t)),_position_recorder,SLOT(positionReceived(mavlink_position_t)));
+    QObject::connect(_position_recorder,SIGNAL(started()),this,SLOT(requestPositionLogging()));
+    addRecorder(_position_recorder);
 }
 
 void QBalancingRobot::handlePartition(const char id, const QByteArray &partition, const int index)

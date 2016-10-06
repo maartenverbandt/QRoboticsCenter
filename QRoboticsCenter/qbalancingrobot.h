@@ -37,6 +37,9 @@ private:
     QVector3D _position;
     QVector3D _attitude;
 
+    QAbstractRecorder* _attitude_recorder;
+    QAbstractRecorder* _position_recorder;
+
 signals:
     void positionChanged(QVector3D position);
     void attitudeChanged(QVector3D attitude);
