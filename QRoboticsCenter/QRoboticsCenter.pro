@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     qrobotbutton.cpp \
     qaboutdialog.cpp \
     qattituderecorder.cpp \
-    qpositionrecorder.cpp
+    qpositionrecorder.cpp \
+    qabstractexternalport.cpp
 
 HEADERS  += mainwindow.h \
     qrobotcoordinator.h \
@@ -50,7 +51,8 @@ HEADERS  += mainwindow.h \
     qrobotbutton.h \
     qaboutdialog.h \
     qattituderecorder.h \
-    qpositionrecorder.h
+    qpositionrecorder.h \
+    qabstractexternalport.h
 
 FORMS    += mainwindow.ui \
     qbalancingwidget.ui \
