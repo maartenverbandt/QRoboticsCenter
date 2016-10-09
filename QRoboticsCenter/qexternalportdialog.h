@@ -1,8 +1,9 @@
-#ifndef QABSTRACTEXTERNALPORT_H
+#ifndef QEXTERNALPORTDIALOG_H
 #define QEXTERNALPORTDIALOG_H
 
 #include <QDialog>
 #include <QLayout>
+#include <QPushButton>
 #include <QButtonGroup>
 #include <QStackedWidget>
 
@@ -11,6 +12,9 @@ class QExternalPortDialog : public QDialog
     Q_OBJECT
 public:
     explicit QExternalPortDialog(QObject *parent = 0);
+
+protected:
+    addWidget(QWidget* w, QString name);
 
 private:
     QHBoxLayout* _layout;
