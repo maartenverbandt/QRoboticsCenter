@@ -4,7 +4,11 @@
 #include <QWidget>
 #include <QFile>
 #include <QFileInfo>
+#include <QFileDialog>
 #include <QTextStream>
+#include <QMessageBox>
+#include <QSettings>
+#include <QDebug>
 
 namespace Ui {
 class QFilePort;
@@ -21,6 +25,11 @@ public:
     QAction *getPopupAction();
     void reset();
 
+protected:
+    virtual void sendData() = 0;
+    QStringList readLine();
+    void abort(QString text = "Aborted for unknown reason");
+
 private:
     Ui::QFilePort *ui;
 
@@ -33,14 +42,18 @@ private:
     QAction *_popup;
 
     QString readHeader();
-    QStringList readLine();
 
     void saveSettings();
     void loadSettings();
 
+    void timerEvent(QTimerEvent *e);
+
 public slots:
     bool setFile(QString absolute_path);
     bool openFile();
+    void handleStartButton(bool checked);
+    void start();
+    void stop();
 
 };
 

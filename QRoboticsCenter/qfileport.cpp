@@ -3,9 +3,19 @@
 
 QFilePort::QFilePort(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::QFilePort)
+    ui(new Ui::QFilePort),
+    _file(new QFile(this)),
+    _stream(new QTextStream(_file)),
+    _repeat(false),
+    _popup(new QAction("CSV input", this))
 {
     ui->setupUi(this);
+
+
+    QObject::connect(ui->open,SIGNAL(released()),this,SLOT(openFile()));
+    QObject::connect(ui->start,SIGNAL(clicked(bool)),this,SLOT(handleStartButton(bool)));
+    QObject::connect(_popup,SIGNAL(triggered()),this,SLOT(show()));
+    QObject::connect(ui->name_lineEdit,SIGNAL(textEdited(QString)),this,SLOT(setFile(QString)));
 }
 
 QFilePort::~QFilePort()
@@ -56,6 +66,14 @@ void QFilePort::reset()
     _stream->seek(_data_begin); //go to start of csv
 }
 
+void QFilePort::abort(QString text)
+{
+    stop();
+    QMessageBox box;
+    box.setText(text);
+    box.exec();
+}
+
 void QFilePort::saveSettings()
 {
     QSettings settings("RobSoft", "QGPIOWidget");
@@ -72,6 +90,11 @@ void QFilePort::loadSettings()
     // save filename
     setFile(settings.value("filename").toString());
     settings.endGroup();
+}
+
+void QFilePort::timerEvent(QTimerEvent *e)
+{
+    sendData();
 }
 
 bool QFilePort::setFile(QString absolute_path)
@@ -93,13 +116,36 @@ bool QFilePort::setFile(QString absolute_path)
     return false;
 }
 
-void QFilePort::openFile()
+bool QFilePort::openFile()
 {
     QFileInfo info(*_file);
     QString path = QFileDialog::getOpenFileName(this, tr("Open File"),
                                                     info.path(),
                                                     tr("CSV files (*.csv *.txt)"));
     if(~path.isEmpty()){
-        setFile(path);
+        return setFile(path);
     }
+
+    return false;
+}
+
+void QFilePort::handleStartButton(bool checked)
+{
+    if(checked)
+        start();
+    else
+        stop();
+}
+
+void QFilePort::start()
+{
+    _timer_id = startTimer(10,Qt::PreciseTimer);
+    qDebug() << "started timer";
+}
+
+void QFilePort::stop()
+{
+    killTimer(_timer_id);
+    ui->start->setChecked(false);
+    reset();
 }
