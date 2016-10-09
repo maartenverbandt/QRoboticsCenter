@@ -11,10 +11,8 @@ class QExternalPortDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit QExternalPortDialog(QObject *parent = 0);
-
-protected:
-    addWidget(QWidget* w, QString name);
+    explicit QExternalPortDialog(QWidget *parent = 0);
+    void addPort(QWidget* w, QString name);
 
 private:
     QHBoxLayout* _layout;

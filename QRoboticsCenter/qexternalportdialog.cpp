@@ -1,17 +1,18 @@
 #include "qexternalportdialog.h"
 
-QExternalPortDialog::QExternalPortDialog(QObject *parent) : QDialog(parent)
+QExternalPortDialog::QExternalPortDialog(QWidget *parent) : QDialog(parent)
 {
     layoutSetup();
 }
 
-QExternalPortDialog::addWidget(QWidget* w, QString name)
+void QExternalPortDialog::addPort(QWidget* w, QString name)
 {
     QPushButton* button = new QPushButton(name,this);
     button->setMinimumSize(60,60);
     button->setMaximumSize(60,60);
     button->setCheckable(true);
     _button_layout->addWidget(button);
+    _button_layout->setAlignment(button,Qt::AlignTop);
 
     _buttons->addButton(button,_stack->count());
     _stack->addWidget(w);
@@ -19,8 +20,8 @@ QExternalPortDialog::addWidget(QWidget* w, QString name)
 
 void QExternalPortDialog::layoutSetup()
 {
-    _layout = new QHBoxLayout(this);
-    _button_layout = new QVBoxLayout(this);
+    _layout = new QHBoxLayout();
+    _button_layout = new QVBoxLayout();
     _buttons = new QButtonGroup(this);
     _stack = new QStackedWidget(this);
 
