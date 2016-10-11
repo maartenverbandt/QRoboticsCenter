@@ -1,8 +1,9 @@
 #include "qexternalportdialog.h"
 
-QExternalPortDialog::QExternalPortDialog(QWidget *parent) : QDialog(parent)
+QExternalPortDialog::QExternalPortDialog(QString name, QWidget *parent) : QDialog(parent), _popup(new QAction(name,this))
 {
     layoutSetup();
+    QObject::connect(_popup,SIGNAL(triggered()),this,SLOT(show()));
 }
 
 void QExternalPortDialog::addPort(QWidget* w, QString name)
@@ -16,6 +17,11 @@ void QExternalPortDialog::addPort(QWidget* w, QString name)
 
     _buttons->addButton(button,_stack->count());
     _stack->addWidget(w);
+}
+
+QAction *QExternalPortDialog::getPopupAction()
+{
+    return _popup;
 }
 
 void QExternalPortDialog::layoutSetup()

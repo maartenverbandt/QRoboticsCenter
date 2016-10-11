@@ -55,7 +55,11 @@ QStringList QFilePort::readLine()
 
     // check end of file
     if(_stream->atEnd()){
-        reset();
+        if(!ui->repeat_checkBox->isChecked()){
+            stop();
+        } else {
+            reset();
+        }
     }
 
     return columns;

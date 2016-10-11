@@ -6,14 +6,16 @@
 
 class QAttitudeFilePort : public QFilePort
 {
+    Q_OBJECT
+
 public:
-    QAttitudeFilePort();
+    explicit QAttitudeFilePort(QWidget *parent = 0);
 
 private:
     void sendData();
 
 signals:
-    void attitudeCommand(mavlink_attitude_cmd_t);
+    void attitudeCommand(mavlink_attitude_cmd_t cmd);
 
 };
 

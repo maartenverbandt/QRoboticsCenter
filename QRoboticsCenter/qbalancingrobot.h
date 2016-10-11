@@ -6,6 +6,8 @@
 #include <qbalancingwidget.h>
 #include <qattituderecorder.h>
 #include <qpositionrecorder.h>
+#include <qexternalportdialog.h>
+#include <qattitudefileport.h>
 
 class QBalancingRobot : public QRobot
 {

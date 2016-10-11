@@ -1,7 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author/>
- <comment/>
- <exportmacro/>
  <class>QFilePort</class>
  <widget class="QWidget" name="QFilePort">
   <property name="geometry">
@@ -47,6 +45,13 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="repeat_checkBox">
+       <property name="text">
+        <string>repeat</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -103,6 +108,6 @@
    </item>
   </layout>
  </widget>
- <pixmapfunction/>
+ <resources/>
  <connections/>
 </ui>
