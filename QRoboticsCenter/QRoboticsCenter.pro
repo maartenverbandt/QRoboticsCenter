@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     qattituderecorder.cpp \
     qpositionrecorder.cpp \
     qexternalportdialog.cpp \
-    qfileport.cpp
+    qfileport.cpp \
+    qattitudefileport.cpp
 
 HEADERS  += mainwindow.h \
     qrobotcoordinator.h \
@@ -54,7 +55,8 @@ HEADERS  += mainwindow.h \
     qattituderecorder.h \
     qpositionrecorder.h \
     qexternalportdialog.h \
-    qfileport.h
+    qfileport.h \
+    qattitudefileport.h
 
 FORMS    += mainwindow.ui \
     qbalancingwidget.ui \
