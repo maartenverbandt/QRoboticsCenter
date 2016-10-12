@@ -36,11 +36,16 @@ void QBalancingRobot::setupBalancingWidget()
     addRecorder(_position_recorder);
 
     // setup ports
-    QExternalPortDialog* ports = new QExternalPortDialog("Attitude port",this);
+    /*QExternalPortDialog* ports = new QExternalPortDialog("Attitude port",this);
     QAttitudeFilePort* fileport = new QAttitudeFilePort(ports);
     QObject::connect(fileport,SIGNAL(attitudeCommand(mavlink_attitude_cmd_t)),this,SLOT(requestAttitudeCommand(mavlink_attitude_cmd_t)));
     ports->addPort(fileport,"File");
-    addRobotMenuAction(ports->getPopupAction());
+    addRobotMenuAction(ports->getPopupAction());*/
+
+    // setup excitation
+    QExcitationDialog* excitation = new QExcitationDialog(this);
+    //QObject::connect(fileport,SIGNAL(attitudeCommand(mavlink_attitude_cmd_t)),this,SLOT(requestAttitudeCommand(mavlink_attitude_cmd_t)));
+    addRobotMenuAction(excitation->getPopupAction());
 }
 
 void QBalancingRobot::handlePartition(const char id, const QByteArray &partition, const int index)

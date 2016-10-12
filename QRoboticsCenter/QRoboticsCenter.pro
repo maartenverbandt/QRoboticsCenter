@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     qpositionrecorder.cpp \
     qexternalportdialog.cpp \
     qfileport.cpp \
-    qattitudefileport.cpp
+    qattitudefileport.cpp \
+    qexcitationdialog.cpp
 
 HEADERS  += mainwindow.h \
     qrobotcoordinator.h \
@@ -56,12 +57,14 @@ HEADERS  += mainwindow.h \
     qpositionrecorder.h \
     qexternalportdialog.h \
     qfileport.h \
-    qattitudefileport.h
+    qattitudefileport.h \
+    qexcitationdialog.h
 
 FORMS    += mainwindow.ui \
     qbalancingwidget.ui \
     qaboutdialog.ui \
-    qfileport.ui
+    qfileport.ui \
+    qexcitationdialog.ui
 
 RESOURCES += \
     icons.qrc
