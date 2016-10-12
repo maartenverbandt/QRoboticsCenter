@@ -40,7 +40,6 @@ void QBalancingRobot::setupBalancingWidget()
     QAttitudeFilePort* fileport = new QAttitudeFilePort(ports);
     ports->addPort(fileport,"File");
     addRobotMenuAction(ports->getPopupAction());
-    ports->show();
 }
 
 void QBalancingRobot::handlePartition(const char id, const QByteArray &partition, const int index)
