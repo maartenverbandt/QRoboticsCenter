@@ -1,7 +1,7 @@
 #include "qfileport.h"
 #include "ui_qfileport.h"
 
-QFilePort::QFilePort(QWidget *parent) :
+QFilePort::QFilePort(QString name, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::QFilePort),
     _file(new QFile(this)),
@@ -16,6 +16,7 @@ QFilePort::QFilePort(QWidget *parent) :
     QObject::connect(_popup,SIGNAL(triggered()),this,SLOT(show()));
     QObject::connect(ui->name_lineEdit,SIGNAL(textEdited(QString)),this,SLOT(setFile(QString)));
 
+    setObjectName(name);
     loadSettings();
 }
 
@@ -84,18 +85,20 @@ void QFilePort::abort(QString text)
 void QFilePort::saveSettings()
 {
     QSettings settings("RobSoft", "QRoboticsCenter");
-    settings.beginGroup("QFilePort");
+    settings.beginGroup(objectName());
     // save filename
     settings.setValue("filename",_file->fileName());
+    settings.setValue("repeat", ui->repeat_checkBox->isChecked());
     settings.endGroup();
 }
 
 void QFilePort::loadSettings()
 {
     QSettings settings("RobSoft", "QRoboticsCenter");
-    settings.beginGroup("QFilePort");
+    settings.beginGroup(objectName());
     // save filename
     setFile(settings.value("filename").toString());
+    ui->repeat_checkBox->setChecked(settings.value("repeat").toBool());
     settings.endGroup();
 }
 

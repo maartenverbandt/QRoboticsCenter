@@ -19,7 +19,7 @@ class QFilePort : public QWidget
     Q_OBJECT
 
 public:
-    explicit QFilePort(QWidget *parent = 0);
+    explicit QFilePort(QString name, QWidget *parent = 0);
     ~QFilePort();
 
     QAction *getPopupAction();
