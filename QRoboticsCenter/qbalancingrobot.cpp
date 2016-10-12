@@ -38,6 +38,7 @@ void QBalancingRobot::setupBalancingWidget()
     // setup ports
     QExternalPortDialog* ports = new QExternalPortDialog("Attitude port",this);
     QAttitudeFilePort* fileport = new QAttitudeFilePort(ports);
+    QObject::connect(fileport,SIGNAL(attitudeCommand(mavlink_attitude_cmd_t)),this,SLOT(requestAttitudeCommand(mavlink_attitude_cmd_t)));
     ports->addPort(fileport,"File");
     addRobotMenuAction(ports->getPopupAction());
 }
@@ -102,6 +103,20 @@ void QBalancingRobot::requestAttitudeLogging()
 void QBalancingRobot::requestPositionLogging()
 {
     sendEvent(QBalancingRobot::LOG_POSITION);
+}
+
+void QBalancingRobot::requestAttitudeCommand(mavlink_attitude_cmd_t attitude_cmd)
+{
+    mavlink_message_t msg;
+    mavlink_msg_attitude_cmd_encode(0,0,&msg,&attitude_cmd);
+    sendMessage(msg);
+}
+
+void QBalancingRobot::requestPositionCommand(mavlink_position_cmd_t position_cmd)
+{
+    mavlink_message_t msg;
+    mavlink_msg_position_cmd_encode(0,0,&msg,&position_cmd);
+    sendMessage(msg);
 }
 
 void QBalancingRobot::receiveMessage(mavlink_message_t msg)

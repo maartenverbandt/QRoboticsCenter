@@ -62,6 +62,8 @@ public slots:
     void requestPositionMode();
     void requestAttitudeLogging();
     void requestPositionLogging();
+    void requestAttitudeCommand(mavlink_attitude_cmd_t attitude_cmd);
+    void requestPositionCommand(mavlink_position_cmd_t position_cmd);
 
     virtual void receiveMessage(mavlink_message_t msg);
 
