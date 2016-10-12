@@ -11,15 +11,18 @@ QFilePort::QFilePort(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
     QObject::connect(ui->open,SIGNAL(released()),this,SLOT(openFile()));
     QObject::connect(ui->start,SIGNAL(clicked(bool)),this,SLOT(handleStartButton(bool)));
     QObject::connect(_popup,SIGNAL(triggered()),this,SLOT(show()));
     QObject::connect(ui->name_lineEdit,SIGNAL(textEdited(QString)),this,SLOT(setFile(QString)));
+
+    loadSettings();
 }
 
 QFilePort::~QFilePort()
 {
+    saveSettings();
+    qDebug() << "settings saved";
     delete ui;
 }
 
@@ -80,7 +83,7 @@ void QFilePort::abort(QString text)
 
 void QFilePort::saveSettings()
 {
-    QSettings settings("RobSoft", "QGPIOWidget");
+    QSettings settings("RobSoft", "QRoboticsCenter");
     settings.beginGroup("QFilePort");
     // save filename
     settings.setValue("filename",_file->fileName());
@@ -89,7 +92,7 @@ void QFilePort::saveSettings()
 
 void QFilePort::loadSettings()
 {
-    QSettings settings("RobSoft", "QGPIOWidget");
+    QSettings settings("RobSoft", "QRoboticsCenter");
     settings.beginGroup("QFilePort");
     // save filename
     setFile(settings.value("filename").toString());

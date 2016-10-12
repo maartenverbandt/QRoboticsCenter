@@ -13,6 +13,8 @@ class QExternalPortDialog : public QDialog
     Q_OBJECT
 public:
     explicit QExternalPortDialog(QString name, QWidget *parent = 0);
+    ~QExternalPortDialog();
+
     void addPort(QWidget* w, QString name);
     QAction* getPopupAction();
 

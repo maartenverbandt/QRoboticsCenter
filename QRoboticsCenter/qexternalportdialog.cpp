@@ -6,6 +6,11 @@ QExternalPortDialog::QExternalPortDialog(QString name, QWidget *parent) : QDialo
     QObject::connect(_popup,SIGNAL(triggered()),this,SLOT(show()));
 }
 
+QExternalPortDialog::~QExternalPortDialog()
+{
+    delete _stack;
+}
+
 void QExternalPortDialog::addPort(QWidget* w, QString name)
 {
     QPushButton* button = new QPushButton(name,this);
