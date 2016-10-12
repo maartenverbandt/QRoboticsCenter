@@ -15,6 +15,7 @@ public:
     explicit QExternalPortDialog(QString name, QWidget *parent = 0);
     ~QExternalPortDialog();
 
+    void setCurrentPort(int index);
     void addPort(QWidget* w, QString name);
     QAction* getPopupAction();
 
