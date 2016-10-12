@@ -1,6 +1,6 @@
 #include "qattitudefileport.h"
 
-QAttitudeFilePort::QAttitudeFilePort(QWidget *parent) : QFilePort(parent)
+QAttitudeFilePort::QAttitudeFilePort(QWidget *parent) : QFilePort("Attitude fileport",parent)
 {
 
 }
