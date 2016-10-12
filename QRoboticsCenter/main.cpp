@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <qrobotcoordinator.h>
 
-#define DEBUG
+//#define DEBUG
 
 int main(int argc, char *argv[])
 {

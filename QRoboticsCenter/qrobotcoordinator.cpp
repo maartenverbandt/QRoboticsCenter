@@ -146,7 +146,7 @@ void QRobotCoordinator::showAboutDialog()
     QAboutDialog *d = new QAboutDialog(this);
     d->setApplicationTitle("QRoboticsCenter");
     d->setVersion("0.1.0");
-    d->setIcon(":/icons/car.png");
+    d->setIcon(":/icons/QRoboticsCenterLogo_blue.png");
 }
 
 void QRobotCoordinator::mavlinkConnectionFound(QMavlinkConnection *connection)
