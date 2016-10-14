@@ -31,13 +31,17 @@ private:
     QComboBox* _channels[8];
     QAction* _popup;
 
+    unsigned int getChannels();
+
 private slots:
     void on_set_pushButton_clicked();
     void on_disable_pushButton_clicked();
 
 signals:
-    void setExcitation(int type, int channels, double var1, double var2, double var3, double var4);
-
+    void requestSweptsine(unsigned int channels, double fmin, double fmax, double period, double amplitude);
+    void requestMultisine(unsigned int channels, int id, double amplitude);
+    void requestSteppedsine(unsigned int channels, double fmin, double fmax, int period, double amplitude);
+    void requestStopExcitation();
 };
 
 #endif // QEXCITATIONDIALOG_H
