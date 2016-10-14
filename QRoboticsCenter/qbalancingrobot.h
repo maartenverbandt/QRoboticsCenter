@@ -66,6 +66,10 @@ public slots:
     void requestPositionLogging();
     void requestAttitudeCommand(mavlink_attitude_cmd_t attitude_cmd);
     void requestPositionCommand(mavlink_position_cmd_t position_cmd);
+    void requestSweptsine(unsigned int channels, double fmin, double fmax, double period, double amplitude);
+    void requestMultisine(unsigned int channels, int id, double amplitude);
+    void requestSteppedsine(unsigned int channels, double fmin, double fmax, int period, double amplitude);
+    void requestStopExcitation();
 
     virtual void receiveMessage(mavlink_message_t msg);
 

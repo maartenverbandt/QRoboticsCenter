@@ -124,6 +124,32 @@ void QBalancingRobot::requestPositionCommand(mavlink_position_cmd_t position_cmd
     sendMessage(msg);
 }
 
+void QBalancingRobot::requestSweptsine(unsigned int channels, double fmin, double fmax, double period, double amplitude)
+{
+    mavlink_message_t msg;
+    mavlink_msg_signal_sweptsine_pack(0,0,&msg,channels,fmin,fmax,period,amplitude);
+    sendMessage(msg);
+}
+
+void QBalancingRobot::requestMultisine(unsigned int channels, int id, double amplitude)
+{
+    mavlink_message_t msg;
+    mavlink_msg_signal_multisine_pack(0,0,&msg,channels,id,amplitude);
+    sendMessage(msg);
+}
+
+void QBalancingRobot::requestSteppedsine(unsigned int channels, double fmin, double fmax, int period, double amplitude)
+{
+    mavlink_message_t msg;
+    mavlink_msg_signal_steppedsine_pack(0,0,&msg,channels,fmin,fmax,period,1.124,amplitude);
+    sendMessage(msg);
+}
+
+void QBalancingRobot::requestStopExcitation()
+{
+    sendEvent(QBalancingRobot::STOP_EXCITATION);
+}
+
 void QBalancingRobot::receiveMessage(mavlink_message_t msg)
 {
     switch(msg.msgid){
