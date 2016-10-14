@@ -45,6 +45,10 @@ void QBalancingRobot::setupBalancingWidget()
     // setup excitation
     QExcitationDialog* excitation = new QExcitationDialog(this);
     //QObject::connect(fileport,SIGNAL(attitudeCommand(mavlink_attitude_cmd_t)),this,SLOT(requestAttitudeCommand(mavlink_attitude_cmd_t)));
+    QObject::connect(excitation,SIGNAL(requestSweptsine(uint,double,double,double,double)),this,SLOT(requestSweptsine(uint,double,double,double,double)));
+    QObject::connect(excitation,SIGNAL(requestMultisine(uint,int,double)),this,SLOT(requestMultisine(uint,int,double)));
+    QObject::connect(excitation,SIGNAL(requestSteppedsine(uint,double,double,int,double)),this,SLOT(requestSteppedsine(uint,double,double,int,double)));
+    QObject::connect(excitation,SIGNAL(requestStopExcitation()),this,SLOT(requestStopExcitation()));
     addRobotMenuAction(excitation->getPopupAction());
 }
 
