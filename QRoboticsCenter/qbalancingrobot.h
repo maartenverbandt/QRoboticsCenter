@@ -23,7 +23,8 @@ public:
         LOG_GPIO = 302,
         LOG_ATTITUDE = 303,
         LOG_VELOCITY = 304,
-        LOG_POSITION = 305
+        LOG_POSITION = 305,
+        STOP_EXCITATION = 310
     } event_t;
 
     QBalancingRobot(unsigned int id, QString type, QIcon icon, QWidget *parent = 0);
