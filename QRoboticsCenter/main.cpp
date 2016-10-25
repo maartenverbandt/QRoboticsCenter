@@ -3,7 +3,7 @@
 #include <qexternalportdialog.h>
 #include <qfileport.h>
 
-#define DEBUG
+//#define DEBUG
 
 int main(int argc, char *argv[])
 {
