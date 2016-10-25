@@ -145,7 +145,7 @@ void QRobotCoordinator::showAboutDialog()
 {
     QAboutDialog *d = new QAboutDialog(this);
     d->setApplicationTitle("QRoboticsCenter");
-    d->setVersion("0.1.0");
+    d->setVersion("0.2.0");
     d->setIcon(":/icons/QRoboticsCenterLogo_blue.png");
 }
 
