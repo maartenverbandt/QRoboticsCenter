@@ -13,6 +13,7 @@ public:
 private:
     QFile* _log;
     QString createHeader();
+    QString createFooter();
 
 public slots:
     void positionReceived(mavlink_position_t position);
