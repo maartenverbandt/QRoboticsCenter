@@ -13,6 +13,7 @@ public:
 private:
     QFile* _log;
     QString createHeader();
+    QString createFooter();
 
 public slots:
     void attitudeReceived(mavlink_attitude_t attitude);

@@ -15,6 +15,7 @@ private:
     QStringList _labels;
 
     QString createHeader();
+    QString createFooter();
 
 public slots:
     void gpioReceived(QGPIOWidget::gpio_t gpio);

@@ -6,6 +6,8 @@ QAboutDialog::QAboutDialog(QWidget *parent) :
     ui(new Ui::QAboutDialog)
 {
     ui->setupUi(this);
+    setWindowTitle("About");
+    setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
     setModal(true); //make it a blocking widget
     setAttribute(Qt::WA_DeleteOnClose);
     show();
