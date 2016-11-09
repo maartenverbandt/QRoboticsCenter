@@ -12,11 +12,15 @@ BallbotConfigDialog::BallbotConfigDialog(QWidget *parent) : QRobotConfigDialog("
     addParameter("pitch offset",&_config.pitch_offset,"IMU");
     addGroup("Controllers")->setExpanded(true);
     addParameter("attitude controller",&_config.default_attitude_controller,"Controllers");
-    addParameter("yaw controller",&_config.default_yaw_controller,"Controllers");
+    addParameter("velocity controller",&_config.default_velocity_controller,"Controllers");
     addParameter("position controller",&_config.default_position_controller,"Controllers");
+    addParameter("yaw velocity controller",&_config.default_yaw_velocity_controller,"Controllers");
+    addParameter("yaw controller",&_config.default_yaw_controller,"Controllers");
     addParameter("attitude gain adjustment",&_config.attitude_gain_adjust,"Controllers");
-    addParameter("yaw gain adjustment",&_config.yaw_gain_adjust,"Controllers");
+    addParameter("velocity gain adjustment",&_config.velocity_gain_adjust,"Controllers");
     addParameter("position gain adjustment",&_config.position_gain_adjust,"Controllers");
+    addParameter("yaw velocity gain adjustment",&_config.yaw_velocity_gain_adjust,"Controllers");
+    addParameter("yaw gain adjustment",&_config.yaw_gain_adjust,"Controllers");
 }
 
 BallbotConfigDialog::~BallbotConfigDialog()

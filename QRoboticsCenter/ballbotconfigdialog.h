@@ -15,12 +15,16 @@ typedef struct __attribute__((__packed__)) ballbot_config_t{
     float pitch_offset;
     // controller configuration
     quint8 default_attitude_controller;
-    quint8 default_yaw_controller;
+    quint8 default_velocity_controller;
     quint8 default_position_controller;
+    quint8 default_yaw_velocity_controller;
+    quint8 default_yaw_controller;
     // controller settings
     float attitude_gain_adjust;
-    float yaw_gain_adjust;
+    float velocity_gain_adjust;
     float position_gain_adjust;
+    float yaw_velocity_gain_adjust;
+    float yaw_gain_adjust;
 } ballbot_config_t;
 
 class BallbotConfigDialog : public QRobotConfigDialog
