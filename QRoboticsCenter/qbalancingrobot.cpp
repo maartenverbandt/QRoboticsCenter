@@ -30,6 +30,10 @@ void QBalancingRobot::setupBalancingWidget()
     QObject::connect(this,SIGNAL(attitudeMessageReceived(mavlink_attitude_t)),_attitude_recorder,SLOT(attitudeReceived(mavlink_attitude_t)));
     QObject::connect(_attitude_recorder,SIGNAL(started()),this,SLOT(requestAttitudeLogging()));
     addRecorder(_attitude_recorder);
+    _velocity_recorder = new QVelocityRecorder(this);
+    QObject::connect(this,SIGNAL(velocityMessageReceived(mavlink_velocity_t)),_velocity_recorder,SLOT(velocityReceived(mavlink_velocity_t)));
+    QObject::connect(_velocity_recorder,SIGNAL(started()),this,SLOT(requestVelocityLogging()));
+    addRecorder(_velocity_recorder);
     _position_recorder = new QPositionRecorder(this);
     QObject::connect(this,SIGNAL(positionMessageReceived(mavlink_position_t)),_position_recorder,SLOT(positionReceived(mavlink_position_t)));
     QObject::connect(_position_recorder,SIGNAL(started()),this,SLOT(requestPositionLogging()));
@@ -58,7 +62,7 @@ void QBalancingRobot::handlePartition(const char id, const QByteArray &partition
 
 void QBalancingRobot::quickRecordToggled(bool b)
 {
-    _position_recorder->recorder()->setChecked(b);
+    _velocity_recorder->recorder()->setChecked(b);
 }
 
 void QBalancingRobot::setPosition(QVector3D position)
@@ -106,6 +110,11 @@ void QBalancingRobot::requestPositionMode()
 void QBalancingRobot::requestAttitudeLogging()
 {
     sendEvent(QBalancingRobot::LOG_ATTITUDE);
+}
+
+void QBalancingRobot::requestVelocityLogging()
+{
+    sendEvent(QBalancingRobot::LOG_VELOCITY);
 }
 
 void QBalancingRobot::requestPositionLogging()
@@ -168,6 +177,12 @@ void QBalancingRobot::receiveMessage(mavlink_message_t msg)
         mavlink_msg_attitude_decode(&msg,&attitude);
         setAttitude(QVector3D(attitude.roll,attitude.pitch,attitude.yaw)*0.0001);
         emit attitudeMessageReceived(attitude);
+        break;}
+
+    case MAVLINK_MSG_ID_VELOCITY:{
+        mavlink_velocity_t velocity;
+        mavlink_msg_velocity_decode(&msg,&velocity);
+        emit velocityMessageReceived(velocity);
         break;}
 
     case MAVLINK_MSG_ID_POSITION:{

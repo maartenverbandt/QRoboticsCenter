@@ -5,6 +5,7 @@
 #include <qrobot.h>
 #include <qbalancingwidget.h>
 #include <qattituderecorder.h>
+#include <qvelocityrecorder.h>
 #include <qpositionrecorder.h>
 #include <qexternalportdialog.h>
 #include <qattitudefileport.h>
@@ -42,12 +43,14 @@ private:
     QVector3D _attitude;
 
     QAbstractRecorder* _attitude_recorder;
+    QAbstractRecorder* _velocity_recorder;
     QAbstractRecorder* _position_recorder;
 
 signals:
     void positionChanged(QVector3D position);
     void attitudeChanged(QVector3D attitude);
     void positionMessageReceived(mavlink_position_t position);
+    void velocityMessageReceived(mavlink_velocity_t velocity);
     void attitudeMessageReceived(mavlink_attitude_t attitude);
 
 protected slots:
@@ -63,6 +66,7 @@ public slots:
     void requestVelocityMode();
     void requestPositionMode();
     void requestAttitudeLogging();
+    void requestVelocityLogging();
     void requestPositionLogging();
     void requestAttitudeCommand(mavlink_attitude_cmd_t attitude_cmd);
     void requestPositionCommand(mavlink_position_cmd_t position_cmd);
