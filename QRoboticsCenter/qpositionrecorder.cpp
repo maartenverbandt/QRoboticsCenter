@@ -24,7 +24,7 @@ QString QPositionRecorder::createHeader()
     header += "\t<version>2.0</version>\n";
 
     // Comment
-    header += "\t<comment></comment>\n";
+    header += "\t<comment>none</comment>\n";
     header += "\n";
 
     // Excitation
@@ -32,6 +32,7 @@ QString QPositionRecorder::createHeader()
     header += "\t\t<type>unknown</type>\n";
     header += "\t\t<fmin>0</fmin>\n";
     header += "\t\t<fmax>inf</fmax>\n";
+    header += "\t\t<fs>0</fs>\n";
     header += "\t\t<period>inf</period>\n";
     header += "\t</excitation>\n";
 

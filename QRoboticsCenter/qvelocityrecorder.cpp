@@ -1,14 +1,14 @@
-#include "qattituderecorder.h"
+#include "qvelocityrecorder.h"
 
-QAttitudeRecorder::QAttitudeRecorder(QObject *parent) : QAbstractRecorder(parent), _log(NULL)
+QVelocityRecorder::QVelocityRecorder(QObject *parent) : QAbstractRecorder(parent), _log(NULL)
 {
-    _recorder.setText("Attitude");
+    _recorder.setText("Velocity");
 }
 
-QString QAttitudeRecorder::createHeader()
+QString QVelocityRecorder::createHeader()
 {
     QString header;
-    header = "<QAttitudeRecord>\n";
+    header = "<QVelocityRecord>\n";
 
     // Time
     QDateTime now = QDateTime::currentDateTime();
@@ -39,15 +39,15 @@ QString QAttitudeRecorder::createHeader()
     // Labels
     header += "\t<labels>\n";
     header += "\t\t<value>time</value>\n";
-    header += "\t\t<value>roll</value>\n";
-    header += "\t\t<value>pitch</value>\n";
-    header += "\t\t<value>yaw</value>\n";
-    header += "\t\t<value>rollcmd</value>\n";
-    header += "\t\t<value>pitchcmd</value>\n";
-    header += "\t\t<value>yawcmd</value>\n";
-    header += "\t\t<value>rollact</value>\n";
-    header += "\t\t<value>pitchact</value>\n";
-    header += "\t\t<value>yawact</value>\n";
+    header += "\t\t<value>vx</value>\n";
+    header += "\t\t<value>vy</value>\n";
+    header += "\t\t<value>vz</value>\n";
+    header += "\t\t<value>vxcmd</value>\n";
+    header += "\t\t<value>vycmd</value>\n";
+    header += "\t\t<value>vzcmd</value>\n";
+    header += "\t\t<value>vxact</value>\n";
+    header += "\t\t<value>vyact</value>\n";
+    header += "\t\t<value>vzact</value>\n";
     header += "\t</labels>\n";
 
     // Data
@@ -56,47 +56,47 @@ QString QAttitudeRecorder::createHeader()
     return header;
 }
 
-QString QAttitudeRecorder::createFooter()
+QString QVelocityRecorder::createFooter()
 {
     QString footer;
     footer += "\t</data>\n";
-    footer += "</QAttitudeRecord>";
+    footer += "</QVelocityRecord>";
 
     return footer;
 }
 
-void QAttitudeRecorder::attitudeReceived(mavlink_attitude_t attitude)
+void QVelocityRecorder::velocityReceived(mavlink_velocity_t velocity)
 {
     if(isRecording()){
         QString line = "\t\t<row>";
-        line += QString::number(attitude.time);
-        line += "\t" + QString::number(attitude.roll);
-        line += "\t" + QString::number(attitude.pitch);
-        line += "\t" + QString::number(attitude.yaw);
-        line += "\t" + QString::number(attitude.roll_cmd);
-        line += "\t" + QString::number(attitude.pitch_cmd);
-        line += "\t" + QString::number(attitude.yaw_cmd);
-        line += "\t" + QString::number(attitude.roll_act);
-        line += "\t" + QString::number(attitude.pitch_act);
-        line += "\t" + QString::number(attitude.yaw_act);
+        line += QString::number(velocity.time);
+        line += "\t" + QString::number(velocity.vx);
+        line += "\t" + QString::number(velocity.vy);
+        line += "\t" + QString::number(velocity.vz);
+        line += "\t" + QString::number(velocity.vx_cmd);
+        line += "\t" + QString::number(velocity.vy_cmd);
+        line += "\t" + QString::number(velocity.vz_cmd);
+        line += "\t" + QString::number(velocity.vx_act);
+        line += "\t" + QString::number(velocity.vy_act);
+        line += "\t" + QString::number(velocity.vz_act);
         line += "</row>\n";
 
         _log->write(line.toLocal8Bit());
     }
 }
 
-void QAttitudeRecorder::startRecording()
+void QVelocityRecorder::startRecording()
 {
     QAbstractRecorder::startRecording(); //emit signals
 
-    _log = openDateFile("log_attitude");
+    _log = openDateFile("log_velocity");
     _log->open(QIODevice::ReadWrite);
 
     //make header
     _log->write(createHeader().toLocal8Bit());
 }
 
-void QAttitudeRecorder::stopRecording()
+void QVelocityRecorder::stopRecording()
 {
     QAbstractRecorder::stopRecording(); //emit signals
 
