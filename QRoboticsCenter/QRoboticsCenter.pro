@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     qexternalportdialog.cpp \
     qfileport.cpp \
     qattitudefileport.cpp \
-    qexcitationdialog.cpp
+    qexcitationdialog.cpp \
+    qvelocityrecorder.cpp
 
 HEADERS  += mainwindow.h \
     qrobotcoordinator.h \
@@ -58,7 +59,8 @@ HEADERS  += mainwindow.h \
     qexternalportdialog.h \
     qfileport.h \
     qattitudefileport.h \
-    qexcitationdialog.h
+    qexcitationdialog.h \
+    qvelocityrecorder.h
 
 FORMS    += mainwindow.ui \
     qbalancingwidget.ui \
@@ -74,5 +76,6 @@ include(../../QtModules/QGPIOWidget/src/qgpiowidget.pri)
 include(../../QtModules/QRobotConfigDialog/src/qrobotconfigdialog.pri)
 include(../../QtModules/QPolarPlot/src/qpolarplot.pri)
 include(../../QtModules/QMapWidget/src/qmapwidget.pri)
+include(../../QtModules/QControllerDevice/src/qcontrollerdevice.pri)
 
 
