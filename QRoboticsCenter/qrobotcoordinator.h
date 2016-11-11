@@ -10,6 +10,7 @@
 #include <qsegbot.h>
 #include <qmavlinkconnection.h>
 #include <qaboutdialog.h>
+#include <qtrustmaster.h>
 
 class QRobotCoordinator : public QMainWindow
 {
@@ -30,6 +31,7 @@ protected:
 private:
     QLayout* _layout;
     QList<QRobot*> _robots;
+    int _current_robot;
     QList<QPushButton*> _buttons;
     QSignalMapper* _robot_mapper;
 
@@ -39,6 +41,9 @@ private:
     QAction* _about;
 
     QConnectionCoordinator* _connection_coordinator;
+    QControllerDeviceInterface* _controller_device;
+    void connectController();
+    void disconnectController();
 
     void saveSettings();
     void loadSettings();
@@ -51,6 +56,8 @@ private slots:
 public slots:
     void mavlinkConnectionFound(QMavlinkConnection *connection);
     void showRobotWidget(int index);
+    void showNextRobotWidget();
+    void showPrevRobotWidget();
     void scan();
 
 };

@@ -12,6 +12,7 @@ void QBallbot::handlePartition(const char id, const QByteArray &partition, const
     switch(id){
     case 'C':{
         _config->fromByteArray(partition,index);
+        qDebug() << "Partition received: " << partition << ", index: " << index;
         break;}
     case 'D':{
         qDebug() << "Data partition not handled";

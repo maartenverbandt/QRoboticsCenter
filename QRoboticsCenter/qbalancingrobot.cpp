@@ -60,9 +60,26 @@ void QBalancingRobot::handlePartition(const char id, const QByteArray &partition
     QRobot::handlePartition(id, partition, index);
 }
 
+void QBalancingRobot::moveRequested(QControllerDeviceInterface::robot_move_cmd_t move_cmd)
+{
+    mavlink_velocity_cmd_t cmd;
+    cmd.vx = -move_cmd.y*1500.0;
+    cmd.vy = -move_cmd.x*1500.0;
+    cmd.vz = -move_cmd.z*1000.0;
+    requestVelocityCommand(cmd);
+    qDebug() << "Balancing robot move requested." << QVector3D(move_cmd.x,move_cmd.y,move_cmd.z);
+}
+
 void QBalancingRobot::quickRecordToggled(bool b)
 {
     _velocity_recorder->recorder()->setChecked(b);
+}
+
+void QBalancingRobot::setupController(QControllerDeviceInterface *controller)
+{
+    QRobot::setupController(controller);
+    QObject::connect(controller,SIGNAL(moveCmdChanged(QControllerDeviceInterface::robot_move_cmd_t)),
+                     this,SLOT(moveRequested(QControllerDeviceInterface::robot_move_cmd_t)));
 }
 
 void QBalancingRobot::setPosition(QVector3D position)
@@ -126,6 +143,13 @@ void QBalancingRobot::requestAttitudeCommand(mavlink_attitude_cmd_t attitude_cmd
 {
     mavlink_message_t msg;
     mavlink_msg_attitude_cmd_encode(0,0,&msg,&attitude_cmd);
+    sendMessage(msg);
+}
+
+void QBalancingRobot::requestVelocityCommand(mavlink_velocity_cmd_t velocity_cmd)
+{
+    mavlink_message_t msg;
+    mavlink_msg_velocity_cmd_encode(0,0,&msg,&velocity_cmd);
     sendMessage(msg);
 }
 

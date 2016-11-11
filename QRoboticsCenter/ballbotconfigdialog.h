@@ -25,6 +25,9 @@ typedef struct __attribute__((__packed__)) ballbot_config_t{
     float position_gain_adjust;
     float yaw_velocity_gain_adjust;
     float yaw_gain_adjust;
+    // maximum ratings
+    float maximum_velocity;
+    float maximum_yaw_velocity;
 } ballbot_config_t;
 
 class BallbotConfigDialog : public QRobotConfigDialog

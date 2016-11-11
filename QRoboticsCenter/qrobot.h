@@ -14,6 +14,7 @@
 #include <qgpiorecorder.h>
 #include <qthreadingwidget.h>
 #include <qgpioinputdialog.h>
+#include <qcontrollerdeviceinterface.h>
 
 class QRobot : public QMainWindow
 {
@@ -48,6 +49,7 @@ public:
     QList<QAbstractRecorder*> recorders;
 
     bool serverConnected();
+    virtual void setupController(QControllerDeviceInterface* controller);
 
 protected:
     const unsigned int  _id;

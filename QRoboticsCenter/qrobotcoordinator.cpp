@@ -3,6 +3,7 @@
 QRobotCoordinator::QRobotCoordinator() :
     QMainWindow(),
     _layout(new QVBoxLayout()),
+    _current_robot(0),
     _robot_mapper(new QSignalMapper(this)),
     _rescan(new QAction("Scan",this)),
     _scan_usb(new QAction("usb",this)),
@@ -34,6 +35,11 @@ QRobotCoordinator::QRobotCoordinator() :
 
     QMenu *help = menuBar()->addMenu("Help");
     help->addAction(_about);
+
+    _controller_device = new QTrustMaster(this);
+    QObject::connect(_controller_device,SIGNAL(switchNextRobot()),this,SLOT(showNextRobotWidget()));
+    QObject::connect(_controller_device,SIGNAL(switchPrevRobot()),this,SLOT(showPrevRobotWidget()));
+    _controller_device->start();
 
     loadSettings();
 
@@ -107,6 +113,16 @@ void QRobotCoordinator::closeEvent(QCloseEvent *e)
         robot.next()->close();
 }
 
+void QRobotCoordinator::connectController()
+{
+    _robots[_current_robot]->setupController(_controller_device);
+}
+
+void QRobotCoordinator::disconnectController()
+{
+    _controller_device->disconnect(_robots[_current_robot]);
+}
+
 void QRobotCoordinator::saveSettings()
 {
     QSettings settings("RobSoft", "QRoboticsCenter");
@@ -156,7 +172,26 @@ void QRobotCoordinator::mavlinkConnectionFound(QMavlinkConnection *connection)
 
 void QRobotCoordinator::showRobotWidget(int index)
 {
-    _robots[index]->show();
+    if((index>=0) && (index<_robots.size())){
+        disconnectController(); //disconnect old robot
+        _current_robot = index;
+        _robots[index]->show();
+        QApplication::setActiveWindow(_robots[index]);
+        //_robots[index]->activateWindow();
+        //_robots[index]->raise();
+        connectController();
+        qDebug() << "Connected to robot" << _current_robot;
+    }
+}
+
+void QRobotCoordinator::showNextRobotWidget()
+{
+    showRobotWidget(_current_robot+1);
+}
+
+void QRobotCoordinator::showPrevRobotWidget()
+{
+    showRobotWidget(_current_robot-1);
 }
 
 void QRobotCoordinator::scan()

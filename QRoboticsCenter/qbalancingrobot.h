@@ -34,6 +34,7 @@ public:
     QVector3D attitude();
 
     void setupBalancingWidget();
+    virtual void setupController(QControllerDeviceInterface* controller);
 
 protected:
     virtual void handlePartition(const char id, const QByteArray &partition, const int index);
@@ -53,6 +54,9 @@ signals:
     void velocityMessageReceived(mavlink_velocity_t velocity);
     void attitudeMessageReceived(mavlink_attitude_t attitude);
 
+private slots:
+    void moveRequested(QControllerDeviceInterface::robot_move_cmd_t move_cmd);
+
 protected slots:
     void quickRecordToggled(bool b);
 
@@ -69,6 +73,7 @@ public slots:
     void requestVelocityLogging();
     void requestPositionLogging();
     void requestAttitudeCommand(mavlink_attitude_cmd_t attitude_cmd);
+    void requestVelocityCommand(mavlink_velocity_cmd_t velocity_cmd);
     void requestPositionCommand(mavlink_position_cmd_t position_cmd);
     void requestSweptsine(unsigned int channels, double fmin, double fmax, double period, double amplitude);
     void requestMultisine(unsigned int channels, int id, double amplitude);
@@ -80,6 +85,7 @@ public slots:
 };
 
 Q_DECLARE_METATYPE(mavlink_position_t)
+Q_DECLARE_METATYPE(mavlink_velocity_t)
 Q_DECLARE_METATYPE(mavlink_attitude_t)
 
 #endif // QBALANCINGROBOT_H

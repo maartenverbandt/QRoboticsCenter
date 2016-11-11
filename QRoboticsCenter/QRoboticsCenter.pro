@@ -77,5 +77,3 @@ include(../../QtModules/QRobotConfigDialog/src/qrobotconfigdialog.pri)
 include(../../QtModules/QPolarPlot/src/qpolarplot.pri)
 include(../../QtModules/QMapWidget/src/qmapwidget.pri)
 include(../../QtModules/QControllerDevice/src/qcontrollerdevice.pri)
-
-

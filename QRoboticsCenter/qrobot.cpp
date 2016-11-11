@@ -122,8 +122,11 @@ void QRobot::sendPartition(const char id, QByteArray data, int index)
 
         mavlink_msg_partition_encode(0,0,&msg,&partition);
         sendMessage(msg);
+
+        qDebug() << "Chunk size: " << chunk << ", Togo: " << partition.togo << ", Index: " << partition.index;
+        qDebug() << (char*)(partition.value);
+
         index += 32;
-        qDebug() << "Chunk size: " << chunk;
     }
 }
 
@@ -200,6 +203,7 @@ void QRobot::requestSaveConfig()
 
 void QRobot::requestStartLogging()
 {
+    sendEvent(302); //request ballbot gpio logging: should be moved when refactoring
     sendEvent(QRobot::LOG_START);
 }
 
@@ -305,6 +309,11 @@ void QRobot::setStatusBarMessage(QString text)
 void QRobot::quickRecordToggled(bool b)
 {
     _recorders[0]->recorder()->setChecked(b);
+}
+
+void QRobot::setupController(QControllerDeviceInterface *controller)
+{
+    QObject::connect(controller,SIGNAL(toggleRecorder()),_quickrecord_action,SLOT(toggle()));
 }
 
 void QRobot::setupGPIOWidget()
