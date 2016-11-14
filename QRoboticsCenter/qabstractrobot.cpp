@@ -2,7 +2,8 @@
 
 QAbstractRobot::QAbstractRobot(int id, QObject *parent) :
     QObject(parent),
-    _id(id)
+    _id(id),
+    _log(new QRobotLog(this))
 {
 
 }

@@ -6,6 +6,11 @@ QRobotConnectionManager::QRobotConnectionManager(QObject *parent) :
 
 }
 
+void QRobotConnectionManager::setupMainWindow(QMainWindow *m)
+{
+    m->menuBar()->addMenu(_menu);
+}
+
 void QRobotConnectionManager::addConnection(QMavlinkConnection *connection)
 {
     _connections.append(connection);

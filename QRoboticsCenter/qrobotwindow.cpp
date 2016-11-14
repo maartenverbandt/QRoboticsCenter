@@ -15,24 +15,12 @@ void QRobotWindow::connect(QRobotConnectionManager *c)
 {
     QObject::connect(this,&QRobotWindow::eventMsgSend,c,&QRobotConnectionManager::eventMsgSend);
     QObject::connect(c,&QRobotConnectionManager::gpioMsgReceived,_gpio,&QGPIOWidget::setInput);
+    QObject::connect(c,&QRobotConnectionManager::printReceived,this->statusBar(),&QStatusBar::showMessage);
 }
 
 void QRobotWindow::setupGPIOWidget()
 {
     QObject::connect(_gpio,&QGPIOWidget::eventButtonPressed,this,&QRobotWindow::eventButtonPressed);
-
-    //QObject::connect(_gpio,SIGNAL(eventButtonPressed(int)),this,SLOT(eventButtonPressed(int)));
-    //QObject::connect(_gpio,SIGNAL(setOutput(QGPIOWidget::gpio_t)),this,SLOT(setGpioOutput(QGPIOWidget::gpio_t)));
-
-    //add recorder
-    /*
-    QGPIORecorder* gpiorec = new QGPIORecorder(this);
-    QObject::connect(this,SIGNAL(gpioReceived(QGPIOWidget::gpio_t)),gpiorec,SLOT(gpioReceived(QGPIOWidget::gpio_t)));
-
-    addRecorder(gpiorec);
-    _gpiowidget->inputLabelsSend();*/
-
-    //add view
 }
 
 void QRobotWindow::sendEvent(int id)

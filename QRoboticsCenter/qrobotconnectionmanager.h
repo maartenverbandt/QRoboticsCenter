@@ -16,6 +16,7 @@ class QRobotConnectionManager : public QObject
 
 public:
     explicit QRobotConnectionManager(QObject *parent = 0);
+    virtual void setupMainWindow(QMainWindow* m);
 
     void addConnection(QMavlinkConnection* connection);
 

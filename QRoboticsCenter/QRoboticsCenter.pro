@@ -38,7 +38,8 @@ SOURCES += main.cpp\
     qbalancingrobot.cpp \
     qbalancingconnectionmanager.cpp \
     qballbot.cpp \
-    qstackedwindow.cpp
+    qstackedwindow.cpp \
+    qrobotlog.cpp
 
 HEADERS  += mainwindow.h \
     qrobotcoordinator.h \
@@ -66,7 +67,8 @@ HEADERS  += mainwindow.h \
     qbalancingrobot.h \
     qbalancingconnectionmanager.h \
     qballbot.h \
-    qstackedwindow.h
+    qstackedwindow.h \
+    qrobotlog.h
 
 FORMS    += mainwindow.ui \
     qbalancingwidget.ui \

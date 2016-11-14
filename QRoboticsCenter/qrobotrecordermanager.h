@@ -2,10 +2,12 @@
 #define QROBOTRECORDERMANAGER_H
 
 #include <QObject>
+#include <QMainWindow>
 #include <QMenu>
 #include <qabstractrecorder.h>
 #include <qgpiorecorder.h>
 #include <qrecorderwidget.h>
+#include <qrobotconnectionmanager.h>
 #include <mavlink.h>
 
 class QRobotRecorderManager : public QObject
@@ -14,6 +16,8 @@ class QRobotRecorderManager : public QObject
 
 public:
     explicit QRobotRecorderManager(QGPIOWidget *gpio, QObject *parent = 0);
+    virtual void setupMainWindow(QMainWindow *m);
+    void connect(QRobotConnectionManager* c);
 
     QRecorderWidget* getRecorderWidget();
     QGPIORecorder* getGPIORecorder();
@@ -44,17 +48,13 @@ private:
 signals:
     void eventMsgSend(mavlink_event_t event);
 
-public slots:
-    virtual void receiveMessage(mavlink_message_t msg);
-
 protected slots:
     void requestStartRecording(int id);
     void requestStopRecording();
 
 private slots:
-    virtual void quickRecord(bool checked);
-
     void requestGpioRecording();
+    virtual void quickRecord(bool checked);
 
 };
 

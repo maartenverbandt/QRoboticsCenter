@@ -10,7 +10,7 @@ QBalancingRecorderManager::QBalancingRecorderManager(QGPIOWidget *gpio, QObject 
 
 void QBalancingRecorderManager::connect(QBalancingConnectionManager *c)
 {
-    QObject::connect(this,&QBalancingRecorderManager::eventMsgSend,c,&QBalancingConnectionManager::eventMsgSend);
+    this->QRobotRecorderManager::connect(c);
     QObject::connect(c,&QBalancingConnectionManager::attitudeMsgReceived,_attitude,&QAttitudeRecorder::attitudeReceived);
     QObject::connect(c,&QBalancingConnectionManager::velocityMsgReceived,_velocity,&QVelocityRecorder::velocityReceived);
     QObject::connect(c,&QBalancingConnectionManager::positionMsgReceived,_position,&QPositionRecorder::positionReceived);

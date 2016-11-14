@@ -5,6 +5,7 @@
 #include <qrobotwindow.h>
 #include <qrobotconnectionmanager.h>
 #include <qrobotrecordermanager.h>
+#include <qrobotlog.h>
 
 
 class QAbstractRobot : public QObject
@@ -26,6 +27,7 @@ public:
 
 private:
     const int _id;
+    QRobotLog* _log;
 
 signals:
 
