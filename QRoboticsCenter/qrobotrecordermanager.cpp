@@ -21,7 +21,7 @@ void QRobotRecorderManager::setupMainWindow(QMainWindow *m)
 void QRobotRecorderManager::connect(QRobotConnectionManager *c)
 {
     QObject::connect(this,&QRobotRecorderManager::eventMsgSend,c,&QRobotConnectionManager::eventMsgSend);
-    QObject::connect(c,&QRobotConnectionManager::gpioReceived,_gpio,&QGPIORecorder::gpioReceived);
+    QObject::connect(c,&QRobotConnectionManager::gpioMsgReceived,_gpio,&QGPIORecorder::gpioReceived);
 }
 
 QRecorderWidget *QRobotRecorderManager::getRecorderWidget()
@@ -70,7 +70,7 @@ void QRobotRecorderManager::setupQuickRecord()
     _quick_record->setCheckable(true);
     _quick_record->setChecked(false);
     _quick_record->setShortcut(Qt::CTRL + Qt::Key_R);
-    connect(_quick_record,&QAction::toggled,this,&QRobotRecorderManager::quickRecord);
+    QObject::connect(_quick_record,&QAction::toggled,this,&QRobotRecorderManager::quickRecord);
 }
 
 void QRobotRecorderManager::requestStartRecording(int id)

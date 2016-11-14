@@ -5,9 +5,12 @@
 #include <QFile>
 #include <qabstractrobot.h>
 
+class QAbstractRobot;
+
 class QRobotLog : public QObject
 {
     Q_OBJECT
+
 public:
     explicit QRobotLog(QObject *parent = 0);
     void open(QAbstractRobot* robot);

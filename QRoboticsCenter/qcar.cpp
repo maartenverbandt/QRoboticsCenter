@@ -13,7 +13,7 @@ QCar::QCar(int id, QObject *parent) :
     _connection_manager->setupMainWindow(_window);
     _recorder_manager->setupMainWindow(_window);
     //start robot log
-    _log->open(this);
+    getLog()->open(this);
 }
 
 QString QCar::getType()

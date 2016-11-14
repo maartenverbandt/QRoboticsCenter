@@ -15,6 +15,6 @@ void QRobotLog::open(QAbstractRobot* robot)
 
 void QRobotLog::write(QString line)
 {
-    _robot_log->write(_stitcher->getLine().toLatin1());
+    _robot_log->write(line.toLatin1());
     _robot_log->flush(); //force a quick update
 }

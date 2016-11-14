@@ -1,7 +1,9 @@
 #include "qrobotconnectionmanager.h"
 
 QRobotConnectionManager::QRobotConnectionManager(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    _menu(new QMenu("Connections")),
+    _stitcher(new QPrintStitcher(this))
 {
 
 }

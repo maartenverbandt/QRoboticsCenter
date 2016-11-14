@@ -7,6 +7,7 @@
 #include <qrobotrecordermanager.h>
 #include <qrobotlog.h>
 
+class QRobotLog;
 
 class QAbstractRobot : public QObject
 {
@@ -24,6 +25,7 @@ public:
 
     int id();
     QString getName();
+    QRobotLog *getLog();
 
 private:
     const int _id;

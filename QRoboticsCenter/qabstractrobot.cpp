@@ -17,3 +17,8 @@ QString QAbstractRobot::getName()
 {
     return getType() + QString::number(id());
 }
+
+QRobotLog *QAbstractRobot::getLog()
+{
+    return _log;
+}
