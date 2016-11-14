@@ -1,6 +1,6 @@
 #include "ballbotconfigdialog.h"
 
-BallbotConfigDialog::BallbotConfigDialog(QWidget *parent) : QRobotConfigDialog("ballbot",parent)
+BallbotConfigDialog::BallbotConfigDialog(QWidget *parent) : QRobotConfigDialog("Configure",parent)
 {
     addGroup("Info")->setExpanded(true);
     addParameter("ID",&_config.robot_id,"Info");

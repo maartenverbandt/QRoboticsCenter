@@ -2,6 +2,7 @@
 #define QBALLBOT_H
 
 #include <qbalancingrobot.h>
+#include <ballbotconfigdialog.h>
 
 class QBallbot : public QBalancingRobot
 {
@@ -10,6 +11,18 @@ public:
 
     QString getType();
     QIcon getIcon();
+
+private:
+    BallbotConfigDialog* _config;
+
+public slots:
+
+    //TODO: move partition messages to config dialog itself.
+    void partitionMsgReceived(mavlink_partition_t partition);
+    void sendConfig(QByteArray data);
+    void requestSendConfig();
+    void requestSaveConfig();
+
 };
 
 #endif // QBALLBOT_H
