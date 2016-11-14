@@ -2,7 +2,7 @@
 #define QROBOTBUTTON_H
 
 #include <QObject>
-#include <qrobot.h>
+#include <qabstractrobot.h>
 #include <qpushbutton.h>
 #include <qstylepainter.h>
 #include <QStyleOptionButton>
@@ -12,8 +12,7 @@ class QRobotButton : public QPushButton
     Q_OBJECT
 
 public:
-    QRobotButton(QRobot *robot, QWidget *parent = 0);
-    QRobotButton(QString text, QIcon icon, int id, QWidget *parent = 0);
+    QRobotButton(QAbstractRobot *robot, QWidget *parent = 0);
 
 protected:
     virtual void paintEvent(QPaintEvent *);

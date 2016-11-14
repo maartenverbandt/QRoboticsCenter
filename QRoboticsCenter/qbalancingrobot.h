@@ -1,91 +1,40 @@
 #ifndef QBALANCINGROBOT_H
 #define QBALANCINGROBOT_H
 
-#include <QVector3D>
-#include <qrobot.h>
-#include <qbalancingwidget.h>
-#include <qattituderecorder.h>
-#include <qvelocityrecorder.h>
-#include <qpositionrecorder.h>
-#include <qexternalportdialog.h>
-#include <qattitudefileport.h>
-#include <qexcitationdialog.h>
+#include <qabstractrobot.h>
+#include <qbalancingwindow.h>
+#include <qbalancingconnectionmanager.h>
+#include <qbalancingrecordermanager.h>
 
-class QBalancingRobot : public QRobot
+class QBalancingRobot : public QAbstractRobot
 {
-    Q_OBJECT
-
 public:
-    typedef enum event_t{
-        MODE_IDLE = 200,
-        MODE_ATTITUDE = 201,
-        MODE_VELOCITY = 202,
-        MODE_POSITION = 203,
-        LOG_GPIO = 302,
-        LOG_ATTITUDE = 303,
-        LOG_VELOCITY = 304,
-        LOG_POSITION = 305,
-        STOP_EXCITATION = 310
-    } event_t;
 
-    QBalancingRobot(unsigned int id, QString type, QIcon icon, QWidget *parent = 0);
+    /*typedef enum event_t{
+            MODE_IDLE = 200,
+            MODE_ATTITUDE = 201,
+            MODE_VELOCITY = 202,
+            MODE_POSITION = 203,
+            LOG_GPIO = 302,
+            LOG_ATTITUDE = 303,
+            LOG_VELOCITY = 304,
+            LOG_POSITION = 305,
+            STOP_EXCITATION = 310
+        } event_t;*/
 
-    QVector3D position();
-    QVector3D attitude();
+    QBalancingRobot(int id, QObject* parent = 0);
 
-    void setupBalancingWidget();
-    virtual void setupController(QControllerDeviceInterface* controller);
+    virtual QString getType() = 0;
+    virtual QIcon getIcon() = 0;
 
-protected:
-    virtual void handlePartition(const char id, const QByteArray &partition, const int index);
+    QBalancingWindow *getWindow();
+    QBalancingConnectionManager *getConnectionManager();
+    QBalancingRecorderManager *getRecorderManager();
 
 private:
-    QVector3D _position;
-    QVector3D _attitude;
-
-    QAbstractRecorder* _attitude_recorder;
-    QAbstractRecorder* _velocity_recorder;
-    QAbstractRecorder* _position_recorder;
-
-signals:
-    void positionChanged(QVector3D position);
-    void attitudeChanged(QVector3D attitude);
-    void positionMessageReceived(mavlink_position_t position);
-    void velocityMessageReceived(mavlink_velocity_t velocity);
-    void attitudeMessageReceived(mavlink_attitude_t attitude);
-
-private slots:
-    void moveRequested(QControllerDeviceInterface::robot_move_cmd_t move_cmd);
-
-protected slots:
-    void quickRecordToggled(bool b);
-
-public slots:
-    void setPosition(QVector3D position);
-    void setAttitude(QVector3D attitude);
-    void setControlMode(int mode);
-
-    void requestIdleMode();
-    void requestAttitudeMode();
-    void requestVelocityMode();
-    void requestPositionMode();
-    void requestAttitudeLogging();
-    void requestVelocityLogging();
-    void requestPositionLogging();
-    void requestAttitudeCommand(mavlink_attitude_cmd_t attitude_cmd);
-    void requestVelocityCommand(mavlink_velocity_cmd_t velocity_cmd);
-    void requestPositionCommand(mavlink_position_cmd_t position_cmd);
-    void requestSweptsine(unsigned int channels, double fmin, double fmax, double period, double amplitude);
-    void requestMultisine(unsigned int channels, int id, double amplitude);
-    void requestSteppedsine(unsigned int channels, double fmin, double fmax, int period, double amplitude);
-    void requestStopExcitation();
-
-    virtual void receiveMessage(mavlink_message_t msg);
-
+    QBalancingWindow *_window;
+    QBalancingConnectionManager *_connection_manager;
+    QBalancingRecorderManager* _recorder_manager;
 };
-
-Q_DECLARE_METATYPE(mavlink_position_t)
-Q_DECLARE_METATYPE(mavlink_velocity_t)
-Q_DECLARE_METATYPE(mavlink_attitude_t)
 
 #endif // QBALANCINGROBOT_H

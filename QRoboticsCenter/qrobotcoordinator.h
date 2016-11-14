@@ -4,10 +4,9 @@
 #include <QObject>
 #include <QMainWindow>
 #include <QLayout>
-#include <qrobot.h>
 #include <qrobotbutton.h>
+#include <qcar.h>
 #include <qballbot.h>
-#include <qsegbot.h>
 #include <qmavlinkconnection.h>
 #include <qaboutdialog.h>
 #include <qtrustmaster.h>
@@ -19,18 +18,24 @@ public:
     explicit QRobotCoordinator();
     ~QRobotCoordinator();
 
-    QRobot* addRobot(unsigned int id, unsigned int type);
-    QRobot* addRobot(QMavlinkConnection* connection);
-    QRobot* findRobot(unsigned int id, unsigned int type);
+    QAbstractRobot* addRobot(unsigned int id, unsigned int type);
+    QAbstractRobot* addRobot(QMavlinkConnection* connection);
+    QAbstractRobot* findRobot(unsigned int id, unsigned int type);
 
     QAction* getRescanAction();
+
+    typedef enum type_t{
+        BALLBOT = 10,
+        SEGBOT = 11,
+        CAR = 20
+    } type_t;
 
 protected:
     virtual void closeEvent(QCloseEvent *e);
 
 private:
     QLayout* _layout;
-    QList<QRobot*> _robots;
+    QList<QAbstractRobot*> _robots;
     int _current_robot;
     QList<QPushButton*> _buttons;
     QSignalMapper* _robot_mapper;

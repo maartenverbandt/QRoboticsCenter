@@ -18,49 +18,55 @@ INCLUDEPATH += $$PWD #\
 SOURCES += main.cpp\
         mainwindow.cpp \
     qrobotcoordinator.cpp \
-    qbalancingrobot.cpp \
-    qrobot.cpp \
-    qballbot.cpp \
-    qsegbot.cpp \
     qcircularlayout.cpp \
     qprintstitcher.cpp \
-    qabstractrecorder.cpp \
-    qgpiorecorder.cpp \
     qbalancingwidget.cpp \
     ballbotconfigdialog.cpp \
-    qrecorderwidget.cpp \
     qrobotbutton.cpp \
     qaboutdialog.cpp \
-    qattituderecorder.cpp \
-    qpositionrecorder.cpp \
     qexternalportdialog.cpp \
     qfileport.cpp \
     qattitudefileport.cpp \
     qexcitationdialog.cpp \
-    qvelocityrecorder.cpp
+    qrobotrecordermanager.cpp \
+    qbalancingrecordermanager.cpp \
+    qabstractrobot.cpp \
+    qrobotconnectionmanager.cpp \
+    qrobotwindow.cpp \
+    qbalancingwindow.cpp \
+    qcar.cpp \
+    qbalancingrobot.cpp \
+    qbalancingconnectionmanager.cpp \
+    qballbot.cpp \
+    qstackedwindow.cpp
 
 HEADERS  += mainwindow.h \
     qrobotcoordinator.h \
-    qbalancingrobot.h \
-    qrobot.h \
-    qballbot.h \
     qsegbot.h \
     qcircularlayout.h \
     qprintstitcher.h \
-    qabstractrecorder.h \
-    qgpiorecorder.h \
     qbalancingwidget.h \
     ballbotconfigdialog.h \
-    qrecorderwidget.h \
     qrobotbutton.h \
     qaboutdialog.h \
-    qattituderecorder.h \
-    qpositionrecorder.h \
     qexternalportdialog.h \
     qfileport.h \
     qattitudefileport.h \
     qexcitationdialog.h \
-    qvelocityrecorder.h
+    qrobotrecordermanager.h \
+    qbalancingrecordermanager.h \
+    qabstractrobot.h \
+    qrobotconnectionmanager.h \
+    qrobotwindow.h \
+    qbalancingwindow.h \
+    #qbalancingrobot_old.h \
+    #qballbot_old.h \
+    #qrobot_old.h \
+    qcar.h \
+    qbalancingrobot.h \
+    qbalancingconnectionmanager.h \
+    qballbot.h \
+    qstackedwindow.h
 
 FORMS    += mainwindow.ui \
     qbalancingwidget.ui \
@@ -77,3 +83,4 @@ include(../../QtModules/QRobotConfigDialog/src/qrobotconfigdialog.pri)
 include(../../QtModules/QPolarPlot/src/qpolarplot.pri)
 include(../../QtModules/QMapWidget/src/qmapwidget.pri)
 include(../../QtModules/QControllerDevice/src/qcontrollerdevice.pri)
+include(../../QtModules/QRecorder/src/qrecorder.pri)

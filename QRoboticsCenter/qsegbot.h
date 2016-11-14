@@ -1,7 +1,7 @@
 #ifndef QSEGBOT_H
 #define QSEGBOT_H
 
-#include <qbalancingrobot.h>
+#include <qbalancingrobot_old.h>
 
 class QSegbot : public QBalancingRobot
 {

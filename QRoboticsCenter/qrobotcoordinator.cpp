@@ -51,22 +51,22 @@ QRobotCoordinator::~QRobotCoordinator()
     saveSettings();
 }
 
-QRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
+QAbstractRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
 {
     //Create new robot
-    QRobot* robot;
+    QAbstractRobot* robot;
     switch(type){
-    case(QRobot::BALLBOT):
+    case(BALLBOT):
         robot = new QBallbot(id,this);
         break;
-    case(QRobot::SEGBOT):
-        robot = new QSegbot(id,this);
+    case(SEGBOT):
+        //robot = new QSegbot(id,this);
         break;
-    case(QRobot::CAR):
-        robot = new QRobot(id,"car",QIcon(":/icons/car.png"),this);
+    case(CAR):
+        robot = new QCar(id,this);
         break;
     default:
-        robot = new QRobot(id,this);
+        //robot = new QRobot(id,this);
         break;
     }
     _robots.append(robot);
@@ -82,20 +82,20 @@ QRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
     return robot;
 }
 
-QRobot *QRobotCoordinator::addRobot(QMavlinkConnection *connection)
+QAbstractRobot *QRobotCoordinator::addRobot(QMavlinkConnection *connection)
 {
-    QRobot* robot = findRobot(connection->getRobotID(), connection->getRobotType());
+    QAbstractRobot* robot = findRobot(connection->getRobotID(), connection->getRobotType());
     if(robot == NULL){
         robot = this->addRobot(connection->getRobotID(), connection->getRobotType());
     }
-    robot->addConnection(connection);
+    robot->getConnectionManager()->addConnection(connection);
 
     return robot;
 }
 
-QRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int type)
+QAbstractRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int type)
 {
-    QListIterator<QRobot*> i(_robots);
+    QListIterator<QAbstractRobot*> i(_robots);
     while(i.hasNext()){
         qDebug() << i.peekNext()->id() << id;
         if(i.next()->id() == id){
@@ -108,14 +108,15 @@ QRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int type)
 
 void QRobotCoordinator::closeEvent(QCloseEvent *e)
 {
-    QListIterator<QRobot*> robot(_robots);
+    QListIterator<QAbstractRobot*> robot(_robots);
     while (robot.hasNext())
-        robot.next()->close();
+        robot.next()->getWindow()->close();
 }
 
 void QRobotCoordinator::connectController()
 {
-    _robots[_current_robot]->setupController(_controller_device);
+    //FIX
+    //_robots[_current_robot]->setupController(_controller_device);
 }
 
 void QRobotCoordinator::disconnectController()
@@ -175,8 +176,8 @@ void QRobotCoordinator::showRobotWidget(int index)
     if((index>=0) && (index<_robots.size())){
         disconnectController(); //disconnect old robot
         _current_robot = index;
-        _robots[index]->show();
-        QApplication::setActiveWindow(_robots[index]);
+        _robots[index]->getWindow()->show();
+        QApplication::setActiveWindow(_robots[index]->getWindow());
         //_robots[index]->activateWindow();
         //_robots[index]->raise();
         connectController();

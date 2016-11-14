@@ -3,7 +3,7 @@
 #include <qexternalportdialog.h>
 #include <qfileport.h>
 
-//#define DEBUG
+#define DEBUG
 
 int main(int argc, char *argv[])
 {
@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
     w.scan();
 
 #ifdef DEBUG
-    w.addRobot(10,QRobot::CAR);
-    w.addRobot(23,QRobot::BALLBOT);    
+    w.addRobot(10,QRobotCoordinator::CAR);
+    w.addRobot(23,QRobotCoordinator::BALLBOT);
 #endif
 
     //QExternalPortDialog* d = new QExternalPortDialog();

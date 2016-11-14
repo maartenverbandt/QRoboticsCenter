@@ -1,0 +1,18 @@
+#include "qabstractrobot.h"
+
+QAbstractRobot::QAbstractRobot(int id, QObject *parent) :
+    QObject(parent),
+    _id(id)
+{
+
+}
+
+int QAbstractRobot::id()
+{
+    return _id;
+}
+
+QString QAbstractRobot::getName()
+{
+    return getType() + QString::number(id());
+}

@@ -1,30 +1,17 @@
 #include "qballbot.h"
 
-QBallbot::QBallbot(unsigned int id, QWidget *parent):
-    QBalancingRobot(id, "Ballbot", QIcon(":/icons/ballbot.png"), parent),
-    _config(new BallbotConfigDialog(0))
+QBallbot::QBallbot(int id, QObject *parent) :
+    QBalancingRobot(id,parent)
 {
-    setupBallbotWidget();
+
 }
 
-void QBallbot::handlePartition(const char id, const QByteArray &partition, const int index)
+QString QBallbot::getType()
 {
-    switch(id){
-    case 'C':{
-        _config->fromByteArray(partition,index);
-        qDebug() << "Partition received: " << partition << ", index: " << index;
-        break;}
-    case 'D':{
-        qDebug() << "Data partition not handled";
-        break;}
-    }
+    return "Ballbot";
 }
 
-void QBallbot::setupBallbotWidget()
+QIcon QBallbot::getIcon()
 {
-    addRobotMenuAction(_config->getPopupAction());
-    QObject::connect(_config,SIGNAL(readRobotSettings()),this,SLOT(requestSendConfig()));
-    QObject::connect(_config,SIGNAL(writeRobotSettings(QByteArray)),this,SLOT(writeRobotSettings(QByteArray)));
-    QObject::connect(_config,SIGNAL(storeRobotSettings()),this,SLOT(requestSaveConfig()));
-    requestSendConfig(); //request current info
+    return QIcon(":/icons/ballbot.png");
 }

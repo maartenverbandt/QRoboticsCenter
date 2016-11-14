@@ -2,17 +2,10 @@
 
 
 
-QRobotButton::QRobotButton(QRobot *robot, QWidget *parent) :
+QRobotButton::QRobotButton(QAbstractRobot *robot, QWidget *parent) :
     QPushButton(robot->getIcon(),robot->getType(),parent)
 {
     _id = robot->id();
-    setMinimumHeight(_icon_size);
-}
-
-QRobotButton::QRobotButton(QString text, QIcon icon, int id, QWidget *parent) :
-    QPushButton(icon,text,parent)
-{
-    _id = id;
     setMinimumHeight(_icon_size);
 }
 
