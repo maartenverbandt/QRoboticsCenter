@@ -1,7 +1,5 @@
 #include <QApplication>
 #include <qrobotcoordinator.h>
-#include <qexternalportdialog.h>
-#include <qfileport.h>
 
 #define DEBUG
 

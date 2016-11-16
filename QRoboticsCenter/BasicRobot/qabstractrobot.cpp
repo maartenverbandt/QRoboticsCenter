@@ -10,8 +10,12 @@ QAbstractRobot::QAbstractRobot(int id, QObject *parent) :
 
 void QAbstractRobot::setup()
 {
+    //setup robot log
     _log->open(getName());
     QObject::connect(getConnectionManager(),&QRobotConnectionManager::printReceived,_log,&QRobotLog::write);
+    //setup window
+    getWindow()->setWindowTitle(getName());
+    getWindow()->setWindowIcon(getIcon());
 }
 
 int QAbstractRobot::id()
