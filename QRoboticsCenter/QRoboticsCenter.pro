@@ -62,7 +62,8 @@ HEADERS  += mainwindow.h \
         BalancingRobot/qballbot.h \
         BalancingRobot/qbalancingwidget.h \
         BalancingRobot/ballbotconfigdialog.h \
-    BalancingRobot/qballbotinput.h
+    BalancingRobot/qballbotinput.h \
+    qrobotevents.h
 
 FORMS   += mainwindow.ui \
         qaboutdialog.ui \
