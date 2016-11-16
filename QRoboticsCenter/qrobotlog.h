@@ -3,9 +3,8 @@
 
 #include <QObject>
 #include <QFile>
-#include <qabstractrobot.h>
-
-class QAbstractRobot;
+#include <QDir>
+#include <QDebug>
 
 class QRobotLog : public QObject
 {
@@ -13,7 +12,7 @@ class QRobotLog : public QObject
 
 public:
     explicit QRobotLog(QObject *parent = 0);
-    void open(QAbstractRobot* robot);
+    void open(QString robot);
 
 private:
     QFile* _robot_log;

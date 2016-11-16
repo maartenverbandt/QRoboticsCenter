@@ -54,7 +54,7 @@ void QRobotConnectionManager::receiveMessage(mavlink_message_t msg)
             mavlink_thread_info_t thread_info;
             mavlink_msg_thread_info_decode(&msg,&thread_info);
 
-            thread_t thread;
+            /*thread_t thread;
             thread.id = thread_info.ID;
             thread.time = thread_info.time;
             thread.priority = thread_info.priority;
@@ -62,10 +62,11 @@ void QRobotConnectionManager::receiveMessage(mavlink_message_t msg)
             thread.average_latency = thread_info.total_latency/thread_info.number_of_executions;
             thread.duration = thread_info.duration;
             thread.latency = thread_info.latency;
-            thread.executions = thread_info.number_of_executions;
+            thread.executions = thread_info.number_of_executions;*/
 
             //FIX
             //_threading->updateThreadInfo(thread);
+            emit threadinfoMsgReceived(thread_info);
         break; }
 
         case MAVLINK_MSG_ID_PARTITION:{

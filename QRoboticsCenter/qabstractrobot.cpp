@@ -8,6 +8,12 @@ QAbstractRobot::QAbstractRobot(int id, QObject *parent) :
 
 }
 
+void QAbstractRobot::setup()
+{
+    _log->open(getName());
+    QObject::connect(getConnectionManager(),&QRobotConnectionManager::printReceived,_log,&QRobotLog::write);
+}
+
 int QAbstractRobot::id()
 {
     return _id;

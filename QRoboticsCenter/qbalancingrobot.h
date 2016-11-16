@@ -23,6 +23,7 @@ public:
         } event_t;*/
 
     QBalancingRobot(int id, QObject* parent = 0);
+    virtual void setup();
 
     virtual QString getType() = 0;
     virtual QIcon getIcon() = 0;
@@ -32,8 +33,8 @@ public:
     QBalancingRecorderManager *getRecorderManager();
 
 private:
-    QBalancingWindow *_window;
     QBalancingConnectionManager *_connection_manager;
+    QBalancingWindow *_window;
     QBalancingRecorderManager* _recorder_manager;
 };
 

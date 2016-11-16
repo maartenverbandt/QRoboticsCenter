@@ -9,6 +9,7 @@ class QCar : public QAbstractRobot
 
 public:
     QCar(int id, QObject* parent = 0);
+    void setup();
 
     QString getType();
     QIcon getIcon();
@@ -18,8 +19,8 @@ public:
     QRobotRecorderManager *getRecorderManager();
 
 private:
-    QRobotWindow *_window;
     QRobotConnectionManager* _connection_manager;
+    QRobotWindow *_window;
     QRobotRecorderManager* _recorder_manager;
 
 };

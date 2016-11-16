@@ -3,6 +3,7 @@
 
 #include <qstackedwindow.h>
 #include <qgpiowidget.h>
+#include <qthreadingdialog.h>
 #include <qrobotconnectionmanager.h>
 
 class QRobotWindow : public QStackedWindow
@@ -14,12 +15,15 @@ public:
     void connect(QRobotConnectionManager* c);
 
     QGPIOWidget *getGPIOWidget();
+    QThreadingDialog *getThreadingDialog();
 
 protected:
     void sendEvent(int id);
 
 private:
-    QGPIOWidget* _gpio;
+    QGPIOWidget *_gpio;
+    QThreadingDialog *_threading;
+
     void setupGPIOWidget();
 
 signals:

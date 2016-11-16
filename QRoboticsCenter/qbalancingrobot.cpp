@@ -6,6 +6,12 @@ QBalancingRobot::QBalancingRobot(int id, QObject *parent) :
     _window(new QBalancingWindow(0)),
     _recorder_manager(new QBalancingRecorderManager(_window->getGPIOWidget(), this))
 {
+    //do nothing (yet..)
+}
+
+void QBalancingRobot::setup()
+{
+    QAbstractRobot::setup();
     //setup signal-slot connections
     _window->connect(_connection_manager);
     _recorder_manager->connect(_connection_manager);

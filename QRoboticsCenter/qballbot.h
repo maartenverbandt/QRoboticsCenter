@@ -9,6 +9,7 @@ class QBallbot : public QBalancingRobot
 {
 public:
     QBallbot(int id, QObject *parent = 0);
+    void setup();
 
     QString getType();
     QIcon getIcon();

@@ -6,14 +6,19 @@ QCar::QCar(int id, QObject *parent) :
     _window(new QRobotWindow(0)),
     _recorder_manager(new QRobotRecorderManager(_window->getGPIOWidget(),this))
 {
+    setup();
+}
+
+void QCar::setup()
+{
+    //Standard setup
+    QAbstractRobot::setup();
     //setup signal-slot connections
     _window->connect(_connection_manager);
     _recorder_manager->connect(_connection_manager);
     //setup mainwindow
     _connection_manager->setupMainWindow(_window);
     _recorder_manager->setupMainWindow(_window);
-    //start robot log
-    getLog()->open(this);
 }
 
 QString QCar::getType()

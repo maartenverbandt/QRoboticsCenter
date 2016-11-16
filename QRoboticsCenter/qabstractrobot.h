@@ -7,14 +7,13 @@
 #include <qrobotrecordermanager.h>
 #include <qrobotlog.h>
 
-class QRobotLog;
-
 class QAbstractRobot : public QObject
 {
     Q_OBJECT
 
 public:
     explicit QAbstractRobot(int id, QObject *parent = 0);
+    virtual void setup();
 
     virtual QString getType() = 0;
     virtual QIcon getIcon() = 0;
@@ -30,10 +29,6 @@ public:
 private:
     const int _id;
     QRobotLog* _log;
-
-signals:
-
-public slots:
 };
 
 #endif // QABSTRACTROBOT_H
