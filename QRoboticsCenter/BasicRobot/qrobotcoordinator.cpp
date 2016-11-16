@@ -117,11 +117,14 @@ void QRobotCoordinator::connectController()
 {
     //FIX
     //_robots[_current_robot]->setupController(_controller_device);
+    _robots[_current_robot]->setControllerDevice(_controller_device);
 }
 
 void QRobotCoordinator::disconnectController()
 {
-    _controller_device->disconnect(_robots[_current_robot]);
+
+    //_controller_device->disconnect(_robots[_current_robot]);
+    _robots[_current_robot]->removeControllerDevice();
 }
 
 void QRobotCoordinator::saveSettings()

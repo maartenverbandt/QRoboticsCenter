@@ -4,12 +4,15 @@
 #include <qbalancingrobot.h>
 #include <ballbotconfigdialog.h>
 #include <qexcitationdialog.h>
+#include <qballbotinput.h>
 
 class QBallbot : public QBalancingRobot
 {
 public:
     QBallbot(int id, QObject *parent = 0);
     void setup();
+    void setControllerDevice(QControllerDeviceInterface *d);
+    void removeControllerDevice();
 
     QString getType();
     QIcon getIcon();
@@ -17,6 +20,7 @@ public:
 private:
     BallbotConfigDialog* _config;
     QExcitationDialog* _excitation;
+    QBallbotInput* _input;
 
 public slots:
 

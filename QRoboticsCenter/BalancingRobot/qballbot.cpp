@@ -3,7 +3,8 @@
 QBallbot::QBallbot(int id, QObject *parent) :
     QBalancingRobot(id,parent),
     _config(new BallbotConfigDialog(0)),
-    _excitation(new QExcitationDialog(0))
+    _excitation(new QExcitationDialog(0)),
+    _input(new QBallbotInput(0))
 {
     setup();
 }
@@ -22,10 +23,23 @@ void QBallbot::setup()
     //connect
     _excitation->connect(getConnectionManager());
 
+    //connect
+    _input->connect(getConnectionManager());
+
     //add tools menu.. // move tools t
     QMenu* tools = getWindow()->menuBar()->addMenu("Tools");
     tools->addAction(_config->getPopupAction());
     tools->addAction(_excitation->getPopupAction());
+}
+
+void QBallbot::setControllerDevice(QControllerDeviceInterface *d)
+{
+    _input->setControllerDevice(d);
+}
+
+void QBallbot::removeControllerDevice()
+{
+    _input->removeControllerDevice();
 }
 
 QString QBallbot::getType()

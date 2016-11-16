@@ -6,6 +6,7 @@
 #include <qrobotconnectionmanager.h>
 #include <qrobotrecordermanager.h>
 #include <qrobotlog.h>
+#include <qcontrollerdeviceinterface.h>
 
 class QAbstractRobot : public QObject
 {
@@ -21,6 +22,8 @@ public:
     virtual QRobotWindow *getWindow() = 0;
     virtual QRobotConnectionManager* getConnectionManager() = 0;
     virtual QRobotRecorderManager* getRecorderManager() = 0;
+    virtual void setControllerDevice(QControllerDeviceInterface* c);
+    virtual void removeControllerDevice();
 
     int id();
     QString getName();

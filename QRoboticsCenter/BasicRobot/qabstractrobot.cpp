@@ -18,6 +18,16 @@ void QAbstractRobot::setup()
     getWindow()->setWindowIcon(getIcon());
 }
 
+void QAbstractRobot::setControllerDevice(QControllerDeviceInterface *c)
+{
+    //do nothing..
+}
+
+void QAbstractRobot::removeControllerDevice()
+{
+    //do nothing
+}
+
 int QAbstractRobot::id()
 {
     return _id;
