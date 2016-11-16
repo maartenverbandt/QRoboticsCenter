@@ -2,7 +2,8 @@
 
 QBallbot::QBallbot(int id, QObject *parent) :
     QBalancingRobot(id,parent),
-    _config(new BallbotConfigDialog(0))
+    _config(new BallbotConfigDialog(0)),
+    _excitation(new QExcitationDialog(0))
 {
     //Connect config //TODO: should be more standard in the future..
     QObject::connect(getConnectionManager(),&QBalancingConnectionManager::partitionMsgReceived,this,&QBallbot::partitionMsgReceived);
@@ -10,9 +11,13 @@ QBallbot::QBallbot(int id, QObject *parent) :
     QObject::connect(_config,&BallbotConfigDialog::storeRobotSettings,this,&QBallbot::requestSaveConfig);
     QObject::connect(_config,&BallbotConfigDialog::writeRobotSettings,this,&QBallbot::sendConfig);
 
+    //connect
+    _excitation->connect(getConnectionManager());
+
     //add tools menu.. // move tools t
     QMenu* tools = getWindow()->menuBar()->addMenu("Tools");
     tools->addAction(_config->getPopupAction());
+    tools->addAction(_excitation->getPopupAction());
 
     //start robot log
     getLog()->open(this);

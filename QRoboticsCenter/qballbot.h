@@ -3,6 +3,7 @@
 
 #include <qbalancingrobot.h>
 #include <ballbotconfigdialog.h>
+#include <qexcitationdialog.h>
 
 class QBallbot : public QBalancingRobot
 {
@@ -14,6 +15,7 @@ public:
 
 private:
     BallbotConfigDialog* _config;
+    QExcitationDialog* _excitation;
 
 public slots:
 

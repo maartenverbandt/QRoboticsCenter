@@ -9,8 +9,8 @@ QExcitationDialog::QExcitationDialog(QWidget *parent) :
     ui->setupUi(this);
 
     QObject::connect(ui->excitation_selection_comboBox,SIGNAL(currentIndexChanged(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
-    ui->excitation_selection_comboBox->setCurrentIndex(0);
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->excitation_selection_comboBox->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(1);
 
     for(int k=0;k<8;k++){
         _channels[k] = new QComboBox(this);
@@ -30,6 +30,14 @@ QExcitationDialog::~QExcitationDialog()
     delete ui;
 }
 
+void QExcitationDialog::connect(QBalancingConnectionManager *c)
+{
+    QObject::connect(this,&QExcitationDialog::requestEvent,c,&QBalancingConnectionManager::eventMsgSend);
+    QObject::connect(this,&QExcitationDialog::requestSweptsine,c,&QBalancingConnectionManager::signalSweptsineMsgSend);
+    QObject::connect(this,&QExcitationDialog::requestMultisine,c,&QBalancingConnectionManager::signalMultisineMsgSend);
+    QObject::connect(this,&QExcitationDialog::requestSteppedsine,c,&QBalancingConnectionManager::signalSteppedsineMsgSend);
+}
+
 QAction *QExcitationDialog::getPopupAction()
 {
     return _popup;
@@ -47,19 +55,37 @@ unsigned int QExcitationDialog::getChannels()
 void QExcitationDialog::on_set_pushButton_clicked()
 {
     switch(ui->excitation_selection_comboBox->currentIndex()){
-        case EXCITATION_SWEPTSINE:
-            emit requestSweptsine(getChannels(), ui->doubleSpinBox_fl->value(), ui->doubleSpinBox_fh->value(), ui->doubleSpinBox_T->value(), ui->doubleSpinBox_A->value());
+        case 0:
+            mavlink_signal_sweptsine_t sweptsine;
+            sweptsine.channels = getChannels();
+            sweptsine.fmin = ui->doubleSpinBox_fl->value();
+            sweptsine.fmax = ui->doubleSpinBox_fh->value();
+            sweptsine.period = ui->doubleSpinBox_T->value();
+            sweptsine.amplitude = ui->doubleSpinBox_A->value();
+            emit requestSweptsine(sweptsine);
             break;
-        case EXCITATION_MULTISINE:
-            emit requestMultisine(getChannels(), ui->multisine_spinBox->value(), ui->musin_gain_doubleSpinBox->value());
+        case 1:
+            mavlink_signal_multisine_t multisine;
+            multisine.channels = getChannels();
+            multisine.id = ui->multisine_spinBox->value();
+            multisine.amplitude = ui->musin_gain_doubleSpinBox->value();
+            emit requestMultisine(multisine);
             break;
-        case EXCITATION_STEPPEDSINE:
-            emit requestSteppedsine(getChannels(), ui->doubleSpinBox_fl_2->value(), ui->doubleSpinBox_fh_2->value(), ui->doubleSpinBox_T_2->value(), ui->doubleSpinBox_A_2->value());
+        case 2:
+            mavlink_signal_steppedsine_t steppedsine;
+            steppedsine.channels = getChannels();
+            steppedsine.fmin = ui->doubleSpinBox_fl_2->value();
+            steppedsine.fmax = ui->doubleSpinBox_fh_2->value();
+            steppedsine.period = ui->doubleSpinBox_T_2->value();
+            steppedsine.amplitude = ui->doubleSpinBox_A_2->value();
+            emit requestSteppedsine(steppedsine);
             break;
     }
 }
 
 void QExcitationDialog::on_disable_pushButton_clicked()
 {
-    emit requestStopExcitation();
+    mavlink_event_t event;
+    event.type = 310; //stop excitation
+    emit requestEvent(event);
 }

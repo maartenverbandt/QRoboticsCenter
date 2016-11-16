@@ -4,13 +4,8 @@
 #include <QDialog>
 #include <QComboBox>
 #include <QAction>
-
-typedef enum excitation_type_t {
-    EXCITATION_SWEPTSINE,
-    EXCITATION_MULTISINE,
-    EXCITATION_STEPPEDSINE,
-    EXCITATION_STOPPED = 255
-} excitation_type_t;
+#include <qbalancingconnectionmanager.h>
+#include <mavlink.h>
 
 namespace Ui {
 class QExcitationDialog;
@@ -24,6 +19,7 @@ public:
     explicit QExcitationDialog(QWidget *parent = 0);
     ~QExcitationDialog();
 
+    void connect(QBalancingConnectionManager *c);
     QAction* getPopupAction();
 
 private:
@@ -33,15 +29,16 @@ private:
 
     unsigned int getChannels();
 
+signals:
+    void requestSweptsine(mavlink_signal_sweptsine_t sweptsine);
+    void requestMultisine(mavlink_signal_multisine_t multisine);
+    void requestSteppedsine(mavlink_signal_steppedsine_t steppedsine);
+    void requestEvent(mavlink_event_t event);
+
 private slots:
     void on_set_pushButton_clicked();
     void on_disable_pushButton_clicked();
 
-signals:
-    void requestSweptsine(unsigned int channels, double fmin, double fmax, double period, double amplitude);
-    void requestMultisine(unsigned int channels, int id, double amplitude);
-    void requestSteppedsine(unsigned int channels, double fmin, double fmax, int period, double amplitude);
-    void requestStopExcitation();
 };
 
 #endif // QEXCITATIONDIALOG_H
