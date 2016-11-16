@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QPixmap>
+#include <QApplication>
 
 namespace Ui {
 class QAboutDialog;
@@ -21,6 +22,7 @@ public:
     void setCopyright(QString copyright);
     void setLink(QString link);
     void setIcon(QString image_path);
+    void setIcon(QIcon icon);
 
 private:
     Ui::QAboutDialog *ui;

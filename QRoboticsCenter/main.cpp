@@ -8,6 +8,11 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    a.setApplicationName("QRoboticsCenter");
+    a.setApplicationVersion("3.0.0");
+    a.setApplicationDisplayName("QRoboticsCenter");
+    a.setWindowIcon(QIcon(":/icons/QRoboticsCenterLogo_blue.png"));
+
     QRobotCoordinator w;
 
     w.show();
