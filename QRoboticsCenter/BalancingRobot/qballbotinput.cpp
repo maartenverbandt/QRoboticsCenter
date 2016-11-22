@@ -20,8 +20,10 @@ void QBallbotInput::setControllerDevice(QControllerDeviceInterface *controller)
 
 void QBallbotInput::removeControllerDevice()
 {
-    _controller = NULL;
-    killTimer(_timer);
+    if(_controller != NULL){
+        killTimer(_timer);
+        _controller = NULL;
+    }
 }
 
 void QBallbotInput::timerEvent(QTimerEvent *)
@@ -29,8 +31,8 @@ void QBallbotInput::timerEvent(QTimerEvent *)
     QControllerDeviceInterface::controller_state_t state = _controller->getState();
     mavlink_velocity_cmd_t velocity_cmd;
     if(state.buttonL2){
-        velocity_cmd.vx = -state.axisRightX*1500.0;
-        velocity_cmd.vy = -state.axisRightY*1500.0;
+        velocity_cmd.vx = -state.axisRightY*1500.0;
+        velocity_cmd.vy = -state.axisRightX*1500.0;
         velocity_cmd.vz = -state.axisLeftX*2000.0;
     } else {
         velocity_cmd.vx = 0.0;
