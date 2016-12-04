@@ -22,10 +22,14 @@ QBalancingWidget::QBalancingWidget(QWidget *parent) :
     _controls->button(_control_mode)->setChecked(true);
     QObject::connect(_controls,SIGNAL(buttonClicked(int)),this,SLOT(handleControlsClicked(int)));
 
+    // Setup balance widget
     ui->balance_widget->setRange(10);
     ui->balance_widget->addCircle(5);
     ui->balance_widget->addCircle(10);
     ui->balance_widget->setSize(20);
+
+    // Setup map widget
+    ui->map_widget->setRange(10.0);
 }
 
 QBalancingWidget::~QBalancingWidget()
