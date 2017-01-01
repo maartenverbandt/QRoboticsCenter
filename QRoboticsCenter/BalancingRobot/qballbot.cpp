@@ -25,6 +25,7 @@ void QBallbot::setup()
 
     //connect
     _input->connect(getConnectionManager());
+    QObject::connect(_input,&QBallbotInput::velocityCmdMsgSend,getWindow(),&QBalancingWindow::velocityCmdReceived);
 
     //add tools menu.. // move tools t
     QMenu* tools = getWindow()->menuBar()->addMenu("Tools");

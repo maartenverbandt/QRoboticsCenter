@@ -7,12 +7,12 @@ BallbotConfigDialog::BallbotConfigDialog(QWidget *parent) : QRobotConfigDialog("
     addGroup("Stats")->setExpanded(true);
     addParameter("ballbot runtime",&_config.ballbot_runtime,"Stats");
     addParameter("ballbot dropcount",&_config.ballbot_dropcount,"Stats");
-    addGroup("IMU")->setExpanded(true);
-    addParameter("roll offset",&_config.roll_offset,"IMU");
-    addParameter("pitch offset",&_config.pitch_offset,"IMU");
-    addGroup("Limits")->setExpanded(true);
-    addParameter("maximum velocity",&_config.maximum_velocity,"Limits");
-    addParameter("maximum yaw velocity",&_config.maximum_yaw_velocity,"Limits");
+    addGroup("Parameters")->setExpanded(true);
+    addParameter("roll offset",&_config.roll_offset,"Parameters");
+    addParameter("pitch offset",&_config.pitch_offset,"Parameters");
+    addParameter("Encoder to millimeter",&_config.encoder_to_millimeter,"Parameters");
+    addParameter("maximum velocity",&_config.maximum_velocity,"Parameters");
+    addParameter("maximum yaw velocity",&_config.maximum_yaw_velocity,"Parameters");
     addGroup("Controllers")->setExpanded(true);
     addParameter("attitude controller",&_config.default_attitude_controller,"Controllers");
     addParameter("velocity controller",&_config.default_velocity_controller,"Controllers");

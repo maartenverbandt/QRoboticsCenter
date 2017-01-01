@@ -35,6 +35,7 @@ signals:
 public slots:
     virtual void updatePosition(QVector3D position);
     virtual void updateAttitude(QVector3D attitude);
+    virtual void updateSpeedCommand(QVector2D command);
     virtual void handleControlsClicked(int id);
 
 };

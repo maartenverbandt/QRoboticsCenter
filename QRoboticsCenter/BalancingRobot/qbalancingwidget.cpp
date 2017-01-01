@@ -29,7 +29,9 @@ QBalancingWidget::QBalancingWidget(QWidget *parent) :
     ui->balance_widget->setSize(20);
 
     // Setup map widget
-    ui->map_widget->setRange(10.0);
+    ui->map_widget->setRange(5000.0);
+    ui->map_widget->getRobot()->getMarker()->setSize(200);
+    ui->map_widget->getRobot()->getSpeed()->setSize(0.2);
 }
 
 QBalancingWidget::~QBalancingWidget()
@@ -49,13 +51,18 @@ QFrame *QBalancingWidget::widgetsFrame()
 
 void QBalancingWidget::updatePosition(QVector3D position)
 {
-    ui->map_widget->setPosition(position.toVector2D());
+    ui->map_widget->getRobot()->setPosition(position.toVector2D());
 }
 
 void QBalancingWidget::updateAttitude(QVector3D attitude)
 {
     ui->balance_widget->addPoint(QPointF(qRadiansToDegrees(attitude.x()),-qRadiansToDegrees(attitude.y())));
-    ui->map_widget->setOrientation(attitude.z());
+    ui->map_widget->getRobot()->setOrientation(attitude.z());
+}
+
+void QBalancingWidget::updateSpeedCommand(QVector2D command)
+{
+    ui->map_widget->getRobot()->setVelocity(command);
 }
 
 void QBalancingWidget::handleControlsClicked(int id)

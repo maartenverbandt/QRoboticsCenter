@@ -28,6 +28,8 @@ typedef struct __attribute__((__packed__)) ballbot_config_t{
     // maximum ratings
     float maximum_velocity;
     float maximum_yaw_velocity;
+    // conversion
+    float encoder_to_millimeter;
 } ballbot_config_t;
 
 class BallbotConfigDialog : public QRobotConfigDialog

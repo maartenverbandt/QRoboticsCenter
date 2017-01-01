@@ -34,6 +34,8 @@ public slots:
     void velocityMsgReceived(mavlink_velocity_t velocity);
     void positionMsgReceived(mavlink_position_t position);
 
+    void velocityCmdReceived(mavlink_velocity_cmd_t command);
+
     void setControlMode(int mode);
 
 };

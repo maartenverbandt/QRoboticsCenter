@@ -38,6 +38,11 @@ void QBalancingWindow::positionMsgReceived(mavlink_position_t position)
     _balancing->updatePosition(QVector3D(position.x,position.y,position.z)*0.001);
 }
 
+void QBalancingWindow::velocityCmdReceived(mavlink_velocity_cmd_t command)
+{
+    _balancing->updateSpeedCommand(QVector2D(command.vx,command.vy));
+}
+
 void QBalancingWindow::setControlMode(int mode)
 {
     switch(mode){
