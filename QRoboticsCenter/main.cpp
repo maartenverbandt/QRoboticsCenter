@@ -17,6 +17,8 @@ int main(int argc, char *argv[])
     w.scan();
 
 #ifdef DEBUG
+    w.addRobot(1,1);
+    w.addRobot(2,2);
     w.addRobot(10,QRobotCoordinator::CAR);
     w.addRobot(23,QRobotCoordinator::BALLBOT);
 #endif
