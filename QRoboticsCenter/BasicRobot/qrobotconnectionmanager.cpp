@@ -37,7 +37,6 @@ void QRobotConnectionManager::receiveMessage(mavlink_message_t msg)
             mavlink_gpio_t gpio;
             mavlink_msg_gpio_decode(&msg, &gpio);
 
-            // emit the message for whatever widget using it
             emit gpioMsgReceived(gpio);
         break; }
 
