@@ -22,7 +22,6 @@ SOURCES += main.cpp\
         qprintstitcher.cpp \
         qaboutdialog.cpp \
         qexcitationdialog.cpp \
-        qcar.cpp \
         BasicRobot/qrobotrecordermanager.cpp \
         BasicRobot/qrobotcoordinator.cpp \
         BasicRobot/qstackedwindow.cpp \
@@ -39,13 +38,15 @@ SOURCES += main.cpp\
         BalancingRobot/qbalancingrobot.cpp \
         BalancingRobot/qbalancingconnectionmanager.cpp \
         BalancingRobot/qballbot.cpp \
-    BalancingRobot/qballbotinput.cpp
+    BalancingRobot/qballbotinput.cpp \
+    qunknownrobot.cpp \
+    qbasicrobot.cpp \
+    qcar.cpp
 
 HEADERS  += mainwindow.h \
         qprintstitcher.h \
         qaboutdialog.h \
         qexcitationdialog.h \
-        qcar.h \
         BasicRobot/qrobotrecordermanager.h \
         BasicRobot/qrobotbutton.h \
         BasicRobot/qabstractrobot.h \
@@ -63,7 +64,10 @@ HEADERS  += mainwindow.h \
         BalancingRobot/qbalancingwidget.h \
         BalancingRobot/ballbotconfigdialog.h \
     BalancingRobot/qballbotinput.h \
-    qrobotevents.h
+    qrobotevents.h \
+    qunknownrobot.h \
+    qbasicrobot.h \
+    qcar.h
 
 FORMS   += mainwindow.ui \
         qaboutdialog.ui \
