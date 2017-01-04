@@ -66,7 +66,7 @@ QAbstractRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
         robot = new QCar(id,this);
         break;
     default:
-        //robot = new QRobot(id,this);
+        robot = new QUnknownRobot(id,this);
         break;
     }
     _robots.append(robot);

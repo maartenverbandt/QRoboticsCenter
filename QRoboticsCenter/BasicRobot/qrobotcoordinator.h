@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QLayout>
 #include <qrobotbutton.h>
+#include <qunknownrobot.h>
 #include <qcar.h>
 #include <qballbot.h>
 #include <qmavlinkconnection.h>
