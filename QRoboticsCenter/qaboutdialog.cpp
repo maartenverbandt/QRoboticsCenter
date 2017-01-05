@@ -5,11 +5,19 @@ QAboutDialog::QAboutDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::QAboutDialog)
 {
+    // Setup dialog
     ui->setupUi(this);
     setWindowTitle("About");
     setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
     setModal(true); //make it a blocking widget
     setAttribute(Qt::WA_DeleteOnClose);
+
+    // Get info from application
+    setApplicationTitle(QApplication::applicationName());
+    setVersion(QApplication::applicationVersion());
+    setIcon(QApplication::windowIcon());
+
+    // Show dialog
     show();
 }
 
@@ -41,6 +49,12 @@ void QAboutDialog::setLink(QString link)
 void QAboutDialog::setIcon(QString image_path)
 {
     QPixmap pixmap(image_path);
+    ui->icon_label->setPixmap(pixmap.scaled(ui->icon_label->rect().size(),Qt::KeepAspectRatio));
+}
+
+void QAboutDialog::setIcon(QIcon icon)
+{
+    QPixmap pixmap = icon.pixmap(ui->icon_label->rect().width(),ui->icon_label->rect().height());
     ui->icon_label->setPixmap(pixmap.scaled(ui->icon_label->rect().size(),Qt::KeepAspectRatio));
 }
 

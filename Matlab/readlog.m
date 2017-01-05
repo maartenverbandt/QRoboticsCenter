@@ -12,7 +12,9 @@ switch type
     case 'QGPIORecord'
         rec = QRecord(filename);
     case 'QAttitudeRecord'
-        error('Not yet implemented');
+        rec = QAttitudeRecord(filename);
+    case 'QVelocityRecord'
+        rec = QVelocityRecord(filename);
     case 'QPositionRecord'
         rec = QPositionRecord(filename);       
 end

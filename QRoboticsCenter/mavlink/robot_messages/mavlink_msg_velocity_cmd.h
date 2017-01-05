@@ -7,22 +7,28 @@ typedef struct __mavlink_velocity_cmd_t
  int16_t vx; ///< x velocity command
  int16_t vy; ///< y velocity command
  int16_t vz; ///< z velocity command
+ int16_t vxFF; ///< x velocity feedforward
+ int16_t vyFF; ///< y velocity feedforward
+ int16_t vzFF; ///< z velocity feedforward
 } mavlink_velocity_cmd_t;
 
-#define MAVLINK_MSG_ID_VELOCITY_CMD_LEN 6
-#define MAVLINK_MSG_ID_55_LEN 6
+#define MAVLINK_MSG_ID_VELOCITY_CMD_LEN 12
+#define MAVLINK_MSG_ID_55_LEN 12
 
-#define MAVLINK_MSG_ID_VELOCITY_CMD_CRC 239
-#define MAVLINK_MSG_ID_55_CRC 239
+#define MAVLINK_MSG_ID_VELOCITY_CMD_CRC 172
+#define MAVLINK_MSG_ID_55_CRC 172
 
 
 
 #define MAVLINK_MESSAGE_INFO_VELOCITY_CMD { \
 	"VELOCITY_CMD", \
-	3, \
+	6, \
 	{  { "vx", NULL, MAVLINK_TYPE_INT16_T, 0, 0, offsetof(mavlink_velocity_cmd_t, vx) }, \
          { "vy", NULL, MAVLINK_TYPE_INT16_T, 0, 2, offsetof(mavlink_velocity_cmd_t, vy) }, \
          { "vz", NULL, MAVLINK_TYPE_INT16_T, 0, 4, offsetof(mavlink_velocity_cmd_t, vz) }, \
+         { "vxFF", NULL, MAVLINK_TYPE_INT16_T, 0, 6, offsetof(mavlink_velocity_cmd_t, vxFF) }, \
+         { "vyFF", NULL, MAVLINK_TYPE_INT16_T, 0, 8, offsetof(mavlink_velocity_cmd_t, vyFF) }, \
+         { "vzFF", NULL, MAVLINK_TYPE_INT16_T, 0, 10, offsetof(mavlink_velocity_cmd_t, vzFF) }, \
          } \
 }
 
@@ -36,16 +42,22 @@ typedef struct __mavlink_velocity_cmd_t
  * @param vx x velocity command
  * @param vy y velocity command
  * @param vz z velocity command
+ * @param vxFF x velocity feedforward
+ * @param vyFF y velocity feedforward
+ * @param vzFF z velocity feedforward
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_velocity_cmd_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-						       int16_t vx, int16_t vy, int16_t vz)
+						       int16_t vx, int16_t vy, int16_t vz, int16_t vxFF, int16_t vyFF, int16_t vzFF)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 	char buf[MAVLINK_MSG_ID_VELOCITY_CMD_LEN];
 	_mav_put_int16_t(buf, 0, vx);
 	_mav_put_int16_t(buf, 2, vy);
 	_mav_put_int16_t(buf, 4, vz);
+	_mav_put_int16_t(buf, 6, vxFF);
+	_mav_put_int16_t(buf, 8, vyFF);
+	_mav_put_int16_t(buf, 10, vzFF);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_VELOCITY_CMD_LEN);
 #else
@@ -53,6 +65,9 @@ static inline uint16_t mavlink_msg_velocity_cmd_pack(uint8_t system_id, uint8_t 
 	packet.vx = vx;
 	packet.vy = vy;
 	packet.vz = vz;
+	packet.vxFF = vxFF;
+	packet.vyFF = vyFF;
+	packet.vzFF = vzFF;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_VELOCITY_CMD_LEN);
 #endif
@@ -74,17 +89,23 @@ static inline uint16_t mavlink_msg_velocity_cmd_pack(uint8_t system_id, uint8_t 
  * @param vx x velocity command
  * @param vy y velocity command
  * @param vz z velocity command
+ * @param vxFF x velocity feedforward
+ * @param vyFF y velocity feedforward
+ * @param vzFF z velocity feedforward
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_velocity_cmd_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
 							   mavlink_message_t* msg,
-						           int16_t vx,int16_t vy,int16_t vz)
+						           int16_t vx,int16_t vy,int16_t vz,int16_t vxFF,int16_t vyFF,int16_t vzFF)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 	char buf[MAVLINK_MSG_ID_VELOCITY_CMD_LEN];
 	_mav_put_int16_t(buf, 0, vx);
 	_mav_put_int16_t(buf, 2, vy);
 	_mav_put_int16_t(buf, 4, vz);
+	_mav_put_int16_t(buf, 6, vxFF);
+	_mav_put_int16_t(buf, 8, vyFF);
+	_mav_put_int16_t(buf, 10, vzFF);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_VELOCITY_CMD_LEN);
 #else
@@ -92,6 +113,9 @@ static inline uint16_t mavlink_msg_velocity_cmd_pack_chan(uint8_t system_id, uin
 	packet.vx = vx;
 	packet.vy = vy;
 	packet.vz = vz;
+	packet.vxFF = vxFF;
+	packet.vyFF = vyFF;
+	packet.vzFF = vzFF;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_VELOCITY_CMD_LEN);
 #endif
@@ -114,7 +138,7 @@ static inline uint16_t mavlink_msg_velocity_cmd_pack_chan(uint8_t system_id, uin
  */
 static inline uint16_t mavlink_msg_velocity_cmd_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_velocity_cmd_t* velocity_cmd)
 {
-	return mavlink_msg_velocity_cmd_pack(system_id, component_id, msg, velocity_cmd->vx, velocity_cmd->vy, velocity_cmd->vz);
+	return mavlink_msg_velocity_cmd_pack(system_id, component_id, msg, velocity_cmd->vx, velocity_cmd->vy, velocity_cmd->vz, velocity_cmd->vxFF, velocity_cmd->vyFF, velocity_cmd->vzFF);
 }
 
 /**
@@ -128,7 +152,7 @@ static inline uint16_t mavlink_msg_velocity_cmd_encode(uint8_t system_id, uint8_
  */
 static inline uint16_t mavlink_msg_velocity_cmd_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_velocity_cmd_t* velocity_cmd)
 {
-	return mavlink_msg_velocity_cmd_pack_chan(system_id, component_id, chan, msg, velocity_cmd->vx, velocity_cmd->vy, velocity_cmd->vz);
+	return mavlink_msg_velocity_cmd_pack_chan(system_id, component_id, chan, msg, velocity_cmd->vx, velocity_cmd->vy, velocity_cmd->vz, velocity_cmd->vxFF, velocity_cmd->vyFF, velocity_cmd->vzFF);
 }
 
 /**
@@ -138,16 +162,22 @@ static inline uint16_t mavlink_msg_velocity_cmd_encode_chan(uint8_t system_id, u
  * @param vx x velocity command
  * @param vy y velocity command
  * @param vz z velocity command
+ * @param vxFF x velocity feedforward
+ * @param vyFF y velocity feedforward
+ * @param vzFF z velocity feedforward
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_velocity_cmd_send(mavlink_channel_t chan, int16_t vx, int16_t vy, int16_t vz)
+static inline void mavlink_msg_velocity_cmd_send(mavlink_channel_t chan, int16_t vx, int16_t vy, int16_t vz, int16_t vxFF, int16_t vyFF, int16_t vzFF)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 	char buf[MAVLINK_MSG_ID_VELOCITY_CMD_LEN];
 	_mav_put_int16_t(buf, 0, vx);
 	_mav_put_int16_t(buf, 2, vy);
 	_mav_put_int16_t(buf, 4, vz);
+	_mav_put_int16_t(buf, 6, vxFF);
+	_mav_put_int16_t(buf, 8, vyFF);
+	_mav_put_int16_t(buf, 10, vzFF);
 
 #if MAVLINK_CRC_EXTRA
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_VELOCITY_CMD, buf, MAVLINK_MSG_ID_VELOCITY_CMD_LEN, MAVLINK_MSG_ID_VELOCITY_CMD_CRC);
@@ -159,6 +189,9 @@ static inline void mavlink_msg_velocity_cmd_send(mavlink_channel_t chan, int16_t
 	packet.vx = vx;
 	packet.vy = vy;
 	packet.vz = vz;
+	packet.vxFF = vxFF;
+	packet.vyFF = vyFF;
+	packet.vzFF = vzFF;
 
 #if MAVLINK_CRC_EXTRA
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_VELOCITY_CMD, (const char *)&packet, MAVLINK_MSG_ID_VELOCITY_CMD_LEN, MAVLINK_MSG_ID_VELOCITY_CMD_CRC);
@@ -176,13 +209,16 @@ static inline void mavlink_msg_velocity_cmd_send(mavlink_channel_t chan, int16_t
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_velocity_cmd_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  int16_t vx, int16_t vy, int16_t vz)
+static inline void mavlink_msg_velocity_cmd_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  int16_t vx, int16_t vy, int16_t vz, int16_t vxFF, int16_t vyFF, int16_t vzFF)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 	char *buf = (char *)msgbuf;
 	_mav_put_int16_t(buf, 0, vx);
 	_mav_put_int16_t(buf, 2, vy);
 	_mav_put_int16_t(buf, 4, vz);
+	_mav_put_int16_t(buf, 6, vxFF);
+	_mav_put_int16_t(buf, 8, vyFF);
+	_mav_put_int16_t(buf, 10, vzFF);
 
 #if MAVLINK_CRC_EXTRA
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_VELOCITY_CMD, buf, MAVLINK_MSG_ID_VELOCITY_CMD_LEN, MAVLINK_MSG_ID_VELOCITY_CMD_CRC);
@@ -194,6 +230,9 @@ static inline void mavlink_msg_velocity_cmd_send_buf(mavlink_message_t *msgbuf, 
 	packet->vx = vx;
 	packet->vy = vy;
 	packet->vz = vz;
+	packet->vxFF = vxFF;
+	packet->vyFF = vyFF;
+	packet->vzFF = vzFF;
 
 #if MAVLINK_CRC_EXTRA
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_VELOCITY_CMD, (const char *)packet, MAVLINK_MSG_ID_VELOCITY_CMD_LEN, MAVLINK_MSG_ID_VELOCITY_CMD_CRC);
@@ -240,6 +279,36 @@ static inline int16_t mavlink_msg_velocity_cmd_get_vz(const mavlink_message_t* m
 }
 
 /**
+ * @brief Get field vxFF from velocity_cmd message
+ *
+ * @return x velocity feedforward
+ */
+static inline int16_t mavlink_msg_velocity_cmd_get_vxFF(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_int16_t(msg,  6);
+}
+
+/**
+ * @brief Get field vyFF from velocity_cmd message
+ *
+ * @return y velocity feedforward
+ */
+static inline int16_t mavlink_msg_velocity_cmd_get_vyFF(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_int16_t(msg,  8);
+}
+
+/**
+ * @brief Get field vzFF from velocity_cmd message
+ *
+ * @return z velocity feedforward
+ */
+static inline int16_t mavlink_msg_velocity_cmd_get_vzFF(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_int16_t(msg,  10);
+}
+
+/**
  * @brief Decode a velocity_cmd message into a struct
  *
  * @param msg The message to decode
@@ -251,6 +320,9 @@ static inline void mavlink_msg_velocity_cmd_decode(const mavlink_message_t* msg,
 	velocity_cmd->vx = mavlink_msg_velocity_cmd_get_vx(msg);
 	velocity_cmd->vy = mavlink_msg_velocity_cmd_get_vy(msg);
 	velocity_cmd->vz = mavlink_msg_velocity_cmd_get_vz(msg);
+	velocity_cmd->vxFF = mavlink_msg_velocity_cmd_get_vxFF(msg);
+	velocity_cmd->vyFF = mavlink_msg_velocity_cmd_get_vyFF(msg);
+	velocity_cmd->vzFF = mavlink_msg_velocity_cmd_get_vzFF(msg);
 #else
 	memcpy(velocity_cmd, _MAV_PAYLOAD(msg), MAVLINK_MSG_ID_VELOCITY_CMD_LEN);
 #endif

@@ -11,50 +11,64 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = QRoboticsCenter
 TEMPLATE = app
 
-INCLUDEPATH += $$PWD #\
+INCLUDEPATH +=  $$PWD \
+                BasicRobot \
+                BalancingRobot \
                #mavlink
 #/ballbot_messagesavr/mavlink.h
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    qrobotcoordinator.cpp \
-    qbalancingrobot.cpp \
-    qrobot.cpp \
-    qballbot.cpp \
-    qsegbot.cpp \
-    qcircularlayout.cpp \
-    qprintstitcher.cpp \
-    qabstractrecorder.cpp \
-    qgpiorecorder.cpp \
-    qbalancingwidget.cpp \
-    ballbotconfigdialog.cpp \
-    qrecorderwidget.cpp \
-    qrobotbutton.cpp \
-    qaboutdialog.cpp \
-    qattituderecorder.cpp \
-    qpositionrecorder.cpp
+        qprintstitcher.cpp \
+        qaboutdialog.cpp \
+        qexcitationdialog.cpp \
+        qcar.cpp \
+        BasicRobot/qrobotrecordermanager.cpp \
+        BasicRobot/qrobotcoordinator.cpp \
+        BasicRobot/qstackedwindow.cpp \
+        BasicRobot/qrobotlog.cpp \
+        BasicRobot/qrobotconfig.cpp \
+        BasicRobot/qabstractrobot.cpp \
+        BasicRobot/qrobotconnectionmanager.cpp \
+        BasicRobot/qrobotwindow.cpp \
+        BasicRobot/qrobotbutton.cpp \
+        BalancingRobot/qbalancingwidget.cpp \
+        BalancingRobot/ballbotconfigdialog.cpp \
+        BalancingRobot/qbalancingrecordermanager.cpp \
+        BalancingRobot/qbalancingwindow.cpp \
+        BalancingRobot/qbalancingrobot.cpp \
+        BalancingRobot/qbalancingconnectionmanager.cpp \
+        BalancingRobot/qballbot.cpp \
+    BalancingRobot/qballbotinput.cpp
 
 HEADERS  += mainwindow.h \
-    qrobotcoordinator.h \
-    qbalancingrobot.h \
-    qrobot.h \
-    qballbot.h \
-    qsegbot.h \
-    qcircularlayout.h \
-    qprintstitcher.h \
-    qabstractrecorder.h \
-    qgpiorecorder.h \
-    qbalancingwidget.h \
-    ballbotconfigdialog.h \
-    qrecorderwidget.h \
-    qrobotbutton.h \
-    qaboutdialog.h \
-    qattituderecorder.h \
-    qpositionrecorder.h
+        qprintstitcher.h \
+        qaboutdialog.h \
+        qexcitationdialog.h \
+        qcar.h \
+        BasicRobot/qrobotrecordermanager.h \
+        BasicRobot/qrobotbutton.h \
+        BasicRobot/qabstractrobot.h \
+        BasicRobot/qrobotconnectionmanager.h \
+        BasicRobot/qrobotwindow.h \
+        BasicRobot/qrobotcoordinator.h \
+        BasicRobot/qstackedwindow.h \
+        BasicRobot/qrobotlog.h \
+        BasicRobot/qrobotconfig.h \
+        BalancingRobot/qbalancingrecordermanager.h \
+        BalancingRobot/qbalancingwindow.h \
+        BalancingRobot/qbalancingrobot.h \
+        BalancingRobot/qbalancingconnectionmanager.h \
+        BalancingRobot/qballbot.h \
+        BalancingRobot/qbalancingwidget.h \
+        BalancingRobot/ballbotconfigdialog.h \
+    BalancingRobot/qballbotinput.h \
+    qrobotevents.h
 
-FORMS    += mainwindow.ui \
-    qbalancingwidget.ui \
-    qaboutdialog.ui
+FORMS   += mainwindow.ui \
+        qaboutdialog.ui \
+        qexcitationdialog.ui \
+        BalancingRobot/qbalancingwidget.ui
 
 RESOURCES += \
     icons.qrc
@@ -64,5 +78,5 @@ include(../../QtModules/QGPIOWidget/src/qgpiowidget.pri)
 include(../../QtModules/QRobotConfigDialog/src/qrobotconfigdialog.pri)
 include(../../QtModules/QPolarPlot/src/qpolarplot.pri)
 include(../../QtModules/QMapWidget/src/qmapwidget.pri)
-
-
+include(../../QtModules/QControllerDevice/src/qcontrollerdevice.pri)
+include(../../QtModules/QRecorder/src/qrecorder.pri)
