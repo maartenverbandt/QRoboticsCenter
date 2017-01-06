@@ -30,7 +30,10 @@ SOURCES += main.cpp\
         BasicRobot/qabstractrobot.cpp \
         BasicRobot/qrobotconnectionmanager.cpp \
         BasicRobot/qrobotwindow.cpp \
-        BasicRobot/qrobotbutton.cpp \
+        BasicRobot/qrobotbutton.cpp  \
+		BasicRobot/qunknownrobot.cpp \
+		BasicRobot/qbasicrobot.cpp \
+		BasicRobot/qcar.cpp \
         BalancingRobot/qbalancingwidget.cpp \
         BalancingRobot/ballbotconfigdialog.cpp \
         BalancingRobot/qbalancingrecordermanager.cpp \
@@ -38,10 +41,7 @@ SOURCES += main.cpp\
         BalancingRobot/qbalancingrobot.cpp \
         BalancingRobot/qbalancingconnectionmanager.cpp \
         BalancingRobot/qballbot.cpp \
-    BalancingRobot/qballbotinput.cpp \
-    qunknownrobot.cpp \
-    qbasicrobot.cpp \
-    qcar.cpp
+		BalancingRobot/qballbotinput.cpp
 
 HEADERS  += mainwindow.h \
         qprintstitcher.h \
@@ -56,6 +56,9 @@ HEADERS  += mainwindow.h \
         BasicRobot/qstackedwindow.h \
         BasicRobot/qrobotlog.h \
         BasicRobot/qrobotconfig.h \
+		BasicRobot/qunknownrobot.h \
+		BasicRobot/qbasicrobot.h \
+		BasicRobot/qcar.h\
         BalancingRobot/qbalancingrecordermanager.h \
         BalancingRobot/qbalancingwindow.h \
         BalancingRobot/qbalancingrobot.h \
@@ -63,11 +66,8 @@ HEADERS  += mainwindow.h \
         BalancingRobot/qballbot.h \
         BalancingRobot/qbalancingwidget.h \
         BalancingRobot/ballbotconfigdialog.h \
-    BalancingRobot/qballbotinput.h \
-    qrobotevents.h \
-    qunknownrobot.h \
-    qbasicrobot.h \
-    qcar.h
+    	BalancingRobot/qballbotinput.h \
+    	qrobotevents.h
 
 FORMS   += mainwindow.ui \
         qaboutdialog.ui \
