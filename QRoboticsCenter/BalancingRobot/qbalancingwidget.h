@@ -27,6 +27,7 @@ public:
     QMapWidget* map();
     QPolarPlot* balance();
 
+    void setJumping(bool jumping = true);
 
 private:
     Ui::QBalancingWidget *ui;

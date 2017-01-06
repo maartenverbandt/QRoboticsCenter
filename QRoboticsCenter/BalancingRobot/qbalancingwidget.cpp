@@ -59,6 +59,11 @@ QPolarPlot *QBalancingWidget::balance()
     return ui->balance_widget;
 }
 
+void QBalancingWidget::setJumping(bool jumping)
+{
+    _jumping = jumping;
+}
+
 void QBalancingWidget::updatePosition(QVector3D position)
 {
     ui->map_widget->getRobot()->setPosition(position.toVector2D());
