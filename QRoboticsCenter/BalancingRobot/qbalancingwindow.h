@@ -13,6 +13,8 @@ public:
     QBalancingWindow(QWidget *parent = 0);
     void connect(QBalancingConnectionManager* c);
 
+    QBalancingWidget* getBalancingView();
+
 private:
     QBalancingWidget* _balancing;
 

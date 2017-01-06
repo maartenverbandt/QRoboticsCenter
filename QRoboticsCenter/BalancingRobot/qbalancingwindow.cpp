@@ -17,6 +17,11 @@ void QBalancingWindow::connect(QBalancingConnectionManager *c)
     QObject::connect(c,&QBalancingConnectionManager::positionMsgReceived,this,&QBalancingWindow::positionMsgReceived);
 }
 
+QBalancingWidget *QBalancingWindow::getBalancingView()
+{
+    return _balancing;
+}
+
 void QBalancingWindow::poseMsgReceived(mavlink_pose_t pose)
 {
     _balancing->updateAttitude(QVector3D(pose.roll,pose.pitch,pose.yaw)*0.0001);
