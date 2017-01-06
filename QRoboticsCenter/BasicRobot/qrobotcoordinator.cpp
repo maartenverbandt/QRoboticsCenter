@@ -62,6 +62,9 @@ QAbstractRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
     case(SEGBOT):
         //robot = new QSegbot(id,this);
         break;
+    case(TILTINGTABLE):
+        robot = new QTiltingTable(id,this);
+        break;
     case(CAR):
         robot = new QCar(id,this);
         break;
