@@ -49,6 +49,16 @@ QFrame *QBalancingWidget::widgetsFrame()
     return ui->widgets_frame;
 }
 
+QMapWidget *QBalancingWidget::map()
+{
+    return ui->map_widget;
+}
+
+QPolarPlot *QBalancingWidget::balance()
+{
+    return ui->balance_widget;
+}
+
 void QBalancingWidget::updatePosition(QVector3D position)
 {
     ui->map_widget->getRobot()->setPosition(position.toVector2D());
