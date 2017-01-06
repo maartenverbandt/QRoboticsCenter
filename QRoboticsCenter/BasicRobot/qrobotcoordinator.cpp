@@ -97,7 +97,6 @@ QAbstractRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int type)
 {
     QListIterator<QAbstractRobot*> i(_robots);
     while(i.hasNext()){
-        qDebug() << i.peekNext()->id() << id;
         if(i.next()->id() == id){
             return i.peekPrevious();
         }

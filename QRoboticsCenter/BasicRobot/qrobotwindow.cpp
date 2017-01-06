@@ -25,6 +25,7 @@ void QRobotWindow::connect(QRobotConnectionManager *c)
 {
     QObject::connect(this,&QRobotWindow::eventMsgSend,c,&QRobotConnectionManager::eventMsgSend);
     QObject::connect(c,&QRobotConnectionManager::gpioMsgReceived,_gpio,&QGPIOWidget::setInput);
+    QObject::connect(_gpio,&QGPIOWidget::setOutput,c,&QRobotConnectionManager::gpioMsgSend);
     QObject::connect(c,SIGNAL(printReceived(QString)),this->statusBar(),SLOT(showMessage(QString)));
     QObject::connect(c,&QRobotConnectionManager::threadinfoMsgReceived,_threading,&QThreadingDialog::threadInfoMsgReceived);
 }
