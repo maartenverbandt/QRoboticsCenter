@@ -29,9 +29,13 @@ public:
     QString getName();
     QRobotLog *getLog();
 
+    virtual void saveState();
+    virtual void restoreState();
+
 private:
     const int _id;
     QRobotLog* _log;
+
 };
 
 #endif // QABSTRACTROBOT_H

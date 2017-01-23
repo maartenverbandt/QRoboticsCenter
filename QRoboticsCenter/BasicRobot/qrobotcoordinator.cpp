@@ -144,11 +144,16 @@ void QRobotCoordinator::saveSettings()
     settings.setValue("scan_bluetooth", _scan_bluetooth->isChecked());
 
     settings.endGroup();
+
+    // Save robot settings
+    QListIterator<QAbstractRobot*> robot(_robots);
+    while (robot.hasNext())
+        robot.next()->saveState();
 }
 
 void QRobotCoordinator::loadSettings()
 {
-    QSettings settings("RobSoft", "QRoboticsCenter");
+    QSettings settings;
 
     // set window group
     settings.beginGroup("QRobotCoordinator");

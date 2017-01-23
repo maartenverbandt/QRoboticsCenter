@@ -37,6 +37,16 @@ void QRobotWindow::sendEvent(int id)
     emit eventMsgSend(event);
 }
 
+void QRobotWindow::saveState(QString group)
+{
+    _gpio->saveState(group);
+}
+
+void QRobotWindow::restoreState(QString group)
+{
+    _gpio->restoreState(group);
+}
+
 void QRobotWindow::eventButtonPressed(int id)
 {
     sendEvent(id + 1000);

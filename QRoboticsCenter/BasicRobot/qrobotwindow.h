@@ -17,6 +17,9 @@ public:
     QGPIOWidget *getGPIOWidget();
     QThreadingDialog *getThreadingDialog();
 
+    virtual void saveState(QString group);
+    virtual void restoreState(QString group);
+
 protected:
     void sendEvent(int id);
 

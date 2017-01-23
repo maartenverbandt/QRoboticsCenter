@@ -16,6 +16,8 @@ void QAbstractRobot::setup()
     //setup window
     getWindow()->setWindowTitle(getName());
     getWindow()->setWindowIcon(getIcon());
+    //restore state
+    restoreState();
 }
 
 void QAbstractRobot::setControllerDevice(QControllerDeviceInterface *c)
@@ -41,4 +43,14 @@ QString QAbstractRobot::getName()
 QRobotLog *QAbstractRobot::getLog()
 {
     return _log;
+}
+
+void QAbstractRobot::saveState()
+{
+    getWindow()->saveState(getName());
+}
+
+void QAbstractRobot::restoreState()
+{
+    getWindow()->restoreState(getName());
 }
