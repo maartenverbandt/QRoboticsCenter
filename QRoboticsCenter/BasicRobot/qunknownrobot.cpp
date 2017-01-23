@@ -3,7 +3,7 @@
 QUnknownRobot::QUnknownRobot(int id, QObject *parent) :
     QBasicRobot(id,parent)
 {
-    setup();
+    //do nothing
 }
 
 QString QUnknownRobot::getType()

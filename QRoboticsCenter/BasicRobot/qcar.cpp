@@ -3,7 +3,7 @@
 QCar::QCar(int id, QObject *parent) :
     QBasicRobot(id,parent)
 {
-    setup();
+    // do nothing
 }
 
 QString QCar::getType()

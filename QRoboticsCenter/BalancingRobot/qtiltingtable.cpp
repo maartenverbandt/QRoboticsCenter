@@ -3,7 +3,7 @@
 QTiltingTable::QTiltingTable(int id, QObject *parent) :
     QBalancingRobot(id,parent)
 {
-    setup();
+    //do nothing
 }
 
 void QTiltingTable::setup()

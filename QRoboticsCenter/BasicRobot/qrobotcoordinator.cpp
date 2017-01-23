@@ -72,6 +72,7 @@ QAbstractRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
         robot = new QUnknownRobot(id,this);
         break;
     }
+    robot->setup();
     _robots.append(robot);
 
     //Add button to the mainwindow
@@ -166,6 +167,8 @@ void QRobotCoordinator::loadSettings()
     _scan_bluetooth->setChecked(settings.value("scan_bluetooth",false).toBool());
 
     settings.endGroup();
+
+
 }
 
 void QRobotCoordinator::showAboutDialog()
