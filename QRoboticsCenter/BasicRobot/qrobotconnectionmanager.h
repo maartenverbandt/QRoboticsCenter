@@ -53,7 +53,7 @@ public slots:
     //void sendPartition(const char id, QByteArray data, int index = 0);
 };
 
-Q_DECLARE_METATYPE(mavlink_gpio_t)
+//Q_DECLARE_METATYPE(mavlink_gpio_t)
 Q_DECLARE_METATYPE(mavlink_thread_info_t)
 Q_DECLARE_METATYPE(mavlink_partition_t)
 

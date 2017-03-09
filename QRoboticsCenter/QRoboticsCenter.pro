@@ -42,7 +42,8 @@ SOURCES += main.cpp\
         BalancingRobot/qbalancingconnectionmanager.cpp \
         BalancingRobot/qballbot.cpp \
         BalancingRobot/qballbotinput.cpp \
-        BalancingRobot/qtiltingtable.cpp
+        BalancingRobot/qtiltingtable.cpp \
+    qrobotportmanager.cpp
 
 HEADERS  += mainwindow.h \
         qprintstitcher.h \
@@ -69,7 +70,8 @@ HEADERS  += mainwindow.h \
         BalancingRobot/ballbotconfigdialog.h \
         BalancingRobot/qballbotinput.h \
         BalancingRobot/qtiltingtable.h \
-        qrobotevents.h
+        qrobotevents.h \
+    qrobotportmanager.h
 
 FORMS   += mainwindow.ui \
         qaboutdialog.ui \

@@ -2,10 +2,12 @@
 
 QBalancingWindow::QBalancingWindow(QWidget *parent) :
     QRobotWindow(parent),
-    _balancing(new QBalancingWidget(this))
+    _balancing(new QBalancingWidget(this)),
+    _position_cmd_port(new QPositionCmdPortDialog(this))
 {
     addView(_balancing);
     QObject::connect(_balancing,&QBalancingWidget::controlModeChanged,this,&QBalancingWindow::setControlMode);
+    addPort(_position_cmd_port);
 }
 
 void QBalancingWindow::connect(QBalancingConnectionManager *c)
@@ -15,6 +17,7 @@ void QBalancingWindow::connect(QBalancingConnectionManager *c)
     QObject::connect(c,&QBalancingConnectionManager::attitudeMsgReceived,this,&QBalancingWindow::attitudeMsgReceived);
     QObject::connect(c,&QBalancingConnectionManager::velocityMsgReceived,this,&QBalancingWindow::velocityMsgReceived);
     QObject::connect(c,&QBalancingConnectionManager::positionMsgReceived,this,&QBalancingWindow::positionMsgReceived);
+    QObject::connect(_position_cmd_port,&QPositionCmdPortDialog::positionCmdPacket,c,&QBalancingConnectionManager::positionCmdMsgSend);
 }
 
 QBalancingWidget *QBalancingWindow::getBalancingView()

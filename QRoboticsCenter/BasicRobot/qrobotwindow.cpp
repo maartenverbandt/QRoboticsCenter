@@ -2,13 +2,17 @@
 
 QRobotWindow::QRobotWindow(QWidget *parent) :
     _gpio(new QGPIOWidget()),
-    _threading(new QThreadingDialog(parent))
+    _threading(new QThreadingDialog(parent)),
+    _gpio_port(new QGPIOPortDialog(this))
 {
     addView(_gpio);
     // Setup threading
     QObject::connect(_gpio,&QGPIOWidget::eventButtonPressed,this,&QRobotWindow::eventButtonPressed);
     QMenu* analyze = menuBar()->addMenu("Analyze");
     analyze->addAction(_threading->getPopupAction());
+    // Setup Ports menu
+    _ports = menuBar()->addMenu("Ports");
+    addPort(_gpio_port);
 }
 
 QGPIOWidget *QRobotWindow::getGPIOWidget()
@@ -28,6 +32,7 @@ void QRobotWindow::connect(QRobotConnectionManager *c)
     QObject::connect(_gpio,&QGPIOWidget::setOutput,c,&QRobotConnectionManager::gpioMsgSend);
     QObject::connect(c,SIGNAL(printReceived(QString)),this->statusBar(),SLOT(showMessage(QString)));
     QObject::connect(c,&QRobotConnectionManager::threadinfoMsgReceived,_threading,&QThreadingDialog::threadInfoMsgReceived);
+    QObject::connect(_gpio_port,&QGPIOPortDialog::gpioPacket,c,&QRobotConnectionManager::gpioMsgSend);
 }
 
 void QRobotWindow::sendEvent(int id)
@@ -35,6 +40,11 @@ void QRobotWindow::sendEvent(int id)
     mavlink_event_t event;
     event.type = id;
     emit eventMsgSend(event);
+}
+
+void QRobotWindow::addPort(QExternalPortDialog *d)
+{
+    _ports->addAction(d->getPopupAction());
 }
 
 void QRobotWindow::saveState(QString group)

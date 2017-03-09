@@ -4,6 +4,7 @@
 #include <qrobotwindow.h>
 #include <qbalancingconnectionmanager.h>
 #include <qbalancingwidget.h>
+#include <qpositioncmdportdialog.h>
 
 class QBalancingWindow : public QRobotWindow
 {
@@ -17,6 +18,7 @@ public:
 
 private:
     QBalancingWidget* _balancing;
+    QPositionCmdPortDialog* _position_cmd_port;
 
     void requestIdleMode();
     void requestAttitudeMode();
