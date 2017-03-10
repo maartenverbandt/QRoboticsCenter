@@ -38,6 +38,26 @@ void QBalancingConnectionManager::receiveMessage(mavlink_message_t msg)
     }
 }
 
+void QBalancingConnectionManager::packetSend(QVariant packet)
+{
+    int t = packet.userType();
+    if(t == qMetaTypeId<mavlink_attitude_cmd_t>()){
+        attitudeCmdMsgSend(packet.value<mavlink_attitude_cmd_t>());
+    } else if (t == qMetaTypeId<mavlink_velocity_cmd_t>()){
+        velocityCmdMsgSend(packet.value<mavlink_velocity_cmd_t>());
+    } else if (t == qMetaTypeId<mavlink_position_cmd_t>()){
+        positionCmdMsgSend(packet.value<mavlink_position_cmd_t>());
+    } else if (t == qMetaTypeId<mavlink_signal_sweptsine_t>()) {
+        signalSweptsineMsgSend(packet.value<mavlink_signal_sweptsine_t>());
+    } else if (t == qMetaTypeId<mavlink_signal_multisine_t>()){
+        signalMultisineMsgSend(packet.value<mavlink_signal_multisine_t>());
+    } else if (t == qMetaTypeId<mavlink_signal_steppedsine_t>()){
+        signalSteppedsineMsgSend(packet.value<mavlink_signal_steppedsine_t>());
+    } else {
+        QRobotConnectionManager::packetSend(packet);
+    }
+}
+
 void QBalancingConnectionManager::attitudeCmdMsgSend(mavlink_attitude_cmd_t attitude_cmd)
 {
     mavlink_message_t msg;

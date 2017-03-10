@@ -18,6 +18,7 @@ signals:
 
 public slots:
     virtual void receiveMessage(mavlink_message_t msg);
+    virtual void packetSend(QVariant packet);
 
     void attitudeCmdMsgSend(mavlink_attitude_cmd_t attitude_cmd);
     void velocityCmdMsgSend(mavlink_velocity_cmd_t velocity_cmd);

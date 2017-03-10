@@ -46,7 +46,9 @@ signals:
 
 public slots:
     virtual void receiveMessage(mavlink_message_t msg);
+    virtual void packetSend(QVariant packet);
 
+    void packetsSend(QList<QVariant> packets);
     void gpioMsgSend(mavlink_gpio_t gpio);
     void eventMsgSend(mavlink_event_t event);
     void partitionMsgSend(mavlink_partition_t partition);
@@ -54,7 +56,7 @@ public slots:
 };
 
 //Q_DECLARE_METATYPE(mavlink_gpio_t)
-Q_DECLARE_METATYPE(mavlink_thread_info_t)
-Q_DECLARE_METATYPE(mavlink_partition_t)
+//Q_DECLARE_METATYPE(mavlink_thread_info_t)
+//Q_DECLARE_METATYPE(mavlink_partition_t)
 
 #endif // QROBOTCONNECTIONMANAGER_H
