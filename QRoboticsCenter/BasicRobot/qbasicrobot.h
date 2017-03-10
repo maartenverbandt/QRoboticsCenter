@@ -17,11 +17,13 @@ public:
     QRobotWindow *getWindow();
     QRobotConnectionManager *getConnectionManager();
     QRobotRecorderManager *getRecorderManager();
+    virtual QRobotCommandManager *getCommandManager();
 
 private:
     QRobotConnectionManager* _connection_manager;
     QRobotWindow *_window;
     QRobotRecorderManager* _recorder_manager;
+    QRobotCommandManager* _command_manager;
 
 };
 
