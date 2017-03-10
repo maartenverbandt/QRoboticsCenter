@@ -4,7 +4,6 @@
 #include <qstackedwindow.h>
 #include <qgpiowidget.h>
 #include <qthreadingdialog.h>
-#include <qgpioportdialog.h>
 #include <qrobotconnectionmanager.h>
 
 class QRobotWindow : public QStackedWindow
@@ -23,14 +22,10 @@ public:
 
 protected:
     void sendEvent(int id);
-    void addPort(QExternalPortDialog *d);
 
 private:
     QGPIOWidget *_gpio;
     QThreadingDialog *_threading;
-
-    QMenu *_ports;
-    QGPIOPortDialog *_gpio_port;
 
     void setupGPIOWidget();
 
