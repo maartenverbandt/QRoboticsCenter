@@ -9,14 +9,14 @@ class QBasicRobot : public QAbstractRobot
 
 public:
     QBasicRobot(int id, QObject* parent = 0);
-    void setup();
+    virtual void setup();
 
     virtual QString getType() = 0;
     virtual QIcon getIcon() = 0;
 
-    QRobotWindow *getWindow();
-    QRobotConnectionManager *getConnectionManager();
-    QRobotRecorderManager *getRecorderManager();
+    virtual QRobotWindow *getWindow();
+    virtual QRobotConnectionManager *getConnectionManager();
+    virtual QRobotRecorderManager *getRecorderManager();
     virtual QRobotCommandManager *getCommandManager();
 
 private:
