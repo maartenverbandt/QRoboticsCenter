@@ -1,6 +1,7 @@
 #ifndef QROBOTWINDOW_H
 #define QROBOTWINDOW_H
 
+#include <QStatusBar>
 #include <qstackedwindow.h>
 #include <qgpiowidget.h>
 #include <qthreadingdialog.h>

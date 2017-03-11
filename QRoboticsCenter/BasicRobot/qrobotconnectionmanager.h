@@ -2,7 +2,9 @@
 #define QROBOTCONNECTIONMANAGER_H
 
 #include <QObject>
+#include <QMainWindow>
 #include <QMenu>
+#include <QMenuBar>
 #include <mavlink.h>
 #include <qprintstitcher.h>
 #include <qmavlinkconnection.h>
