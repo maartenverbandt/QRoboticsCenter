@@ -3,6 +3,7 @@
 
 #include <qrobotcommandmanager.h>
 #include <qpositioncmdcsvreader.h>
+#include <qvelocitygamepadcommand.h>
 
 class QBalancingCommandManager : public QRobotCommandManager
 {

@@ -5,6 +5,7 @@
 #include <qgpiocsvreader.h>
 #include <qtudpreader.h>
 #include <qrobotconnectionmanager.h>
+#include <qgamepadinputwidget.h>
 
 class QRobotCommandManager : public QExternalPortDialog
 {
@@ -17,10 +18,12 @@ public:
 
     QInputWidget *getCsvInputWidget();
     QInputWidget *getUdpInputWidget();
+    QGamepadInputWidget *getGamepadInputWidget();
 
 protected:
     QInputWidget *_csv;
     QInputWidget *_udp;
+    QGamepadInputWidget *_gamepad;
 
 };
 
