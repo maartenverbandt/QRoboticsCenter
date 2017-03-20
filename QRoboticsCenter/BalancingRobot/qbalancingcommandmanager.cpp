@@ -8,7 +8,7 @@ QBalancingCommandManager::QBalancingCommandManager(QObject *parent) :
     //udp->addPort(new QVelocityCmdUdpReader(udp));
     _udp->addPort(new QPositionCmdUdpReader(_udp));
 
-    //_gamepad->addPort(new QVelocityGamepadCommand(_gamepad));
+    _gamepad->addPort(new QVelocityGamepadCommand(_gamepad));
 }
 
 void QBalancingCommandManager::connect(QRobotConnectionManager *c)
