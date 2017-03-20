@@ -39,7 +39,7 @@ The QBallbot class is a more elaborate example. This is because the ballbot send
 
 ## 5. Interesting links
 
- * [MECO-CSI](https://github.com/maartenverbandt/MECO-CSI)
+* [MECO-CSI](https://github.com/maartenverbandt/MECO-CSI)
 A toolchain to easily interface embedded hardware with a pc
 * [MicroOS](https://github.com/maartenverbandt/MicroOS)
 Arduino library to do multitasking and handle communications to the QRoboticsCenter
