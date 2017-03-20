@@ -5,8 +5,10 @@
 #include <QMainWindow>
 #include <QLayout>
 #include <qrobotbutton.h>
+#include <qunknownrobot.h>
 #include <qcar.h>
 #include <qballbot.h>
+#include <qtiltingtable.h>
 #include <qmavlinkconnection.h>
 #include <qaboutdialog.h>
 #include <qtrustmaster.h>
@@ -27,6 +29,7 @@ public:
     typedef enum type_t{
         BALLBOT = 10,
         SEGBOT = 11,
+        TILTINGTABLE = 12,
         CAR = 20
     } type_t;
 

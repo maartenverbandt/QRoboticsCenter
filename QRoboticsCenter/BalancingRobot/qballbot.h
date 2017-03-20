@@ -10,12 +10,12 @@ class QBallbot : public QBalancingRobot
 {
 public:
     QBallbot(int id, QObject *parent = 0);
-    void setup();
-    void setControllerDevice(QControllerDeviceInterface *d);
-    void removeControllerDevice();
+    virtual void setup();
+    virtual void setControllerDevice(QControllerDeviceInterface *d);
+    virtual void removeControllerDevice();
 
-    QString getType();
-    QIcon getIcon();
+    virtual QString getType();
+    virtual QIcon getIcon();
 
 private:
     BallbotConfigDialog* _config;

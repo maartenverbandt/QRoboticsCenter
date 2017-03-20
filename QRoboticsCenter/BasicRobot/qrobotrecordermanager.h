@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QMainWindow>
 #include <QMenu>
+#include <QMenuBar>
+#include <QStatusBar>
 #include <qabstractrecorder.h>
 #include <qgpiorecorder.h>
 #include <qrecorderwidget.h>

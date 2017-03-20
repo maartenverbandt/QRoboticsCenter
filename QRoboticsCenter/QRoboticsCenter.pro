@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui gamepad
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,7 +22,6 @@ SOURCES += main.cpp\
         qprintstitcher.cpp \
         qaboutdialog.cpp \
         qexcitationdialog.cpp \
-        qcar.cpp \
         BasicRobot/qrobotrecordermanager.cpp \
         BasicRobot/qrobotcoordinator.cpp \
         BasicRobot/qstackedwindow.cpp \
@@ -31,7 +30,11 @@ SOURCES += main.cpp\
         BasicRobot/qabstractrobot.cpp \
         BasicRobot/qrobotconnectionmanager.cpp \
         BasicRobot/qrobotwindow.cpp \
-        BasicRobot/qrobotbutton.cpp \
+        BasicRobot/qrobotbutton.cpp  \
+        BasicRobot/qunknownrobot.cpp \
+        BasicRobot/qbasicrobot.cpp \
+        BasicRobot/qcar.cpp \
+        BasicRobot/qrobotcommandmanager.cpp \
         BalancingRobot/qbalancingwidget.cpp \
         BalancingRobot/ballbotconfigdialog.cpp \
         BalancingRobot/qbalancingrecordermanager.cpp \
@@ -39,13 +42,14 @@ SOURCES += main.cpp\
         BalancingRobot/qbalancingrobot.cpp \
         BalancingRobot/qbalancingconnectionmanager.cpp \
         BalancingRobot/qballbot.cpp \
-    BalancingRobot/qballbotinput.cpp
+        BalancingRobot/qballbotinput.cpp \
+        BalancingRobot/qtiltingtable.cpp \
+        BalancingRobot/qbalancingcommandmanager.cpp
 
 HEADERS  += mainwindow.h \
         qprintstitcher.h \
         qaboutdialog.h \
         qexcitationdialog.h \
-        qcar.h \
         BasicRobot/qrobotrecordermanager.h \
         BasicRobot/qrobotbutton.h \
         BasicRobot/qabstractrobot.h \
@@ -55,6 +59,10 @@ HEADERS  += mainwindow.h \
         BasicRobot/qstackedwindow.h \
         BasicRobot/qrobotlog.h \
         BasicRobot/qrobotconfig.h \
+        BasicRobot/qunknownrobot.h \
+        BasicRobot/qbasicrobot.h \
+        BasicRobot/qcar.h\
+        BasicRobot/qrobotcommandmanager.h \
         BalancingRobot/qbalancingrecordermanager.h \
         BalancingRobot/qbalancingwindow.h \
         BalancingRobot/qbalancingrobot.h \
@@ -62,8 +70,10 @@ HEADERS  += mainwindow.h \
         BalancingRobot/qballbot.h \
         BalancingRobot/qbalancingwidget.h \
         BalancingRobot/ballbotconfigdialog.h \
-    BalancingRobot/qballbotinput.h \
-    qrobotevents.h
+        BalancingRobot/qballbotinput.h \
+        BalancingRobot/qtiltingtable.h \
+        BalancingRobot/qbalancingcommandmanager.h \
+        qrobotevents.h
 
 FORMS   += mainwindow.ui \
         qaboutdialog.ui \
@@ -80,3 +90,4 @@ include(../../QtModules/QPolarPlot/src/qpolarplot.pri)
 include(../../QtModules/QMapWidget/src/qmapwidget.pri)
 include(../../QtModules/QControllerDevice/src/qcontrollerdevice.pri)
 include(../../QtModules/QRecorder/src/qrecorder.pri)
+include(../../QtModules/QExternalPort/src/qexternalport.pri)

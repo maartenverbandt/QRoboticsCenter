@@ -37,7 +37,6 @@ void QRobotConnectionManager::receiveMessage(mavlink_message_t msg)
             mavlink_gpio_t gpio;
             mavlink_msg_gpio_decode(&msg, &gpio);
 
-            // emit the message for whatever widget using it
             emit gpioMsgReceived(gpio);
         break; }
 
@@ -76,6 +75,28 @@ void QRobotConnectionManager::receiveMessage(mavlink_message_t msg)
             //handlePartition(partition.ID, QByteArray((char*)partition.value,partition.size), partition.index);
             emit partitionMsgReceived(partition);
         break; }
+    }
+}
+
+void QRobotConnectionManager::packetSend(QVariant packet)
+{
+    int t = packet.userType();
+    if(t == qMetaTypeId<mavlink_gpio_t>()){
+        gpioMsgSend(packet.value<mavlink_gpio_t>());
+    } else if (t == qMetaTypeId<mavlink_event_t>()){
+        eventMsgSend(packet.value<mavlink_event_t>());
+    } else if (t == qMetaTypeId<mavlink_partition_t>()){
+        partitionMsgSend(packet.value<mavlink_partition_t>());
+    } else {
+        qDebug() << "Unable to handle variant packet";
+    }
+}
+
+void QRobotConnectionManager::packetsSend(QList<QVariant> packets)
+{
+    QListIterator<QVariant> i(packets);
+    while(i.hasNext()){
+        packetSend(i.next());
     }
 }
 

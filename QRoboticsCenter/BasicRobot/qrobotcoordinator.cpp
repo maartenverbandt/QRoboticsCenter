@@ -62,13 +62,17 @@ QAbstractRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
     case(SEGBOT):
         //robot = new QSegbot(id,this);
         break;
+    case(TILTINGTABLE):
+        robot = new QTiltingTable(id,this);
+        break;
     case(CAR):
         robot = new QCar(id,this);
         break;
     default:
-        //robot = new QRobot(id,this);
+        robot = new QUnknownRobot(id,this);
         break;
     }
+    robot->setup();
     _robots.append(robot);
 
     //Add button to the mainwindow
@@ -97,7 +101,6 @@ QAbstractRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int type)
 {
     QListIterator<QAbstractRobot*> i(_robots);
     while(i.hasNext()){
-        qDebug() << i.peekNext()->id() << id;
         if(i.next()->id() == id){
             return i.peekPrevious();
         }
@@ -142,11 +145,16 @@ void QRobotCoordinator::saveSettings()
     settings.setValue("scan_bluetooth", _scan_bluetooth->isChecked());
 
     settings.endGroup();
+
+    // Save robot settings
+    QListIterator<QAbstractRobot*> robot(_robots);
+    while (robot.hasNext())
+        robot.next()->saveState();
 }
 
 void QRobotCoordinator::loadSettings()
 {
-    QSettings settings("RobSoft", "QRoboticsCenter");
+    QSettings settings;
 
     // set window group
     settings.beginGroup("QRobotCoordinator");
@@ -159,6 +167,8 @@ void QRobotCoordinator::loadSettings()
     _scan_bluetooth->setChecked(settings.value("scan_bluetooth",false).toBool());
 
     settings.endGroup();
+
+
 }
 
 void QRobotCoordinator::showAboutDialog()

@@ -7,6 +7,8 @@
 #include <QVector2D>
 #include <QVector3D>
 #include <QtMath>
+#include <qmapwidget.h>
+#include <qpolarplot.h>
 
 namespace Ui {
 class QBalancingWidget;
@@ -22,6 +24,10 @@ public:
 
     QFrame* controlsFrame();
     QFrame* widgetsFrame();
+    QMapWidget* map();
+    QPolarPlot* balance();
+
+    void setJumping(bool jumping = true);
 
 private:
     Ui::QBalancingWidget *ui;

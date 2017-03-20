@@ -7,6 +7,7 @@
 #include <qrobotrecordermanager.h>
 #include <qrobotlog.h>
 #include <qcontrollerdeviceinterface.h>
+#include <qrobotcommandmanager.h>
 
 class QAbstractRobot : public QObject
 {
@@ -22,6 +23,7 @@ public:
     virtual QRobotWindow *getWindow() = 0;
     virtual QRobotConnectionManager* getConnectionManager() = 0;
     virtual QRobotRecorderManager* getRecorderManager() = 0;
+    virtual QRobotCommandManager* getCommandManager() = 0;
     virtual void setControllerDevice(QControllerDeviceInterface* c);
     virtual void removeControllerDevice();
 
@@ -29,9 +31,13 @@ public:
     QString getName();
     QRobotLog *getLog();
 
+    virtual void saveState();
+    virtual void restoreState();
+
 private:
     const int _id;
     QRobotLog* _log;
+
 };
 
 #endif // QABSTRACTROBOT_H

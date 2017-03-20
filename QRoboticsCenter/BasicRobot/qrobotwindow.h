@@ -1,6 +1,7 @@
 #ifndef QROBOTWINDOW_H
 #define QROBOTWINDOW_H
 
+#include <QStatusBar>
 #include <qstackedwindow.h>
 #include <qgpiowidget.h>
 #include <qthreadingdialog.h>
@@ -16,6 +17,9 @@ public:
 
     QGPIOWidget *getGPIOWidget();
     QThreadingDialog *getThreadingDialog();
+
+    virtual void saveState(QString group);
+    virtual void restoreState(QString group);
 
 protected:
     void sendEvent(int id);

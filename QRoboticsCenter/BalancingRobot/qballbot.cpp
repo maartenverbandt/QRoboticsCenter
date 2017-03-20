@@ -6,7 +6,7 @@ QBallbot::QBallbot(int id, QObject *parent) :
     _excitation(new QExcitationDialog(0)),
     _input(new QBallbotInput(0))
 {
-    setup();
+    //do nothing
 }
 
 void QBallbot::setup()

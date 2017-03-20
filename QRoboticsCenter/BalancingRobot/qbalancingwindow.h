@@ -4,6 +4,7 @@
 #include <qrobotwindow.h>
 #include <qbalancingconnectionmanager.h>
 #include <qbalancingwidget.h>
+#include <qpositioncmdcsvreader.h>
 
 class QBalancingWindow : public QRobotWindow
 {
@@ -12,6 +13,8 @@ class QBalancingWindow : public QRobotWindow
 public:
     QBalancingWindow(QWidget *parent = 0);
     void connect(QBalancingConnectionManager* c);
+
+    QBalancingWidget* getBalancingView();
 
 private:
     QBalancingWidget* _balancing;

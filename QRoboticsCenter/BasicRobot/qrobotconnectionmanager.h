@@ -2,7 +2,9 @@
 #define QROBOTCONNECTIONMANAGER_H
 
 #include <QObject>
+#include <QMainWindow>
 #include <QMenu>
+#include <QMenuBar>
 #include <mavlink.h>
 #include <qprintstitcher.h>
 #include <qmavlinkconnection.h>
@@ -46,15 +48,17 @@ signals:
 
 public slots:
     virtual void receiveMessage(mavlink_message_t msg);
+    virtual void packetSend(QVariant packet);
 
+    void packetsSend(QList<QVariant> packets);
     void gpioMsgSend(mavlink_gpio_t gpio);
     void eventMsgSend(mavlink_event_t event);
     void partitionMsgSend(mavlink_partition_t partition);
     //void sendPartition(const char id, QByteArray data, int index = 0);
 };
 
-Q_DECLARE_METATYPE(mavlink_gpio_t)
-Q_DECLARE_METATYPE(mavlink_thread_info_t)
-Q_DECLARE_METATYPE(mavlink_partition_t)
+//Q_DECLARE_METATYPE(mavlink_gpio_t)
+//Q_DECLARE_METATYPE(mavlink_thread_info_t)
+//Q_DECLARE_METATYPE(mavlink_partition_t)
 
 #endif // QROBOTCONNECTIONMANAGER_H

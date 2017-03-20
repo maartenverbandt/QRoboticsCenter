@@ -5,6 +5,7 @@
 #include <qbalancingwindow.h>
 #include <qbalancingconnectionmanager.h>
 #include <qbalancingrecordermanager.h>
+#include <qbalancingcommandmanager.h>
 
 class QBalancingRobot : public QAbstractRobot
 {
@@ -31,11 +32,14 @@ public:
     QBalancingWindow *getWindow();
     QBalancingConnectionManager *getConnectionManager();
     QBalancingRecorderManager *getRecorderManager();
+    QBalancingCommandManager *getCommandManager();
 
 private:
     QBalancingConnectionManager *_connection_manager;
     QBalancingWindow *_window;
     QBalancingRecorderManager* _recorder_manager;
+    QBalancingCommandManager* _command_manager;
+
 };
 
 #endif // QBALANCINGROBOT_H

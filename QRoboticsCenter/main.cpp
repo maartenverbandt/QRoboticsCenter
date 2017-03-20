@@ -7,7 +7,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setApplicationName("QRoboticsCenter");
-    a.setApplicationVersion("3.0.0");
+    a.setOrganizationName("RobSoft");
+    a.setApplicationVersion("4.0.0");
     a.setApplicationDisplayName("QRoboticsCenter");
     a.setWindowIcon(QIcon(":/icons/QRoboticsCenterLogo_blue.png"));
 
@@ -17,6 +18,8 @@ int main(int argc, char *argv[])
     w.scan();
 
 #ifdef DEBUG
+    w.addRobot(1,1);
+    w.addRobot(2,2);
     w.addRobot(10,QRobotCoordinator::CAR);
     w.addRobot(23,QRobotCoordinator::BALLBOT);
 #endif
