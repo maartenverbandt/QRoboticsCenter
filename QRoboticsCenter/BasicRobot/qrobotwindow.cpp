@@ -5,6 +5,9 @@ QRobotWindow::QRobotWindow(QWidget *parent) :
     _threading(new QThreadingDialog(parent))
 {
     addView(_gpio);
+    // Set menubar not native as it causes command tab not to be displayed
+    menuBar()->setNativeMenuBar(false);
+
     // Setup threading
     QObject::connect(_gpio,&QGPIOWidget::eventButtonPressed,this,&QRobotWindow::eventButtonPressed);
     QMenu* analyze = menuBar()->addMenu("Analyze");
