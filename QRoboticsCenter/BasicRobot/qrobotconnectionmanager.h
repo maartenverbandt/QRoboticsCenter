@@ -36,6 +36,7 @@ signals:
     //void gpioReceived(QGPIOWidget::gpio_t gpio); //obsolete in future
 
     // msg received signals
+    void packetReceived(QVariant packet);
     void printReceived(QString text); //special print stiched
     void gpioMsgReceived(mavlink_gpio_t gpio);
     void threadinfoMsgReceived(mavlink_thread_info_t thread);

@@ -33,12 +33,14 @@ public:
     QBalancingConnectionManager *getConnectionManager();
     QBalancingRecorderManager *getRecorderManager();
     QBalancingCommandManager *getCommandManager();
+    QRobotMeasurementManager *getMeasurementManager();
 
 private:
     QBalancingConnectionManager *_connection_manager;
     QBalancingWindow *_window;
     QBalancingRecorderManager* _recorder_manager;
     QBalancingCommandManager* _command_manager;
+    QRobotMeasurementManager* _measurement_manager;
 
 };
 

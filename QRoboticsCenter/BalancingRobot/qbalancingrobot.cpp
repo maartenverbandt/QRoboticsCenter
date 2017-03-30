@@ -5,7 +5,8 @@ QBalancingRobot::QBalancingRobot(int id, QObject *parent) :
     _connection_manager(new QBalancingConnectionManager(this)),
     _window(new QBalancingWindow(0)),
     _recorder_manager(new QBalancingRecorderManager(_window->getGPIOWidget(), this)),
-    _command_manager(new QBalancingCommandManager(parent))
+    _command_manager(new QBalancingCommandManager(parent)),
+    _measurement_manager(new QRobotMeasurementManager(parent))
 {
     //do nothing (yet..)
 }
@@ -17,10 +18,12 @@ void QBalancingRobot::setup()
     _window->connect(_connection_manager);
     _recorder_manager->connect(_connection_manager);
     _command_manager->connect(_connection_manager);
+    _measurement_manager->connect(_connection_manager);
     //setup mainwindow
     _connection_manager->setupMainWindow(_window);
     _recorder_manager->setupMainWindow(_window);
     _command_manager->setupMainWindow(_window);
+    _measurement_manager->setupMainWindow(_window);
 }
 
 QBalancingWindow *QBalancingRobot::getWindow()
@@ -41,4 +44,9 @@ QBalancingRecorderManager *QBalancingRobot::getRecorderManager()
 QBalancingCommandManager *QBalancingRobot::getCommandManager()
 {
     return _command_manager;
+}
+
+QRobotMeasurementManager *QBalancingRobot::getMeasurementManager()
+{
+    return _measurement_manager;
 }
