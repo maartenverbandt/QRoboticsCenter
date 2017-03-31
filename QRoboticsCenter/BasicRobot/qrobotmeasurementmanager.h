@@ -1,10 +1,10 @@
 #ifndef QROBOTMEASUREMENTMANAGER_H
 #define QROBOTMEASUREMENTMANAGER_H
 
+#include <qoutputwidget.h>
 #include <qoutputdialog.h>
 #include <qtudpsender.h>
 #include <qrobotconnectionmanager.h>
-#include <qoutputwidget.h>
 
 class QRobotMeasurementManager : public QOutputDialog
 {
