@@ -35,6 +35,7 @@ SOURCES += main.cpp\
         BasicRobot/qbasicrobot.cpp \
         BasicRobot/qcar.cpp \
         BasicRobot/qrobotcommandmanager.cpp \
+        BasicRobot/qrobotmeasurementmanager.cpp \
         BalancingRobot/qbalancingwidget.cpp \
         BalancingRobot/ballbotconfigdialog.cpp \
         BalancingRobot/qbalancingrecordermanager.cpp \
@@ -44,7 +45,8 @@ SOURCES += main.cpp\
         BalancingRobot/qballbot.cpp \
         BalancingRobot/qballbotinput.cpp \
         BalancingRobot/qtiltingtable.cpp \
-        BalancingRobot/qbalancingcommandmanager.cpp
+        BalancingRobot/qbalancingcommandmanager.cpp \
+        BalancingRobot/qbalancingmeasurementmanager.cpp
 
 HEADERS  += mainwindow.h \
         qprintstitcher.h \
@@ -63,6 +65,7 @@ HEADERS  += mainwindow.h \
         BasicRobot/qbasicrobot.h \
         BasicRobot/qcar.h\
         BasicRobot/qrobotcommandmanager.h \
+        BasicRobot/qrobotmeasurementmanager.h \
         BalancingRobot/qbalancingrecordermanager.h \
         BalancingRobot/qbalancingwindow.h \
         BalancingRobot/qbalancingrobot.h \
@@ -73,6 +76,7 @@ HEADERS  += mainwindow.h \
         BalancingRobot/qballbotinput.h \
         BalancingRobot/qtiltingtable.h \
         BalancingRobot/qbalancingcommandmanager.h \
+        BalancingRobot/qbalancingmeasurementmanager.h \
         qrobotevents.h
 
 FORMS   += mainwindow.ui \

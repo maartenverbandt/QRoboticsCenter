@@ -38,6 +38,10 @@ void QRobotConnectionManager::receiveMessage(mavlink_message_t msg)
             mavlink_msg_gpio_decode(&msg, &gpio);
 
             emit gpioMsgReceived(gpio);
+
+            QVariant packet;
+            packet.setValue<mavlink_gpio_t>(gpio);
+            emit packetReceived(packet);
         break; }
 
         case MAVLINK_MSG_ID_PRINT:{
