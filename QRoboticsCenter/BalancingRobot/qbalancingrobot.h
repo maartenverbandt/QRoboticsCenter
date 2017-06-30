@@ -6,6 +6,7 @@
 #include <qbalancingconnectionmanager.h>
 #include <qbalancingrecordermanager.h>
 #include <qbalancingcommandmanager.h>
+#include <qbalancingmeasurementmanager.h>
 
 class QBalancingRobot : public QAbstractRobot
 {

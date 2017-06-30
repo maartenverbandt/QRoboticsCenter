@@ -35,6 +35,7 @@ SOURCES += main.cpp\
         BasicRobot/qbasicrobot.cpp \
         BasicRobot/qcar.cpp \
         BasicRobot/qrobotcommandmanager.cpp \
+        BasicRobot/qrobotmeasurementmanager.cpp \
         BalancingRobot/qbalancingwidget.cpp \
         BalancingRobot/ballbotconfigdialog.cpp \
         BalancingRobot/qbalancingrecordermanager.cpp \
@@ -45,7 +46,7 @@ SOURCES += main.cpp\
         BalancingRobot/qballbotinput.cpp \
         BalancingRobot/qtiltingtable.cpp \
         BalancingRobot/qbalancingcommandmanager.cpp \
-    BasicRobot/qrobotmeasurementmanager.cpp
+        BalancingRobot/qbalancingmeasurementmanager.cpp
 
 HEADERS  += mainwindow.h \
         qprintstitcher.h \
@@ -64,6 +65,7 @@ HEADERS  += mainwindow.h \
         BasicRobot/qbasicrobot.h \
         BasicRobot/qcar.h\
         BasicRobot/qrobotcommandmanager.h \
+        BasicRobot/qrobotmeasurementmanager.h \
         BalancingRobot/qbalancingrecordermanager.h \
         BalancingRobot/qbalancingwindow.h \
         BalancingRobot/qbalancingrobot.h \
@@ -74,8 +76,8 @@ HEADERS  += mainwindow.h \
         BalancingRobot/qballbotinput.h \
         BalancingRobot/qtiltingtable.h \
         BalancingRobot/qbalancingcommandmanager.h \
-        qrobotevents.h \
-    BasicRobot/qrobotmeasurementmanager.h
+        BalancingRobot/qbalancingmeasurementmanager.h \
+        qrobotevents.h
 
 FORMS   += mainwindow.ui \
         qaboutdialog.ui \
@@ -93,4 +95,3 @@ include(../../QtModules/QMapWidget/src/qmapwidget.pri)
 include(../../QtModules/QControllerDevice/src/qcontrollerdevice.pri)
 include(../../QtModules/QRecorder/src/qrecorder.pri)
 include(../../QtModules/QExternalPort/src/qexternalport.pri)
-include(../../QtModules/QStorage/src/qstorage.pri)

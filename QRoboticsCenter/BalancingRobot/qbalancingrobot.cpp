@@ -6,7 +6,7 @@ QBalancingRobot::QBalancingRobot(int id, QObject *parent) :
     _window(new QBalancingWindow(0)),
     _recorder_manager(new QBalancingRecorderManager(_window->getGPIOWidget(), this)),
     _command_manager(new QBalancingCommandManager(parent)),
-    _measurement_manager(new QRobotMeasurementManager(parent))
+    _measurement_manager(new QBalancingMeasurementManager(parent))
 {
     //do nothing (yet..)
 }

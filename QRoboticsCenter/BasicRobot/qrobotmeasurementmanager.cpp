@@ -1,11 +1,11 @@
 #include "qrobotmeasurementmanager.h"
 
 QRobotMeasurementManager::QRobotMeasurementManager(QObject *parent) :
-    QOutputDialog("Measurements",0),
+    QMeasurementPortDialog("Measurements",0),
     _udp(new QOutputWidget("UDP",this))
 {
     addOutputWidget(_udp);
-    _udp->addSender(new QGpioUdpSender(_udp));
+    _udp->addPort(new QGpioUdpWriter(_udp));
 }
 
 void QRobotMeasurementManager::setupMainWindow(QMainWindow *m)
@@ -15,7 +15,7 @@ void QRobotMeasurementManager::setupMainWindow(QMainWindow *m)
 
 void QRobotMeasurementManager::connect(QRobotConnectionManager *c)
 {
-    QObject::connect(c,&QRobotConnectionManager::packetReceived,this,&QRobotMeasurementManager::sendPacket);
+    QObject::connect(c,&QRobotConnectionManager::packetReceived,this,&QRobotMeasurementManager::measurement);
 }
 
 QOutputWidget *QRobotMeasurementManager::getUdpOutputWidget()

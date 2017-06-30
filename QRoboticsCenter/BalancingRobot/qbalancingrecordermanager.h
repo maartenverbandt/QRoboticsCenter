@@ -47,8 +47,4 @@ private slots:
 
 };
 
-Q_DECLARE_METATYPE(mavlink_position_t)
-Q_DECLARE_METATYPE(mavlink_velocity_t)
-Q_DECLARE_METATYPE(mavlink_attitude_t)
-
 #endif // QBALANCINGRECORDERMANAGER_H

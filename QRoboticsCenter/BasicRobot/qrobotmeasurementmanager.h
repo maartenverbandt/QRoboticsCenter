@@ -2,11 +2,11 @@
 #define QROBOTMEASUREMENTMANAGER_H
 
 #include <qoutputwidget.h>
-#include <qoutputdialog.h>
-#include <qtudpsender.h>
+#include <qmeasurementportdialog.h>
+#include <qtudpwriter.h>
 #include <qrobotconnectionmanager.h>
 
-class QRobotMeasurementManager : public QOutputDialog
+class QRobotMeasurementManager : public QMeasurementPortDialog
 {
     Q_OBJECT
 
