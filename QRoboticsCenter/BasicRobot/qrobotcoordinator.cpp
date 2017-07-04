@@ -36,10 +36,10 @@ QRobotCoordinator::QRobotCoordinator() :
     QMenu *help = menuBar()->addMenu("Help");
     help->addAction(_about);
 
-    _controller_device = new QTrustMaster(this);
-    QObject::connect(_controller_device,SIGNAL(switchNextRobot()),this,SLOT(showNextRobotWidget()));
-    QObject::connect(_controller_device,SIGNAL(switchPrevRobot()),this,SLOT(showPrevRobotWidget()));
-    _controller_device->start();
+    //_controller_device = new QTrustMaster(this);
+    //QObject::connect(_controller_device,SIGNAL(switchNextRobot()),this,SLOT(showNextRobotWidget()));
+    //QObject::connect(_controller_device,SIGNAL(switchPrevRobot()),this,SLOT(showPrevRobotWidget()));
+    //_controller_device->start();
 
     loadSettings();
 
@@ -120,7 +120,7 @@ void QRobotCoordinator::connectController()
 {
     //FIX
     //_robots[_current_robot]->setupController(_controller_device);
-    _robots[_current_robot]->setControllerDevice(_controller_device);
+    //_robots[_current_robot]->setControllerDevice(_controller_device);
 }
 
 void QRobotCoordinator::disconnectController()

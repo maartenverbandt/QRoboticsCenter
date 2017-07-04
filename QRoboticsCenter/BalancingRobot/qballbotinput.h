@@ -2,7 +2,7 @@
 #define QBALLBOTINPUT_H
 
 #include <QObject>
-#include <qcontrollerdeviceinterface.h>
+//#include <qcontrollerdeviceinterface.h>
 #include <qbalancingconnectionmanager.h>
 #include <mavlink.h>
 
@@ -13,11 +13,11 @@ public:
     explicit QBallbotInput(QObject *parent = 0);
 
     void connect(QBalancingConnectionManager *c);
-    void setControllerDevice(QControllerDeviceInterface *controller);
+    //void setControllerDevice(QControllerDeviceInterface *controller);
     void removeControllerDevice();
 
 private:
-    QControllerDeviceInterface *_controller;
+    //QControllerDeviceInterface *_controller;
     int _timer;
 
     void timerEvent(QTimerEvent *);

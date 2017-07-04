@@ -11,7 +11,7 @@
 #include <qtiltingtable.h>
 #include <qmavlinkconnection.h>
 #include <qaboutdialog.h>
-#include <qtrustmaster.h>
+//#include <qtrustmaster.h>
 
 class QRobotCoordinator : public QMainWindow
 {
@@ -49,7 +49,7 @@ private:
     QAction* _about;
 
     QConnectionCoordinator* _connection_coordinator;
-    QControllerDeviceInterface* _controller_device;
+    //QControllerDeviceInterface* _controller_device;
     void connectController();
     void disconnectController();
 

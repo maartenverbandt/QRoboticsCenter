@@ -11,7 +11,7 @@ class QBallbot : public QBalancingRobot
 public:
     QBallbot(int id, QObject *parent = 0);
     virtual void setup();
-    virtual void setControllerDevice(QControllerDeviceInterface *d);
+    //virtual void setControllerDevice(QControllerDeviceInterface *d);
     virtual void removeControllerDevice();
 
     virtual QString getType();

@@ -33,10 +33,10 @@ void QBallbot::setup()
     tools->addAction(_excitation->getPopupAction());
 }
 
-void QBallbot::setControllerDevice(QControllerDeviceInterface *d)
+/*void QBallbot::setControllerDevice(QControllerDeviceInterface *d)
 {
     _input->setControllerDevice(d);
-}
+}*/
 
 void QBallbot::removeControllerDevice()
 {

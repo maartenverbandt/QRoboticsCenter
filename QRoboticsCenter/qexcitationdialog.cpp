@@ -47,7 +47,7 @@ unsigned int QExcitationDialog::getChannels()
 {
     unsigned int channels = 0;
     for(int k=0;k<8;k++){
-        channels |= ((u_int8_t)(_channels[k]->currentIndex()) << (k<<1));
+        channels |= ((quint8)(_channels[k]->currentIndex()) << (k<<1));
     }
     return channels;
 }

@@ -20,10 +20,10 @@ void QAbstractRobot::setup()
     restoreState();
 }
 
-void QAbstractRobot::setControllerDevice(QControllerDeviceInterface *c)
+/*void QAbstractRobot::setControllerDevice(QControllerDeviceInterface *c)
 {
     //do nothing..
-}
+}*/
 
 void QAbstractRobot::removeControllerDevice()
 {
