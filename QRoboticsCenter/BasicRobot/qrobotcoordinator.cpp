@@ -35,12 +35,6 @@ QRobotCoordinator::QRobotCoordinator() :
 
     QMenu *help = menuBar()->addMenu("Help");
     help->addAction(_about);
-
-    _controller_device = new QTrustMaster(this);
-    QObject::connect(_controller_device,SIGNAL(switchNextRobot()),this,SLOT(showNextRobotWidget()));
-    QObject::connect(_controller_device,SIGNAL(switchPrevRobot()),this,SLOT(showPrevRobotWidget()));
-    _controller_device->start();
-
     loadSettings();
 
     setMinimumWidth(250);
@@ -116,20 +110,6 @@ void QRobotCoordinator::closeEvent(QCloseEvent *e)
         robot.next()->getWindow()->close();
 }
 
-void QRobotCoordinator::connectController()
-{
-    //FIX
-    //_robots[_current_robot]->setupController(_controller_device);
-    _robots[_current_robot]->setControllerDevice(_controller_device);
-}
-
-void QRobotCoordinator::disconnectController()
-{
-
-    //_controller_device->disconnect(_robots[_current_robot]);
-    _robots[_current_robot]->removeControllerDevice();
-}
-
 void QRobotCoordinator::saveSettings()
 {
     QSettings settings("RobSoft", "QRoboticsCenter");
@@ -184,14 +164,11 @@ void QRobotCoordinator::mavlinkConnectionFound(QMavlinkConnection *connection)
 void QRobotCoordinator::showRobotWidget(int index)
 {
     if((index>=0) && (index<_robots.size())){
-        disconnectController(); //disconnect old robot
         _current_robot = index;
         _robots[index]->getWindow()->show();
         QApplication::setActiveWindow(_robots[index]->getWindow());
         //_robots[index]->activateWindow();
         //_robots[index]->raise();
-        connectController();
-        qDebug() << "Connected to robot" << _current_robot;
     }
 }
 
