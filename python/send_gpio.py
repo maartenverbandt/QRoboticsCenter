@@ -3,7 +3,7 @@ import time as tm
 from struct import *
 
 UDP_IP = "127.0.0.1"
-UDP_PORT = 47856
+UDP_PORT = 27500
 
 time = 0
 floats = [0]*8

@@ -91,9 +91,9 @@ void QRobotConnectionManager::packetSend(QVariant packet)
         eventMsgSend(packet.value<mavlink_event_t>());
     } else if (t == qMetaTypeId<mavlink_partition_t>()){
         partitionMsgSend(packet.value<mavlink_partition_t>());
-    } else {
+    } /*else{
         qDebug() << "Unable to handle variant packet";
-    }
+    }*/
 }
 
 void QRobotConnectionManager::packetsSend(QList<QVariant> packets)
