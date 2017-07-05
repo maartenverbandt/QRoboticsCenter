@@ -43,7 +43,6 @@ SOURCES += main.cpp\
         BalancingRobot/qbalancingrobot.cpp \
         BalancingRobot/qbalancingconnectionmanager.cpp \
         BalancingRobot/qballbot.cpp \
-        BalancingRobot/qballbotinput.cpp \
         BalancingRobot/qtiltingtable.cpp \
         BalancingRobot/qbalancingcommandmanager.cpp \
         BalancingRobot/qbalancingmeasurementmanager.cpp
@@ -73,7 +72,6 @@ HEADERS  += mainwindow.h \
         BalancingRobot/qballbot.h \
         BalancingRobot/qbalancingwidget.h \
         BalancingRobot/ballbotconfigdialog.h \
-        BalancingRobot/qballbotinput.h \
         BalancingRobot/qtiltingtable.h \
         BalancingRobot/qbalancingcommandmanager.h \
         BalancingRobot/qbalancingmeasurementmanager.h \

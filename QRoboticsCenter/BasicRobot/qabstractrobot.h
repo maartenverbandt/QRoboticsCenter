@@ -6,7 +6,6 @@
 #include <qrobotconnectionmanager.h>
 #include <qrobotrecordermanager.h>
 #include <qrobotlog.h>
-//#include <qcontrollerdeviceinterface.h>
 #include <qrobotcommandmanager.h>
 #include <qrobotmeasurementmanager.h>
 
@@ -26,8 +25,6 @@ public:
     virtual QRobotRecorderManager* getRecorderManager() = 0;
     virtual QRobotCommandManager* getCommandManager() = 0;
     virtual QRobotMeasurementManager* getMeasurementManager() = 0;
-    //virtual void setControllerDevice(QControllerDeviceInterface* c);
-    virtual void removeControllerDevice();
 
     int id();
     QString getName();

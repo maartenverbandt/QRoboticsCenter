@@ -3,8 +3,7 @@
 QBallbot::QBallbot(int id, QObject *parent) :
     QBalancingRobot(id,parent),
     _config(new BallbotConfigDialog(0)),
-    _excitation(new QExcitationDialog(0)),
-    _input(new QBallbotInput(0))
+    _excitation(new QExcitationDialog(0))
 {
     //do nothing
 }
@@ -23,24 +22,10 @@ void QBallbot::setup()
     //connect
     _excitation->connect(getConnectionManager());
 
-    //connect
-    _input->connect(getConnectionManager());
-    QObject::connect(_input,&QBallbotInput::velocityCmdMsgSend,getWindow(),&QBalancingWindow::velocityCmdReceived);
-
     //add tools menu.. // move tools t
     QMenu* tools = getWindow()->menuBar()->addMenu("Tools");
     tools->addAction(_config->getPopupAction());
     tools->addAction(_excitation->getPopupAction());
-}
-
-/*void QBallbot::setControllerDevice(QControllerDeviceInterface *d)
-{
-    _input->setControllerDevice(d);
-}*/
-
-void QBallbot::removeControllerDevice()
-{
-    _input->removeControllerDevice();
 }
 
 QString QBallbot::getType()
@@ -66,7 +51,6 @@ void QBallbot::partitionMsgReceived(mavlink_partition_t partition)
 // TODO: move...
 void QBallbot::sendConfig(QByteArray data)
 {
-    mavlink_message_t msg;
     mavlink_partition_t partition;
     partition.ID = 'C';
 
