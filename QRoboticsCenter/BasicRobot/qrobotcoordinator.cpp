@@ -105,9 +105,9 @@ QAbstractRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int type)
 
 void QRobotCoordinator::closeEvent(QCloseEvent *e)
 {
-    QListIterator<QAbstractRobot*> robot(_robots);
-    while (robot.hasNext())
-        robot.next()->getWindow()->close();
+    foreach (QWidget *widget, QApplication::topLevelWidgets()){
+        widget->close();
+    }
 }
 
 void QRobotCoordinator::saveSettings()
