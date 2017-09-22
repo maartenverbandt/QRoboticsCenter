@@ -36,6 +36,9 @@ public:
     QBalancingCommandManager *getCommandManager();
     QRobotMeasurementManager *getMeasurementManager();
 
+    virtual void saveState();
+    virtual void restoreState();
+
 private:
     QBalancingConnectionManager *_connection_manager;
     QBalancingWindow *_window;

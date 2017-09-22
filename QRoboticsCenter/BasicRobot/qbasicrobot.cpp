@@ -51,3 +51,15 @@ QRobotMeasurementManager *QBasicRobot::getMeasurementManager()
 {
     return _measurement_manager;
 }
+
+void QBasicRobot::saveState()
+{
+    QAbstractRobot::saveState();
+    _command_manager->saveState(this->getName());
+}
+
+void QBasicRobot::restoreState()
+{
+    QAbstractRobot::restoreState();
+    _command_manager->restoreState(this->getName());
+}

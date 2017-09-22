@@ -20,6 +20,9 @@ public:
     virtual QRobotCommandManager *getCommandManager();
     virtual QRobotMeasurementManager *getMeasurementManager();
 
+    virtual void saveState();
+    virtual void restoreState();
+
 private:
     QRobotConnectionManager* _connection_manager;
     QRobotWindow *_window;
