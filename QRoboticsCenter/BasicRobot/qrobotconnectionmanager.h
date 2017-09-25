@@ -2,13 +2,13 @@
 #define QROBOTCONNECTIONMANAGER_H
 
 #include <QObject>
-#include <QMainWindow>
 #include <QMenu>
 #include <QMenuBar>
 #include <mavlink.h>
 #include <qprintstitcher.h>
 #include <qmavlinkconnection.h>
 
+#include <qstackedwindow.h>
 #include <qgpiowidget.h> //should be removed later on.. //FIX
 #include <qthreadingwidget.h> //should be removed later on..
 
@@ -18,7 +18,7 @@ class QRobotConnectionManager : public QObject
 
 public:
     explicit QRobotConnectionManager(QObject *parent = 0);
-    virtual void setupMainWindow(QMainWindow* m);
+    virtual void setupMainWindow(QStackedWindow *m);
 
     void addConnection(QMavlinkConnection* connection);
     QAction *suspendAllAction();
@@ -33,7 +33,7 @@ private:
 
     QPrintStitcher* _stitcher;
 
-    QAction _suspend_all;
+    QAction _activate_all;
 
 signals:
     //void gpioReceived(QGPIOWidget::gpio_t gpio); //obsolete in future
@@ -59,7 +59,7 @@ public slots:
     void eventMsgSend(mavlink_event_t event);
     void partitionMsgSend(mavlink_partition_t partition);
     //void sendPartition(const char id, QByteArray data, int index = 0);
-    void toggleSuspendAll();
+    void toggleActivateAll();
 };
 
 //Q_DECLARE_METATYPE(mavlink_gpio_t)

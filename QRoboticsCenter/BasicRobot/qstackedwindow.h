@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 #include <QMenu>
+#include <QDebug>
 
 class QStackedWindow : public QMainWindow
 {
@@ -24,6 +25,9 @@ private:
 private slots:
     void stackUp();
     void stackDown();
+
+public slots:
+    void setStackEnabled(bool enable = true);
 
 };
 

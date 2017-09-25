@@ -62,3 +62,8 @@ void QStackedWindow::stackDown()
         new_index = _stack->count();
     _stack->setCurrentIndex(new_index);
 }
+
+void QStackedWindow::setStackEnabled(bool enable)
+{
+    _stack->setEnabled(enable);
+}
