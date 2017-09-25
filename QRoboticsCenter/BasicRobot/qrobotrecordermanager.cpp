@@ -44,7 +44,7 @@ QAction *QRobotRecorderManager::getQuickRecord()
     return _quick_record;
 }
 
-int QRobotRecorderManager::addRecorder(QAbstractRecorder *recorder)
+void QRobotRecorderManager::addRecorder(QAbstractRecorder *recorder)
 {
     //_recorders.append(recorder);
     _menu->addAction(recorder->recorder());

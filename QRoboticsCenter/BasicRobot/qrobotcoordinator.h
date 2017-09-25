@@ -19,9 +19,9 @@ public:
     explicit QRobotCoordinator();
     ~QRobotCoordinator();
 
-    QAbstractRobot* addRobot(unsigned int id, unsigned int type);
+    QAbstractRobot* addRobot(int id, int type);
     QAbstractRobot* addRobot(QMavlinkConnection* connection);
-    QAbstractRobot* findRobot(unsigned int id, unsigned int type);
+    QAbstractRobot* findRobot(int id, int type);
 
     QAction* getRescanAction();
 

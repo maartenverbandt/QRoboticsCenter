@@ -45,7 +45,7 @@ QRobotCoordinator::~QRobotCoordinator()
     saveSettings();
 }
 
-QAbstractRobot *QRobotCoordinator::addRobot(unsigned int id, unsigned int type)
+QAbstractRobot *QRobotCoordinator::addRobot(int id, int type)
 {
     //Create new robot
     QAbstractRobot* robot;
@@ -91,7 +91,7 @@ QAbstractRobot *QRobotCoordinator::addRobot(QMavlinkConnection *connection)
     return robot;
 }
 
-QAbstractRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int)
+QAbstractRobot *QRobotCoordinator::findRobot(int id, int)
 {
     QListIterator<QAbstractRobot*> i(_robots);
     while(i.hasNext()){

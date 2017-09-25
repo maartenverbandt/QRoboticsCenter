@@ -27,7 +27,7 @@ public:
     QAction *getQuickRecord();
 
 protected:
-    int addRecorder(QAbstractRecorder* recorder);
+    void addRecorder(QAbstractRecorder* recorder);
 
     typedef enum event_t{
         LOG_START = 300,
