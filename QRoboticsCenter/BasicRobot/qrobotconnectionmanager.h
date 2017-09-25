@@ -21,6 +21,7 @@ public:
     virtual void setupMainWindow(QMainWindow* m);
 
     void addConnection(QMavlinkConnection* connection);
+    QAction *suspendAllAction();
 
 protected:
     //virtual void handlePartition(const char id, const QByteArray &partition, const int index);
@@ -31,6 +32,8 @@ private:
     QMenu* _menu;
 
     QPrintStitcher* _stitcher;
+
+    QAction _suspend_all;
 
 signals:
     //void gpioReceived(QGPIOWidget::gpio_t gpio); //obsolete in future
@@ -56,6 +59,7 @@ public slots:
     void eventMsgSend(mavlink_event_t event);
     void partitionMsgSend(mavlink_partition_t partition);
     //void sendPartition(const char id, QByteArray data, int index = 0);
+    void toggleSuspendAll();
 };
 
 //Q_DECLARE_METATYPE(mavlink_gpio_t)

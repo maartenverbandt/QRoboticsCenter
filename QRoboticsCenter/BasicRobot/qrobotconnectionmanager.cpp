@@ -3,14 +3,19 @@
 QRobotConnectionManager::QRobotConnectionManager(QObject *parent) :
     QObject(parent),
     _menu(new QMenu("Connections")),
-    _stitcher(new QPrintStitcher(this))
+    _stitcher(new QPrintStitcher(this)),
+    _suspend_all("suspend_all",this)
 {
-
+    _suspend_all.setCheckable(true);
+    _suspend_all.setChecked(false);
+    _suspend_all.setShortcut(QKeySequence(Qt::CTRL + Qt::Key_X));
+    QObject::connect(&_suspend_all,&QAction::toggled,this,&QRobotConnectionManager::toggleSuspendAll);
 }
 
 void QRobotConnectionManager::setupMainWindow(QMainWindow *m)
 {
     m->menuBar()->addMenu(_menu);
+    m->addAction(&_suspend_all);
 }
 
 void QRobotConnectionManager::addConnection(QMavlinkConnection *connection)
@@ -20,6 +25,11 @@ void QRobotConnectionManager::addConnection(QMavlinkConnection *connection)
 
     QMenu* menu = connection->constructMenu();
     _menu->addMenu(menu);
+}
+
+QAction *QRobotConnectionManager::suspendAllAction()
+{
+    return &_suspend_all;
 }
 
 void QRobotConnectionManager::sendMessage(const mavlink_message_t &msg)
@@ -123,4 +133,11 @@ void QRobotConnectionManager::partitionMsgSend(mavlink_partition_t partition)
     mavlink_message_t msg;
     mavlink_msg_partition_encode(0,0,&msg,&partition);
     sendMessage(msg);
+}
+
+void QRobotConnectionManager::toggleSuspendAll()
+{
+    QListIterator<QMavlinkConnection*> i(_connections);
+    while(i.hasNext())
+        i.next()->getSuspendAction()->toggle();
 }
