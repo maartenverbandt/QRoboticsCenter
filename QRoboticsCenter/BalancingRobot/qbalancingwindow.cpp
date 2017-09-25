@@ -33,7 +33,7 @@ void QBalancingWindow::attitudeMsgReceived(mavlink_attitude_t attitude)
     _balancing->updateAttitude(QVector3D(attitude.roll,attitude.pitch,attitude.yaw)*0.0001);
 }
 
-void QBalancingWindow::velocityMsgReceived(mavlink_velocity_t velocity)
+void QBalancingWindow::velocityMsgReceived(mavlink_velocity_t)
 {
     //do nothing?
 }

@@ -91,7 +91,7 @@ QAbstractRobot *QRobotCoordinator::addRobot(QMavlinkConnection *connection)
     return robot;
 }
 
-QAbstractRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int type)
+QAbstractRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int)
 {
     QListIterator<QAbstractRobot*> i(_robots);
     while(i.hasNext()){
@@ -103,7 +103,7 @@ QAbstractRobot *QRobotCoordinator::findRobot(unsigned int id, unsigned int type)
     return NULL;
 }
 
-void QRobotCoordinator::closeEvent(QCloseEvent *e)
+void QRobotCoordinator::closeEvent(QCloseEvent*)
 {
     foreach (QWidget *widget, QApplication::topLevelWidgets()){
         widget->close();
@@ -153,7 +153,7 @@ void QRobotCoordinator::loadSettings()
 
 void QRobotCoordinator::showAboutDialog()
 {
-    QAboutDialog *d = new QAboutDialog(this);
+    new QAboutDialog(this);
 }
 
 void QRobotCoordinator::mavlinkConnectionFound(QMavlinkConnection *connection)

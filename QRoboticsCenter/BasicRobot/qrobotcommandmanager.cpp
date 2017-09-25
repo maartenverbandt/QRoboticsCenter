@@ -1,6 +1,6 @@
 #include "qrobotcommandmanager.h"
 
-QRobotCommandManager::QRobotCommandManager(QObject *parent) :
+QRobotCommandManager::QRobotCommandManager(QObject *) :
     QExternalPortDialog("Commands",0),
     _csv(new QInputWidget("CSV",this)),
     _udp(new QInputWidget("UDP",this)),

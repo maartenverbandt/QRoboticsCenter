@@ -1,6 +1,6 @@
 #include "qrobotmeasurementmanager.h"
 
-QRobotMeasurementManager::QRobotMeasurementManager(QObject *parent) :
+QRobotMeasurementManager::QRobotMeasurementManager(QObject *) :
     QMeasurementPortDialog("Measurements",0),
     _udp(new QOutputWidget("UDP",this))
 {
