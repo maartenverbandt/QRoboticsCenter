@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QPixmap>
 #include <QApplication>
+#include <QAction>
 
 namespace Ui {
 class QAboutDialog;
@@ -26,6 +27,16 @@ public:
 
 private:
     Ui::QAboutDialog *ui;
+};
+
+class QShowAboutDialogAction : public QAction
+{
+    Q_OBJECT
+public:
+    explicit QShowAboutDialogAction(QObject *parent = 0);
+
+    void showDialog();
+
 };
 
 #endif // QABOUTDIALOG_H

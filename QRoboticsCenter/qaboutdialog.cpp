@@ -16,9 +16,6 @@ QAboutDialog::QAboutDialog(QWidget *parent) :
     setApplicationTitle(QApplication::applicationName());
     setVersion(QApplication::applicationVersion());
     setIcon(QApplication::windowIcon());
-
-    // Show dialog
-    show();
 }
 
 QAboutDialog::~QAboutDialog()
@@ -59,3 +56,15 @@ void QAboutDialog::setIcon(QIcon icon)
 }
 
 
+
+QShowAboutDialogAction::QShowAboutDialogAction(QObject *parent) :
+    QAction("about",parent)
+{
+    QObject::connect(this, &QShowAboutDialogAction::triggered, this, &QShowAboutDialogAction::showDialog);
+}
+
+void QShowAboutDialogAction::showDialog()
+{
+    QDialog *d = new QAboutDialog(0);
+    d->show();
+}
