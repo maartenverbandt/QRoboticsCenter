@@ -45,8 +45,8 @@ void QRoboticsCenterMainwindow::setup()
 
 void QRoboticsCenterMainwindow::scan()
 {
-    if(_scan_usb) _scanner->scanUSB();
-    if(_scan_bluetooth) _scanner->scanBT();
+    if(_scan_usb->isChecked()) _scanner->scanUSB();
+    if(_scan_bluetooth->isChecked()) _scanner->scanBT();
 }
 
 void QRoboticsCenterMainwindow::saveSettings()
