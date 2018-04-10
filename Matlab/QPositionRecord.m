@@ -12,11 +12,12 @@ classdef QPositionRecord < QLoopRecord
             self@QLoopRecord(filename);
         end
         
-        function [measurements,commands,controls] = getLoopData(self)
-			% get data
-			measurements = self.getData({'x','y','z'});
-			commands = self.getData({'xcmd','ycmd','zcmd'});
-			controls = self.getData({'xact','yact','zact'});
+        function [measurements,commands,actuation,controls] = getLoopData(self)
+            % get data
+            measurements = self.getData({'x','y','z'});
+            commands = self.getData({'xcmd','ycmd','zcmd'});
+            actuation = self.getData({'xact','yact','zact'});
+            controls = self.getData({'xcont','ycont','zcont'});
         end
         
         function index = getDirectionIndex(self,direction)

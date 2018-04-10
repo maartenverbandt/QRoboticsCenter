@@ -11,13 +11,15 @@ classdef QAttitudeRecord < QLoopRecord
             
             % Rescale the angles: *1e-4
             self.data(:,2:7) = (1e-4)*self.data(:,2:7);
+            self = extend(self);
         end
         
-        function [measurements,commands,controls] = getLoopData(self)
-			% get data
-			measurements = self.getData({'roll','pitch','yaw'});
-			commands = self.getData({'rollcmd','pitchcmd','yawcmd'});
-			controls = self.getData({'rollact','pitchact','yawact'});
+        function [measurements,commands,actuation,controls] = getLoopData(self)
+            % get data
+            measurements = self.getData({'roll','pitch','yaw'});
+            commands = self.getData({'rollcmd','pitchcmd','yawcmd'});
+            actuation = self.getData({'rollact','pitchact','yawact'});
+            controls = self.getData({'rollcont','pitchcont','yawcont'});
         end
         
         function index = getDirectionIndex(self,direction)

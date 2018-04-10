@@ -6,6 +6,7 @@ classdef QRecord
     %       TIME
     %       VERSION
     %       COMMENT
+    %       EXCITATION
     %       LABELS
     %       DATA
     
@@ -15,6 +16,7 @@ classdef QRecord
         time
         version
         comment
+        excitation
         labels
         data
     end
@@ -42,9 +44,22 @@ classdef QRecord
             self.version = char(DOM.getElementsByTagName('version').item(0).getFirstChild.getData);
            
             % Get the comments
-            comment = DOM.getElementsByTagName('comment').item(0).getFirstChild;
-            if ~isempty(comment)
-                self.comment = char(comment.getData);
+            item_comment = DOM.getElementsByTagName('comment').item(0).getFirstChild;
+            if ~isempty(item_comment)
+                self.comment = char(item_comment.getData);
+            end
+            
+            % Get the excitation if it is there
+            item_excitation = DOM.getElementsByTagName('excitation').item(0);
+            if ~isempty(item_excitation)
+                exc_type = char(item_excitation.getElementsByTagName('type').item(0).getFirstChild.getData());
+                if ~strcmp(exc_type,'unknown') 
+                    exc_fmin = str2double(char(item_excitation.getElementsByTagName('fmin').item(0).getFirstChild.getData()));
+                    exc_fmax = str2double(char(item_excitation.getElementsByTagName('fmax').item(0).getFirstChild.getData()));
+                    exc_fs = str2double(char(item_excitation.getElementsByTagName('fs').item(0).getFirstChild.getData()));
+                    exc_period = str2double(char(item_excitation.getElementsByTagName('period').item(0).getFirstChild.getData()));
+                    self.excitation = struct('type',exc_type,'fmin',exc_fmin,'fmax',exc_fmax,'fs',exc_fs,'period',exc_period);
+                end
             end
             
             % Get the labels
@@ -95,8 +110,14 @@ classdef QRecord
         
         function disp(self)
             fprintf(['\t',self.type, ', recorded on ', num2str(self.time.day),'-',num2str(self.time.month),'-',num2str(self.time.year),'\n']);
-            fprintf('\tcomments:\n');
-            fprintf(['\t    ',self.comment,'\n']);
+            if ~isempty(self.comment)
+                fprintf('\tcomments:\n');
+                fprintf(['\t    ',self.comment,'\n']);
+            end
+            if ~isempty(self.excitation)
+                fprintf('\texcitation:\n');
+                fprintf(['\t\t',self.excitation.type, ' [', num2str(self.excitation.fmin), ',', num2str(self.excitation.fmax), '] Hz, with sample frequency ', num2str(self.excitation.fs), 'Hz\n']);
+            end  
         end
     end
     
