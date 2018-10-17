@@ -24,6 +24,9 @@ SOURCES += \
     qaboutdialog.cpp \
     qroboticscentermainwindow.cpp
 
+FORMS += \
+    qaboutdialog.ui
+
 RESOURCES += \
     icons.qrc
     
