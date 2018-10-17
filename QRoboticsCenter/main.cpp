@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.setApplicationName("QRoboticsCenter");
     a.setOrganizationName("RobSoft");
-    a.setApplicationVersion("5.0.0 - alpha");
+    a.setApplicationVersion("5.0.0 - stable");
     a.setApplicationDisplayName("QRoboticsCenter");
     a.setWindowIcon(QIcon(":/icons/QRoboticsCenterLogo_blue.png"));
 
